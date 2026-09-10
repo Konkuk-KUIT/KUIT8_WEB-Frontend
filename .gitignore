@@ -1,0 +1,21 @@
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Build / Deps
+node_modules/
+dist/
+dist-ssr/
+
+# Misc (Windows/VS)
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+*.sw?
