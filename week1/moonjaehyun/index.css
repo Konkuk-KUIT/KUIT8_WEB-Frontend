@@ -1,4 +1,17 @@
+/* Global styles */
+
+button {
+  background: none;
+  padding: none;
+  border: none;
+  cursor: pointer;
+}
+
 /* component styles */
+
+body {
+  margin-bottom: 54px;
+}
 
 .chat-header {
   display: flex;
@@ -86,5 +99,72 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}
+
+.bottom-bar {
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-top: 1px solid #d9d9d9;
+  width: 100%;
+}
+
+.bar-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1 0 0;
+}
+
+.bar__divider {
+  width: 1px;
+  align-self: stretch;
+  background-color: #eeeeee;
+  margin: 0 16px;
+}
+
+.bar__post-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 0 0;
+}
+
+.post-price {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 128.571% */
+}
+
+.post-suggest {
+  color: #8c8c8c;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 150% */
+}
+
+.bar__chat-btn {
+  display: flex;
+  padding: 8px 14px;
+  gap: 10px;
+  border-radius: 4px;
+  background: #ff7e36;
+  color: var(--white, #fff);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
   line-height: 18px; /* 128.571% */
 }
