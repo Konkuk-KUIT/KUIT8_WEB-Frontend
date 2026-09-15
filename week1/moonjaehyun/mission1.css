@@ -57,11 +57,54 @@ body {
 }
 
 .user-name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.user-name-text {
   color: #000;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
+  line-height: 20px; /* 125% */
+  width: 50%;
+  display: flex;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-name-input {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  width: 50%;
+  border: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.disable {
+  display: none;
+}
+
+.user-name-button {
+  background-color: #ff7e36;
+  border: 1px dashed #ff7e36;
+  border-radius: 10%;
+  color: #fff;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
   line-height: 20px; /* 125% */
 }
 
