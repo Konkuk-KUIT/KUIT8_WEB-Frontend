@@ -1,0 +1,247 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-header {
+  display: flex;
+  padding: 12px 16px;
+  justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.setting-header__text {
+  color: #000;
+
+  /* 18 */
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 155.556% */
+}
+
+.simple-info {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  border-bottom: 4px solid #eeeeee;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-info__profile {
+  width: 64px;
+  height: 64px;
+}
+
+.user-img {
+  border-radius: 100%;
+  stroke-width: 1px;
+  stroke: #bcbcbc;
+}
+
+.user-content {
+  display: flex;
+  height: 64px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  flex: 1 0 0;
+}
+
+.user-name {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+
+.user-info {
+  color: #8c8c8c;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.user-info__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.danggn-pay {
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px dashed #ff7e36;
+}
+
+.danggn-pay__title {
+  color: #ff7e36;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 128.571% */
+}
+
+.danggn-pay__description {
+  color: #5e5e5e;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.list {
+  display: flex;
+  padding: 0 16px;
+}
+
+.my-danggn .list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+}
+
+.my-danggn .list-item button {
+  display: flex;
+  padding: 12px;
+  gap: 10px;
+  border-radius: 100px;
+  background: #ffebe0;
+  border: none;
+}
+
+.my-danggn .list-item span {
+  color: #000;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.my-activity {
+  display: flex;
+  padding: 10px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-bottom: 4px solid #eeeeee;
+}
+
+.my-activity .list-title {
+  display: flex;
+  padding: 10px 16px;
+  gap: 10px;
+}
+
+.my-activity .list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.my-activity .list-item__name {
+  color: #000;
+
+  /* 16 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+}
+
+.our-neighborhood {
+  display: flex;
+  padding: 10px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.our-neighborhood .list-title {
+  display: flex;
+  padding: 10px 16px;
+  gap: 10px;
+}
+
+.our-neighborhood .list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.our-neighborhood .list-item__name {
+  color: #000;
+
+  /* 16 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+}
+
+.footer {
+  display: flex;
+  padding: 8px 0;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 1px solid #d9d9d9;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1 0 0;
+}
+
+.list-title__text {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+
+.footer-item .item-name {
+  color: #000;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 140% */
+}
