@@ -1,0 +1,145 @@
+/* 나의 당근 (당근마켓_3) */
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 4px solid var(--line);
+}
+
+.profile__user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.profile__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.nickname {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.profile__id {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--gray);
+}
+
+/* 닉네임 편집 폼. hidden 속성이 붙어 있으면 안 보인다 */
+.nickname-form {
+  display: flex;
+  gap: 8px;
+}
+
+.nickname-form[hidden] {
+  display: none; /* display: flex 가 hidden 을 이기지 않도록 */
+}
+
+.nickname-form__input {
+  width: 140px;
+  height: 28px;
+  padding: 0 8px;
+  font: inherit;
+  font-size: 14px;
+  border: 1px solid var(--line-dark);
+  border-radius: 6px;
+  outline: none;
+}
+
+.nickname-form__input:focus {
+  border-color: var(--orange);
+}
+
+.nickname-form__submit {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--orange);
+  border-radius: 6px;
+}
+
+.pay-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px dashed var(--orange);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pay-banner__title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  color: var(--orange);
+}
+
+.pay-banner__desc {
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--gray);
+}
+
+.quick-menu {
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+}
+
+.quick-menu__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.quick-menu__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--orange-bg);
+}
+
+.menu {
+  padding: 16px 0 8px;
+  border-bottom: 4px solid var(--line);
+}
+
+.menu__title {
+  padding: 0 16px 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.menu__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 18px;
+}
