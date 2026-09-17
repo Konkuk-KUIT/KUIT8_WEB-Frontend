@@ -103,6 +103,28 @@
   gap: 16px;
 }
 
+/* 바텀바 */
+
+.bottom-bar {
+  display: flex;
+  width: 100%;
+  padding: 8px 0;
+  background: #FFF;
+  align-items: flex-start;
+  border-top: 1px solid #D9D9D9;
+  position: relative;
+  z-index: 20;
+  margin-top: -26px;
+}
+
+.bottom-bar-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1 0 0;
+}
+
 /* 텍스트 */
 
 .titletext {
@@ -143,6 +165,14 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+}
+
+.text-black-4 {
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
 }
 
 .text-gray-1 {
