@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danggn</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <!-- 상단 헤더 -->
+    <header>
+      <div class="header-title">나의 당근</div>
+      <div class="header-icons">
+        <button>
+          <img src="./assets/setting.svg" alt="설정 버튼" />
+        </button>
+      </div>
+    </header>
+    <!-- 메인 -->
+    <main>
+      <!-- 내 프로필 -->
+      <section class="profile">
+        <div class="profile-card">
+          <img src="./assets/profile-image.svg" alt="사용자 사진" class="user-img" />
+          <div class="user-info">
+            <h3 class="user-name" tabindex="0" role="button" aria-label="닉네임 변경">가나다</h3>
+            <p class="user-location">군자동 #123456789</p>
+          </div>
+          <button>
+            <img src="./assets/chevron-right.svg" alt="프로필 상세보기" />
+          </button>
+        </div>
+        <!-- 당근페이 배너 -->
+        <div class="carrot-pay-banner">
+          <span class="banner-title">당근페이</span>
+          <span class="banner-info">중고거래는 이제 당근페이로 해보세요!</span>
+        </div>
+        <!-- 메뉴 아이콘 -->
+        <div class="profile-menu">
+          <a href="/">
+            <div class="menu-icon">
+              <img src="./assets/document.svg" alt="판매내역" />
+            </div>
+            <span>판매내역</span>
+          </a>
+          <a href="/">
+            <div class="menu-icon">
+              <img src="./assets/shopping-bag.svg" alt="구매내역" />
+            </div>
+            <span>구매내역</span>
+          </a>
+          <a href="/">
+            <div class="menu-icon">
+              <img src="./assets/heart.svg" alt="관심목록" />
+            </div>
+            <span>관심목록</span>
+          </a>
+        </div>
+      </section>
+      <!-- 나의 활동 -->
+      <section class="activity">
+        <h3 class="activity-title">나의 활동</h3>
+        <ul class="menu-list">
+          <li class="menu-item"><img src="./assets/news.svg" alt="내 동네 설정" />내 동네 설정</li>
+          <li class="menu-item"><img src="./assets/news.svg" alt="동네 인증하기" />동네 인증하기</li>
+          <li class="menu-item"><img src="./assets/news.svg" alt="키워드 알림" />키워드 알림</li>
+          <li class="menu-item"><img src="./assets/news.svg" alt="모아보기" />모아보기</li>
+          <li class="menu-item"><img src="./assets/news.svg" alt="당근가계부" />당근가계부</li>
+        </ul>
+      </section>
+      <!-- 우리 동네 -->
+      <section class="neighborhood">
+        <h3 class="neighborhood-title">우리동네</h3>
+        <ul class="menu-list">
+          <li class="menu-item"><img src="./assets/news.svg" alt="동네생활 글/댓글" />동네생활 글/댓글</li>
+          <li class="menu-item"><img src="./assets/news.svg" alt="동네홍보 글" />동네홍보 글</li>
+        </ul>
+      </section>
+    </main>
+    <!-- 하단 바 -->
+    <nav class="bottom-bar">
+      <div class="bar-content">
+        <button>
+          <img src="./assets/home.svg" alt="홈 버튼" />
+          <p>홈</p>
+        </button>
+        <button>
+          <img src="./assets/news.svg" alt="동네생활 버튼" />
+          <p>동네생활</p>
+        </button>
+        <button>
+          <img src="./assets/location.svg" alt="내 근처 버튼" />
+          <p>내 근처</p>
+        </button>
+        <button>
+          <img src="./assets/chat.svg" alt="채팅 버튼" />
+          <p>채팅</p>
+        </button>
+        <button>
+          <img src="./assets/profile.svg" alt="나의 당근 버튼" />
+          <p>나의 당근</p>
+        </button>
+      </div>
+    </nav>
+    <script src="./script.js"></script>
+  </body>
+</html>
