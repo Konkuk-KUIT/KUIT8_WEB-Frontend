@@ -5,6 +5,8 @@
   border-bottom: 1px solid #d9d9d9;
 }
 
+/* 프로필 영역 */
+
 .profile {
   display: flex;
   padding: 16px;
@@ -13,7 +15,6 @@
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
-  border-bottom: 4px solid #EEE;
 }
 
 .profile-name {
@@ -68,6 +69,48 @@
   background: #ffebe0;
 }
 
+/* 본문 영역 */
+
+.myactivity {
+  display: flex;
+  padding: 8px 0;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: stretch;
+  border-top: 4px solid #eee;
+}
+
+.myactivity-header {
+  display: flex;
+  padding: 8px 0;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: stretch;
+}
+
+.textarea {
+  display: flex;
+  padding: 10px 16px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.myactivity-button {
+  display: flex;
+  padding: 10px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.myactivity-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 /* 텍스트 */
 
 .titletext {
@@ -92,6 +135,22 @@
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
+}
+
+.text-black-2 {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.text-black-3 {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
 }
 
 .text-gray-1 {
