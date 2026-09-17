@@ -1,4 +1,5 @@
 const userName = document.querySelector(".user-name");
+userName.textContent = localStorage.getItem("nickname") || userName.textContent;
 
 function editName() {
   const form = document.createElement("form");
@@ -18,6 +19,7 @@ function editName() {
     if (!newName) return;
 
     userName.textContent = newName;
+    localStorage.setItem("nickname", newName);
     userName.hidden = false;
     form.remove();
     userName.focus();
