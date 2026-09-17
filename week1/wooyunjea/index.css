@@ -71,21 +71,13 @@
 
 /* 본문 영역 */
 
-.myactivity {
+.contents {
   display: flex;
   padding: 8px 0;
   flex-direction: column;
   align-items: flex-end;
   align-self: stretch;
   border-top: 4px solid #eee;
-}
-
-.myactivity-header {
-  display: flex;
-  padding: 8px 0;
-  flex-direction: column;
-  align-items: flex-end;
-  align-self: stretch;
 }
 
 .textarea {
@@ -96,7 +88,7 @@
   align-self: stretch;
 }
 
-.myactivity-button {
+.contents-area {
   display: flex;
   padding: 10px 16px;
   flex-direction: column;
@@ -105,7 +97,7 @@
   align-self: stretch;
 }
 
-.myactivity-content {
+.contents-text {
   display: flex;
   align-items: center;
   gap: 16px;
