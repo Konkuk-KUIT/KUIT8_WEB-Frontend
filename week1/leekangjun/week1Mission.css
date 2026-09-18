@@ -1,0 +1,234 @@
+button{
+    background: none;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+body{
+    margin-bottom: 58px;
+}
+
+.profile-header{
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.profile-header__title{
+    color: #000;
+
+    /* 18 */
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 155.556% */
+}
+
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+}
+
+.profile-info__user{
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+}
+
+.user-info{
+    width: 100%;
+    padding: 12px 0;
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name{
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 125% */
+}
+
+.user-id{
+    color: #8C8C8C;
+
+    /* 12 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+}
+
+.profile-info__danggnpay{
+    border-radius: 8px;
+    border: 1px dashed #FF7E36;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#danggnpay{
+    color: #FF7E36;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px; /* 128.571% */
+}
+
+#danggnpayDes{
+    color: #5E5E5E;
+
+    /* 12 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+}
+
+.profile-info__history{
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.sell, .buy, .interest{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+#sellDes, #buyDes, #interestDes{
+    color: #000;
+
+    /* 12 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+}
+
+.bar_divider{
+    height: 4px;
+    align-self: stretch;
+    background: #EEE;
+}
+
+.myActivity{
+    padding: 8px 0;
+}
+
+.myActivity-title{
+    padding: 10px 16px;
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 125% */
+}
+
+.news{
+    padding: 10px 16px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.news-title{
+    color: #000;
+
+    /* 16 */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+}
+
+.ourPlace{
+    padding: 8px 0;
+}
+
+.ourPlace-title{
+    padding: 12px 16px;
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 125% */
+}
+
+.bottom-bar{
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    padding: 8px 0;
+    border-top: 1px solid #d9d9d9;
+    background-color: #fff;
+}    
+
+.barItems{
+    display: flex;
+    justify-content: space-around;
+}
+
+.barItem{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.barItem>img{
+    display: flex;
+    height: 24px;
+    width: 24px;
+}
+
+.barItem>span{
+    color: #000;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px; /* 140% */
+}
+
+.changeName{
+    display: flex;
+    gap: 16px;
+    display: none;
+}
+
+#nameTextArea{
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+#nameButton{
+    width: 50px;
+    color: #fff;
+    background-color: #FF7E36;
+    border-radius: 5px;
+}
+
+.clicked{
+    display: flex;
+}
