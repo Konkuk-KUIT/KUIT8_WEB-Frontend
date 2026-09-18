@@ -30,9 +30,15 @@ body {
 
 /* 프로필 영역 */
 .profile-section {
+  /*display: flex;
+  align-items: center;
+  padding: 20px 16px;*/
   display: flex;
   align-items: center;
-  padding: 20px 16px;
+  justify-content: space-between;
+  padding: 24px 16px; /* 상하 24px, 좌우 16px 여유 공간 확보 */
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f3f5;
 }
 
 .profile__default-img {
@@ -49,6 +55,11 @@ body {
 }
 
 .profile__info {
+  /*flex-grow: 1;*/
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* 이름과 주소 사이 간격 넓히기 */
+  margin-left: 16px; /* 프로필 이미지와 텍스트 사이 간격 확보 */
   flex-grow: 1;
 }
 
@@ -107,7 +118,7 @@ body {
 
 /* 4px 두께의 구분선 */
 .history-section, .menu-group {
-  border-bottom: 4px solid #EEEEEE; 
+  border-bottom: 4px solid #EEEEEE;
 }
 
 /* 내역 영역 */
@@ -119,10 +130,11 @@ body {
 
 .history-item {
   display: flex;
+  color: #000000;
   flex-direction: column;
   align-items: center;
   font-size: 13px;
-  font-weight: bold;
+  gap: 10px;
 }
 
 .history-item__circle {
@@ -140,24 +152,44 @@ body {
 
 /* 리스트 메뉴 */
 .menu-group {
-  padding: 20px 16px;
+  /*padding: 20px 16px;*/
+  margin-top: 0; /* 위 섹션과의 간격 넓히기 */
+  margin-bottom: 0; /* 하단 바와의 간격 확보 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-bottom: 4px solid #EEEEEE;
 }
 
 .menu-group__title {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 16px;
+  box-sizing: border-box;
+  padding-left: 16px;
+  
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
 .menu-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-list__item {
-  padding: 12px 0;
+  /*padding: 12px 0;*/
+  gap: 16px;
   font-size: 15px;
+  font-weight: 400;
+
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
 /* 하단 바 */
