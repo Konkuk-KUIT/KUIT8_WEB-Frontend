@@ -1,249 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Danggn</title>
-    <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./index.css" />
-    <script src="./script.js" defer ></script>
-  </head>
-  <body>
-    <!-- 상단 헤더 -->
-    <header class="chat-header">
-      <div class="chat-header__title">채팅</div>
-      <div class="chat-header__icons">
-        <button>
-          <img src="./assets/camera.svg" alt="카메라 버튼" />
-        </button>
-        <button class="alarm-button">
-          <img src="./assets/alarm.svg" alt="알람 버튼" />
-        </button>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나의 당근</title>
+  <!-- 폰트와 CSS, JS 연결 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./reset.css" />
+  <link rel="stylesheet" href="./index.css" />
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <!-- 상단 헤더 -->
+  <header class="top-header">
+    <div class="top-header__title">나의 당근</div>
+    <button class="top-header__icon">
+      <img src="./assets/set.svg" alt="설정" />
+    </button>
+  </header>
+
+  <main class="main-content">
+    <!-- 프로필 영역 -->
+    <section class="profile-section">
+      <div class="profile__img-wrapper">
+        <!-- 사람 모양 임시 아이콘 -->
+        <img src="./assets/user.svg" alt="기본 프로필" />
       </div>
-    </header>
-    <!-- 채팅 목록 -->
-    <article class="chat-list">
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요우</span>
-              <span class="user-info">군자동 · 1주 전</span>
-            </div>
-            <div class="chat-text">감사합니다!! 조심히가세요!</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요이키</span>
-              <span class="user-info">문정동 · 1주 전</span>
-            </div>
-            <div class="chat-text">확인했습니다 감사합니다 :)</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">chan</span>
-              <span class="user-info">구의동 · 2주 전</span>
-            </div>
-            <div class="chat-text">넵 수고하세용</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요우</span>
-              <span class="user-info">군자동 · 1주 전</span>
-            </div>
-            <div class="chat-text">감사합니다!! 조심히가세요!</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요우</span>
-              <span class="user-info">군자동 · 1주 전</span>
-            </div>
-            <div class="chat-text">감사합니다!! 조심히가세요!</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요우</span>
-              <span class="user-info">군자동 · 1주 전</span>
-            </div>
-            <div class="chat-text">감사합니다!! 조심히가세요!</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요우</span>
-              <span class="user-info">군자동 · 1주 전</span>
-            </div>
-            <div class="chat-text">감사합니다!! 조심히가세요!</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요우</span>
-              <span class="user-info">군자동 · 1주 전</span>
-            </div>
-            <div class="chat-text">감사합니다!! 조심히가세요!</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-      <section class="chat-post">
-        <div class="chat-post__user">
-          <img
-            src="http://placehold.co/40"
-            alt="사용자 사진"
-            class="user-img"
-          />
-          <div class="chat-content">
-            <div class="chat-info">
-              <span class="user-name">요우</span>
-              <span class="user-info">군자동 · 1주 전</span>
-            </div>
-            <div class="chat-text">감사합니다!! 조심히가세요!</div>
-          </div>
-        </div>
-        <div class="product">
-          <img
-            src="http://placehold.co/40"
-            alt="상품 사진"
-            class="product-img"
-          />
-        </div>
-      </section>
-    </article>
-    <!-- 하단 바 -->
-    <nav class="bottom-bar">
-      <div class="bar-content">
-        <button>
-          <img src="./assets/heart.svg" alt="좋아요 누르기 버튼" />
-        </button>
-        <div class="bar__divider"></div>
-        <div class="bar__post-info">
-          <span class="post-price">360,000원</span>
-          <span class="post-suggest">가격 제안 불가</span>
-        </div>
+      <div class="profile__info">
+        <!-- JS로 이름을 바꿀 영역 -->
+        <div class="profile__name" id="user-name">가나다</div>
+        <div class="profile__detail">군자동 #123456789</div>
       </div>
-      <button class="bar__chat-btn">채팅하기</button>
-    </nav>
-  </body>
+      <div class="profile__arrow">&gt;</div>
+    </section>
+
+    <!-- 당근페이 배너 -->
+    <section class="pay-banner">
+      <span class="pay-banner__title">당근페이</span>
+      <span class="pay-banner__desc">중고거래는 이제 당근페이로 해보세요!</span>
+    </section>
+
+    <!-- 내역 아이콘 영역 -->
+    <section class="history-section">
+  <div class="history-item">
+      <img src="./assets/bill.svg" alt="판매내역" />
+      <span>판매내역</span>
+  </div>
+  <div class="history-item">
+      <img src="./assets/bag.svg" alt="구매내역" />
+      <span>구매내역</span>
+  </div>
+  <div class="history-item">
+      <img src="./assets/heart.svg" alt="관심목록" />
+      <span>관심목록</span>
+  </div>
+</section>
+
+    <!-- 나의 활동 영역 -->
+    <section class="menu-group">
+      <div class="menu-group__title">나의 활동</h3>
+      <ul class="menu-list">
+        <li>
+            <img src="./assets/community.svg" alt="신문 아이콘" />
+            <span>내 동네 설정</span>
+        </li>
+        <li class="menu-list__item">
+            <img src="./assets/community.svg" alt="신문 아이콘" />
+            <span>동네 인증하기</span>
+        </li>
+        <li class="menu-list__item">
+            <img src="./assets/community.svg" alt="신문 아이콘" />
+            <span>키워드 알림</span>
+        </li>
+        <li class="menu-list__item">
+            <img src="./assets/community.svg" alt="신문 아이콘" />
+            <span>모아보기</span>
+        </li>
+        <li class="menu-list__item">
+            <img src="./assets/community.svg" alt="신문 아이콘" />
+            <span>당근가계부</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 우리동네 영역 -->
+    <section class="menu-group">
+      <div class="menu-group__title">우리동네</h3>
+      <ul class="menu-list">
+        <li>
+            <img src="./assets/community.svg" alt="신문 아이콘" />
+            <span>동네생활 글</span>
+        </li>
+        <li class="menu-list__item">
+            <img src="./assets/community.svg" alt="신문 아이콘" />
+            <span>동네홍보 글</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- 하단 네비게이션 바 -->
+  <nav class="bottom-bar">
+    <div class="bottom-bar__item">
+      <img src="./assets/home.svg" alt="홈" />
+      <span>홈</span>
+    </div>
+    <div class="bottom-bar__item">
+      <img src="./assets/community.svg" alt="동네생활" />
+      <span>동네생활</span>
+    </div>
+    <div class="bottom-bar__item">
+      <img src="./assets/location.svg" alt="내 근처" />
+      <span>내 근처</span>
+    </div>
+    <div class="bottom-bar__item">
+      <img src="./assets/chat.svg" alt="채팅" />
+      <span>채팅</span>
+    </div>
+    <div class="bottom-bar__item">
+      <img src="./assets/user.svg" alt="나의 당근" />
+      <span>나의 당근</span>
+    </div>
+  </nav>
+</body>
 </html>

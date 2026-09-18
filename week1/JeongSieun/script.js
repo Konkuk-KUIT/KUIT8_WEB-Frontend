@@ -1,21 +1,33 @@
-const alarmButton = document.querySelector(".alarm-button");
+const userNameElement = document.getElementById("user-name");
 
-function changeAlarmState() {
-    const input = prompt("enabled 또는 disabled를 입력하세요,");
+function changeProfileName(event) {
+    if (userNameElement.querySelector("input")) return;
 
-    if (input === null) {
-        return;
-    }
+    const currentName = userNameElement.textContent;
 
-    const state = input.trim().toLowerCase();
+    userNameElement.innerHTML = `
+        <input type="text" id="name-input" value="${currentName}" />
+        <button id="edit-btn">수정</button>
+    `;
 
-    if (state === "disabled") {
-        alarmButton.classList.add("alarm-button--disabled");
-    } else if (state === "enabled") {
-        alarmButton.classList.remove("alarm-button--disabled");
-    } else {
-        alert("enabled 또는 disabled를 입력해 주세요.");
-    }
+    const nameInput = document.getElementById("name-input");
+    const editBtn = document.getElementById("edit-btn");
+
+    nameInput.addEventListener("click", function(e) {
+        e.stopPropagation(); 
+    });
+
+    editBtn.addEventListener("click", function(e) {
+        e.stopPropagation(); 
+        
+        const newName = nameInput.value.trim();
+        
+        if (newName !== "") {
+            userNameElement.textContent = newName;
+        } else {
+            userNameElement.textContent = currentName;
+        }
+    });
 }
 
-alarmButton.addEventListener("click", changeAlarmState);
+userNameElement.addEventListener("click", changeProfileName);

@@ -1,176 +1,218 @@
-/* Global styles */
-button {
+/* 기본 설정 */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  color: #212124;
+  padding-bottom: 60px;  /*하단 바에 가려지지 않게 여백 추가 */
+  /*width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  color: #212124;*/
+}
+
+/* 상단 헤더 */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.top-header__icon {
   background: none;
-  padding: 0;
   border: none;
   cursor: pointer;
 }
 
-body {
-  margin-bottom: 54px;
-}
-
-/* components styles */
-
-.chat-header {
-  padding: 12px 16px;
+/* 프로필 영역 */
+.profile-section {
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #eeeeee;
   align-items: center;
-  position: fixed;
-  background-color: #fff;
-  width: 100%;
-  box-sizing: border-box;
-  top: 0;
+  padding: 20px 16px;
 }
 
-.chat-list {
-  margin-top: 54px;
+.profile__default-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 16px;
+  background-color: #C7C7C7; /* 진한 회색 배경 */
+  color: #F4F4F4; /* 연한 사람 아이콘 색상 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
 
-.chat-header__title {
-  color: #000;
+.profile__info {
+  flex-grow: 1;
+}
 
-  /* 18 */
-  font-family: Inter;
+.profile__name {
   font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px; /* 155.556% */
+  font-weight: bold;
+  margin-bottom: 4px;
+  cursor: pointer;
 }
 
-.chat-header__icons {
-  display: flex;
-  gap: 16px;
+.profile__detail {
+  font-size: 13px;
+  color: #8C8C8C; /* 군자동 글자 색상 */
 }
 
-.chat-post {
-  padding: 16px;
-  display: flex;
-  border-bottom: 1px solid #eeeeee;
-  justify-content: space-between;
+/* 자바스크립트로 생성될 수정 폼 디자인 */
+#name-input {
+  font-size: 16px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  width: 120px;
+  font-family: 'Inter', sans-serif;
 }
 
-.chat-post__user {
-  display: flex;
-  gap: 16px;
-  width: 100%;
-  align-items: center;
-}
-
-.user-img {
-  border-radius: 100%;
-}
-
-.product-img {
+#edit-btn {
+  background-color: #FF7E36; /* 진한 주황색 */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-left: 8px;
   border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.user-name {
-  color: #000;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 18px; /* 128.571% */
-}
-
-.user-info {
-  color: #8c8c8c;
-
-  /* 12 */
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px; /* 133.333% */
-}
-
-.chat-text {
-  color: #000;
-
-  /* 14 */
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px; /* 128.571% */
-}
-
-.chat-info {
+/* 당근페이 배너 */
+.pay-banner {
+  margin: 0 16px 20px;
+  padding: 16px;
+  border: 1px dashed #FF7E36;
+  border-radius: 8px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+.pay-banner__title {
+  color: #FF7E36;
+  font-weight: bold;
+}
+
+.pay-banner__desc {
+  font-size: 13px;
+  color: #8C8C8C;
+}
+
+/* 4px 두께의 구분선 */
+.history-section, .menu-group {
+  border-bottom: 4px solid #EEEEEE; 
+}
+
+/* 내역 영역 */
+.history-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 20px;
+}
+
+.history-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.history-item__circle {
+  background-color: #FFEBE0; /* 연한 주황색 */
+  color: #FF7E36;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+/* 리스트 메뉴 */
+.menu-group {
+  padding: 20px 16px;
+}
+
+.menu-group__title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list__item {
+  padding: 12px 0;
+  font-size: 15px;
+}
+
+/* 하단 바 */
+.bottom-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  border-top: 1px solid #EEEEEE;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+.bottom-bar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  color: #212124;
   gap: 4px;
 }
 
-.chat-content {
+.bottom-bar__item img {
+  width: 24px;
+  height: 24px;
+}
+
+/* 그룹 전체 여백 (상하 8px) */
+.menu-group {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 4px solid #EEEEEE;
+}
+
+/* 리스트 항목 수치 완벽 적용 (너비 390, 높이 40, 패딩 10/16, 간격 16) */
+.menu-list li {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  width: 390px;
+  height: 40px;
+  box-sizing: border-box; /* 390px 너비 안에 패딩을 포함시킴 */
+  padding: 10px 16px; 
+  gap: 16px; /* margin-right 대신 피그마와 동일하게 gap 사용 */
+  
+  /* 진한 글씨를 원래대로 되돌리는 핵심 포인트 */
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* Regular 굵기로 강제 초기화 */
+  font-size: 16px;
+  color: #212124;
 }
 
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  padding: 8px 16px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  box-sizing: border-box;
-  background-color: #fff;
-  border-top: 1px solid #d9d9d9;
+/* 아이콘 크기 고정 */
+.menu-list li img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain; /* 이미지가 찌그러지지 않게 보호 */
 }
-
-.bar-content {
-  display: flex;
-}
-
-.bar__divider {
-  width: 1px;
-  align-self: stretch;
-  background-color: #eeeeee;
-  margin: 0 16px;
-}
-
-.bar__post-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.post-price {
-  color: #000;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 18px; /* 128.571% */
-}
-
-.post-suggest {
-  color: #8c8c8c;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 18px; /* 150% */
-}
-
-.bar__chat-btn {
-  color: var(--white, #fff);
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 18px; /* 128.571% */
-
-  border-radius: 4px;
-  background: #ff7e36;
-  padding: 8px 14px;
-}
-
-.alarm-button--disabled {
-    opacity: 0.1;
-} 
-/* opacity는 0.1로 설정되어 있어 버튼이 비활성화된 상태를 나타냅니다. -> 투명도를 나타냄 */
