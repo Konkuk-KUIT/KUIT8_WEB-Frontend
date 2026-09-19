@@ -1,6 +1,5 @@
 const profileName = document.querySelector(".myPage-profile__name");
 const nameDiv = document.querySelector(".myPage-profile__name-div");
-let afterName;
 const name = localStorage.getItem('name'); 
 
 function changeNameState(){
