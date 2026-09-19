@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scalw=1.0">
+    <title>Danggn3</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./week1Mission.css">
+    <script src="./week1Mission.js" defer></script>
+</head>
+<body>
+    <header class="profile-header">
+        <div class="profile-header__title">나의 당근</div>
+        <div class="profile-header__icons">
+            <button>
+                <img src="./assets/setting.svg" alt="환경 설정 버튼">
+            </button>
+        </div>
+    </header>
+
+    <article class="profile-list">
+        <section class="profile-info">
+            <div class="profile-info__user">
+                <img src="./assets/profile.svg" alt="프로필 이미지" id="profileImg">
+                <div class="user-info">
+                    <span class="user-name">가나다</span>
+                    <div class="changeName">
+                        <input type="text" placeholder="닉네임을 입력하세요" id="nameTextArea">
+                        <button id="nameButton">수정</button>
+                    </div>
+                    <span class="user-id">군자동 #123456789</span>
+                </div>
+                <img src="./assets/forward.svg" alt="화살표">
+            </div>
+            <div class="profile-info__danggnpay">
+                <span id="danggnpay">당근페이</span>
+                <span id="danggnpayDes">중고거래는 이제 당근페이로 해보세요!</span>
+            </div>
+            <div class="profile-info__history">
+                <div class="sell">
+                    <img src="./assets/sell.svg" alt="판매내역" id="sellImg">
+                    <span id="sellDes">판매내역</span>
+                </div>
+                <div class="buy">
+                    <img src="./assets/buy.svg" alt="구매내역" id="buyImg">
+                    <span id="buyDes">구매내역</span>
+                </div>
+                <div class="interest">
+                    <img src="./assets/interest.svg" alt="관심목록" id="interestImg">
+                    <span id="interestDes">관심목록</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="bar_divider"></div>
+
+        <section class="myActivity">
+            <div class="myActivity-title">나의 활동</div>
+            <div class="news-list">
+                <div class="news">
+                    <img src="./assets/news.svg" alt="뉴스">
+                    <span class="news-title">내 동네 설정</span>
+                </div>
+
+                <div class="news">
+                    <img src="./assets/news.svg" alt="뉴스">
+                    <span class="news-title">동네 인증하기</span>
+                </div>
+
+                <div class="news">
+                    <img src="./assets/news.svg" alt="뉴스">
+                    <span class="news-title">키워드 알림</span>
+                </div>
+
+                <div class="news">
+                    <img src="./assets/news.svg" alt="뉴스">
+                    <span class="news-title">모아보기</span>
+                </div>
+
+                <div class="news">
+                    <img src="./assets/news.svg" alt="뉴스">
+                    <span class="news-title">당근가계부</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="bar_divider"></div>
+
+        <section class="ourPlace">
+            <div class="ourPlace-title">우리동네</div>
+            <div class="news-list">
+                <div class="news">
+                    <img src="./assets/news.svg" alt="뉴스">
+                    <span class="news-title">동네생활 글/댓글</span>
+                </div>
+
+                <div class="news">
+                    <img src="./assets/news.svg" alt="뉴스">
+                    <span class="news-title">동네홍보 글</span>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <nav class="bottom-bar">
+        <div class="barItems">
+            <div class="barItem">
+                <img src="./assets/home.svg" alt="홈" id="homeImg">
+                <span id="homeDes">홈</span>
+            </div>
+
+            <div class="barItem">
+                <img src="./assets/news.svg" alt="동네생활" id="newsImg">
+                <span id="newsDes">동네생활</span>
+            </div>
+
+            <div class="barItem">
+                <img src="./assets/placeMarker.svg" alt="내 근처" id="placeMarkerImg">
+                <span id="placeMarkerDes">내 근처</span>
+            </div>
+
+            <div class="barItem">
+                <img src="./assets/chat.svg" alt="채팅" id="chatImg">
+                <span id="chatDes">채팅</span>
+            </div>
+
+            <div class="barItem">
+                <img src="./assets/user.svg" alt="나의 당근" id="userImg">
+                <span id="userDes">나의 당근</span>
+            </div>
+        </div>
+    </nav>
+</body>
