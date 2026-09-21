@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danggn</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./script.js" defer></script>
+  </head>
+
+  <body>
+    <!-- 상단 header -->
+    <header class="profile-header">
+      <h1 class="profile-header__title">나의 당근</h1>
+
+      <button class="profile-header__settings" type="button">
+        <img src="./assets/settings.svg" alt="환경설정" />
+      </button>
+    </header>
+
+    <!-- 헤더 아래 프로필박스 -->
+    <main>
+      <section class="profile-box">
+        <div class="profile-info">
+          <img
+            class="profile-info__image"
+            src="./assets/profile.svg"
+            alt="기본 프로필 사진"
+          />
+
+          <div class="profile-info__text">
+            <span class="user-name">가나다</span>
+            <span class="user-info">군자동 #12345678</span>
+          </div>
+
+          <img
+            class="profile-info__forward"
+            src="./assets/forward.svg"
+            alt="화살표"
+          />
+        </div>
+
+        <div class="karrot-pay">
+          <span class="karrot-pay__title">당근페이</span>
+          <span class="karrot-pay__details"
+            >중고거래는 이제 당근페이로 해보세요</span
+          >
+        </div>
+
+        <div class="user-history">
+          <div class="user-history__item">
+            <img
+              class="user-history__icon"
+              src="./assets/sales-history.svg"
+              alt="판매내역 사진"
+            />
+            <span class="user-history__label">판매내역</span>
+          </div>
+
+          <div class="user-history__item">
+            <img
+              class="user-history__icon"
+              src="./assets/order-history.svg"
+              alt="구매내역 사진"
+            />
+            <span class="user-history__label">구매내역</span>
+          </div>
+
+          <div class="user-history__item">
+            <img
+              class="user-history__icon"
+              src="./assets/heart-list.svg"
+              alt="관심목록 사진"
+            />
+            <span class="user-history__label">관심목록</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 나의 활동 및 우리동네-->
+      <!-- 나의 활동-->
+      <section class="my-activity">
+        <h2 class="my-activity__title">나의 활동</h2>
+
+        <ul class="my-activity__list">
+          <li class="my-activity__item">
+            <img src="./assets/news.svg" alt="뉴스 아이콘" />
+            <span class="my-activity__label">내 동네 설정</span>
+          </li>
+
+          <li class="my-activity__item">
+            <img src="./assets/news.svg" alt="뉴스 아이콘" />
+            <span class="my-activity__label">동네 인증하기</span>
+          </li>
+
+          <li class="my-activity__item">
+            <img src="./assets/news.svg" alt="뉴스 아이콘" />
+            <span class="my-activity__label">키워드 알림</span>
+          </li>
+
+          <li class="my-activity__item">
+            <img src="./assets/news.svg" alt="뉴스 아이콘" />
+            <span class="my-activity__label">모아보기</span>
+          </li>
+
+          <li class="my-activity__item">
+            <img src="./assets/news.svg" alt="뉴스 아이콘" />
+            <span class="my-activity__label">당근가계부</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 우리 동네 -->
+      <section class="my-neighborhood">
+        <h2 class="my-neighborhood__title">우리 동네</h2>
+
+        <ul class="my-neighborhood__list">
+          <li class="my-neighborhood__item">
+            <img src="./assets/news.svg" alt="뉴스 아이콘" />
+            <span class="my-neighborhood__label">동네생활 글/댓글</span>
+          </li>
+
+          <li class="my-neighborhood__item">
+            <img src="./assets/news.svg" alt="뉴스 아이콘" />
+            <span class="my-neighborhood__label">동네홍보 글</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- 하단 바 -->
+    <nav class="bottom-bar">
+      <div class="bottom-bar__item">
+        <img class="bottom-bar__icon" src="./assets/home.svg" alt="집 아이콘" />
+        <span class="bottom-bar__label">홈</span>
+      </div>
+
+      <div class="bottom-bar__item">
+        <img
+          class="bottom-bar__icon"
+          src="./assets/news.svg"
+          alt="뉴스 아이콘"
+        />
+        <span class="bottom-bar__label">동네생활</span>
+      </div>
+
+      <div class="bottom-bar__item">
+        <img
+          class="bottom-bar__icon"
+          src="./assets/place-marker.svg"
+          alt="위치 아이콘"
+        />
+        <span class="bottom-bar__label">내 근처</span>
+      </div>
+
+      <div class="bottom-bar__item">
+        <img
+          class="bottom-bar__icon"
+          src="./assets/chat.svg"
+          alt="채팅 아이콘"
+        />
+        <span class="bottom-bar__label">채팅</span>
+      </div>
+
+      <div class="bottom-bar__item">
+        <img
+          class="bottom-bar__icon"
+          src="./assets/user.svg"
+          alt="프로필 아이콘"
+        />
+        <span class="bottom-bar__label">나의 당근</span>
+      </div>
+    </nav>
+  </body>
+</html>
