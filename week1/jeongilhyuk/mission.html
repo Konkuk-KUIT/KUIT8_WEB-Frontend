@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>당근마켓 - 나의 당근</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <link rel="stylesheet" href="./mission.css" />
+    <script src="./mission.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1 class="header__title">나의 당근</h1>
+        <div class="header__icons">
+          <button type="button" aria-label="설정">
+            <img src="./assets/settings.svg" alt="" />
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="profile">
+          <div class="profile__user">
+            <img class="profile__avatar" src="./assets/avatar.svg" alt="프로필 사진" />
+            <div class="profile__text">
+              <!-- 닉네임. 클릭하면 JS가 input과 수정 버튼으로 바꾼다 -->
+              <button type="button" class="nickname" id="nickname">가나다</button>
+              <form class="nickname-form" id="nickname-form" hidden>
+                <input type="text" class="nickname-form__input" id="nickname-input" maxlength="12" />
+                <button type="submit" class="nickname-form__submit">수정</button>
+              </form>
+              <span class="profile__id">군자동 #123456789</span>
+            </div>
+            <img src="./assets/forward.svg" alt="" />
+          </div>
+
+          <a class="pay-banner" href="#">
+            <span class="pay-banner__title">당근페이</span>
+            <span class="pay-banner__desc">중고거래는 이제 당근페이로 해보세요!</span>
+          </a>
+
+          <ul class="quick-menu">
+            <li class="quick-menu__item">
+              <span class="quick-menu__icon"><img src="./assets/bill.svg" alt="" /></span>
+              판매내역
+            </li>
+            <li class="quick-menu__item">
+              <span class="quick-menu__icon"><img src="./assets/bag.svg" alt="" /></span>
+              구매내역
+            </li>
+            <li class="quick-menu__item">
+              <span class="quick-menu__icon"><img src="./assets/heart.svg" alt="" /></span>
+              관심목록
+            </li>
+          </ul>
+        </section>
+
+        <section class="menu">
+          <h2 class="menu__title">나의 활동</h2>
+          <ul>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />내 동네 설정</li>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />동네 인증하기</li>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />키워드 알림</li>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />모아보기</li>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />당근가계부</li>
+          </ul>
+        </section>
+
+        <section class="menu">
+          <h2 class="menu__title">우리동네</h2>
+          <ul>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />동네생활 글/댓글</li>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />동네홍보 글</li>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />동네 가게 후기</li>
+            <li class="menu__item"><img src="./assets/news.svg" alt="" />저장한 장소</li>
+          </ul>
+        </section>
+      </main>
+
+      <nav class="tab-bar">
+        <a class="tab-bar__item" href="#"><img src="./assets/home.svg" alt="" />홈</a>
+        <a class="tab-bar__item" href="#"><img src="./assets/news.svg" alt="" />동네생활</a>
+        <a class="tab-bar__item" href="#"><img src="./assets/place.svg" alt="" />내 근처</a>
+        <a class="tab-bar__item" href="./index.html"><img src="./assets/chat.svg" alt="" />채팅</a>
+        <a class="tab-bar__item" href="#" aria-current="page"><img src="./assets/user-active.svg" alt="" />나의 당근</a>
+      </nav>
+    </div>
+  </body>
+</html>
