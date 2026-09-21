@@ -1,0 +1,218 @@
+/* 환경 설정 바*/
+.settings {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.my-carrot {
+  color: #000;
+
+  /* 18 */
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  /* 155.556% */
+}
+
+/* 내 정보 */
+.my-info {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+
+/* 프로필 */
+.my-profile {
+  display: flex;
+  gap: 16px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+  flex: 1;
+  gap: 4px;
+}
+
+.profile-name {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+
+  display: flex;
+  /* 125% */
+}
+
+.name-input{
+  display: none;
+}
+
+.name-modify{
+  display: none;
+}
+
+.profile-tag {
+  color: #8C8C8C;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  /* 133.333% */
+}
+
+.proifle-image {
+  border-radius: 100%;
+}
+
+.profile-arrow{
+  display: flex;
+  align-items: center;
+}
+
+/* 당근 페이 */
+
+.carrot-pay {
+  border-radius: 8px;
+  border: 1px dashed #FF7E36;
+
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+}
+
+.carrot-pay-word {
+  color: #FF7E36;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  /* 128.571% */
+}
+
+.carrot-pay-explain {
+  color: #5E5E5E;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  /* 133.333% */
+}
+
+/* 판매,구매,관심 내역 */
+
+.my-history {
+  display: flex;
+  padding: 0 16px;
+  align-items: flex-start;
+  align-self: stretch;
+
+}
+
+.my-sell-history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.my-buy-history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.my-interest-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+  flex: 1;
+}
+
+/* 바 */
+
+.bar {
+  height: 4px;
+  width: 1;
+  background: #EEE;
+}
+
+/* 내 활동 */
+
+.my-list {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.list-explain {
+  padding: 10px 16px;
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  /* 125% */
+}
+
+.my-list-item {
+  padding: 10px 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.list-item-explain {
+  color: #000;
+
+  /* 16 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  /* 125% */
+}
+
+/* 아래 네비게이션 바 */
+
+.bottom-nav{
+  display: flex;
+  padding: 8px 0;
+
+}
+
+.nav-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex : 1;
+}
