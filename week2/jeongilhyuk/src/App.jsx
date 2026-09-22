@@ -1,62 +1,144 @@
-import Greeting from './components/Greeting.jsx'
-import JsxRules from './components/JsxRules.jsx'
-import ProfileCard from './components/ProfileCard.jsx'
-import StudyInfo from './components/StudyInfo.jsx'
-import AttendancePanel from './components/AttendancePanel.jsx'
+import marketModel from './model.js/marketModel.js'
 
-const studentName = '정일혁'
+// 2주차 미션 1단계다. 이번 커밋에서는 컴포넌트를 쪼개지 않고
+// 미션 JSX 를 전부 이 파일 안에 둔다. Header, ItemCard, BottomNav 같은
+// 분리는 다음 단계에서 한다.
 
-// 만든 컴포넌트들을 App 안에 중첩해서 한 페이지로 모은다.
+// 하단 탭 다섯 칸. 지금은 홈 화면만 있어서 나머지는 눌러도 갈 곳이 없다.
+const navItems = [
+  { id: 'home', label: '홈', icon: '/assets/home.png' },
+  { id: 'town', label: '동네생활', icon: '/assets/news.png' },
+  { id: 'nearby', label: '내 근처', icon: '/assets/nearby.png' },
+  { id: 'chat', label: '채팅', icon: '/assets/chat.png' },
+  { id: 'my', label: '나의 당근', icon: '/assets/profile.png' },
+]
+
+const CURRENT_TAB = 'home'
+
 function App() {
+  // 모델에서 필요한 값만 꺼내 쓴다.
+  const { location, items } = marketModel
+
   return (
-    <main className="page">
-      <header className="page-header">
-        <h1>리액트 빠른 시작 실습</h1>
-        <p className="page-desc">KUIT 8기 웹 2주차 / {studentName}</p>
+    <div className="app">
+      <h1 className="sr-only">당근마켓 중고거래 홈 화면 따라 만들기</h1>
+      <p className="sr-only">
+        이번 주차는 화면만 만들었습니다. 흐리게 보이는 단추는 아직 동작하지 않습니다.
+      </p>
+
+      <img className="status-bar" src="/assets/status-bar.png" alt="" />
+
+      <header className="market-header">
+        <button
+          type="button"
+          className="location-button"
+          disabled
+          title="동네 선택은 아직 만들지 않았습니다"
+          aria-label={`현재 동네 ${location}, 동네 선택은 아직 만들지 않았습니다`}
+        >
+          {location}
+          <img className="location-chevron" src="/assets/chevron-down.png" alt="" />
+        </button>
+
+        <div className="header-actions">
+          <button
+            type="button"
+            className="icon-button"
+            disabled
+            title="검색은 아직 만들지 않았습니다"
+            aria-label="검색, 아직 만들지 않았습니다"
+          >
+            <img src="/assets/search.png" alt="" />
+          </button>
+          <button
+            type="button"
+            className="icon-button"
+            disabled
+            title="카테고리는 아직 만들지 않았습니다"
+            aria-label="카테고리, 아직 만들지 않았습니다"
+          >
+            <img src="/assets/menu.png" alt="" />
+          </button>
+          <button
+            type="button"
+            className="icon-button"
+            disabled
+            title="알림은 아직 만들지 않았습니다"
+            aria-label="알림, 아직 만들지 않았습니다"
+          >
+            <img src="/assets/bell.png" alt="" />
+          </button>
+        </div>
       </header>
 
-      <section className="section">
-        <h2>1. 컴포넌트 만들고 중첩하기</h2>
-        <p className="section-desc">
-          Greeting 컴포넌트를 따로 만들고 App 안에서 태그처럼 불러 썼습니다.
-        </p>
-        <Greeting name={studentName} />
-      </section>
+      {/* 상품 일곱 개를 map 으로 돌린다. key 는 모델에 더해 둔 id 를 쓴다. */}
+      <ul className="market-list">
+        {items.map(({ id, title, location: itemLocation, timeAgo, price, image, comments, likes, isSold }) => (
+          <li className="market-item" key={id}>
+            <img className="item-photo" src={image} alt="" />
+            <div className="item-body">
+              {/* 팔린 물건에만 거래완료 딱지를 붙인다. */}
+              {isSold && <span className="badge-sold">거래완료</span>}
+              <h2 className="item-title">{title}</h2>
+              <p className="item-meta">
+                {itemLocation} · {timeAgo}
+              </p>
+              <p className="item-price">{price}</p>
+              {/* 0 이면 아예 그리지 않는다. comments 는 숫자라서 comments > 0 으로
+                  불린을 만들어야 한다. comments && 로 쓰면 0 이 그대로 찍힌다. */}
+              <div className="item-counts">
+                {comments > 0 && (
+                  <span className="count">
+                    <img src="/assets/comments.png" alt="" />
+                    {comments}
+                    <span className="sr-only">개의 댓글</span>
+                  </span>
+                )}
+                {likes > 0 && (
+                  <span className="count">
+                    <img src="/assets/heart.png" alt="" />
+                    {likes}
+                    <span className="sr-only">개의 관심</span>
+                  </span>
+                )}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
 
-      <section className="section">
-        <h2>2. JSX 로 마크업 작성하기</h2>
-        <p className="section-desc">
-          return 하는 태그는 하나로 감싸야 하고, 빈 태그도 닫아야 합니다.
-        </p>
-        <JsxRules />
-      </section>
+      <button
+        type="button"
+        className="fab"
+        disabled
+        title="글쓰기는 아직 만들지 않았습니다"
+        aria-label="글쓰기, 아직 만들지 않았습니다"
+      >
+        <img src="/assets/plus.png" alt="" />
+      </button>
 
-      <section className="section">
-        <h2>3. className 으로 스타일 추가하기</h2>
-        <p className="section-desc">
-          CSS 파일에 규칙을 쓰고 className 으로 연결했습니다.
-        </p>
-        <ProfileCard name={studentName} part="웹 프론트엔드" />
-      </section>
+      <nav className="bottom-nav" aria-label="주요 메뉴">
+        {navItems.map(({ id, label, icon }) => {
+          const isCurrent = id === CURRENT_TAB
+          return (
+            <button
+              type="button"
+              className="nav-item"
+              key={id}
+              disabled
+              aria-current={isCurrent ? 'page' : undefined}
+              title={isCurrent ? `${label} (지금 보고 있는 화면)` : `${label} 화면은 아직 만들지 않았습니다`}
+              aria-label={isCurrent ? `${label}, 지금 보고 있는 화면` : `${label}, 아직 만들지 않았습니다`}
+            >
+              <img src={icon} alt="" />
+              <span>{label}</span>
+            </button>
+          )
+        })}
+      </nav>
 
-      <section className="section">
-        <h2>4. 데이터 표시하기</h2>
-        <p className="section-desc">
-          중괄호 안에 변수, 계산식, 스타일 객체를 넣어 값을 그대로 보여 줍니다.
-        </p>
-        <StudyInfo />
-      </section>
-
-      <section className="section">
-        <h2>5. 조건부 렌더링</h2>
-        <p className="section-desc">
-          아래 체크박스와 버튼을 눌러 보면 if 문, 삼항 연산자, &amp;&amp; 연산자가 각각
-          어떻게 달라지는지 비교할 수 있습니다. &amp;&amp; 는 조건이 거짓이면 그 자리에
-          아무것도 남지 않습니다.
-        </p>
-        <AttendancePanel />
-      </section>
-    </main>
+      <div className="home-indicator" />
+    </div>
   )
 }
 
