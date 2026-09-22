@@ -12,11 +12,8 @@ function App() {
   const { location, items } = marketModel
 
   return (
-    <div className="app">
-      <h1 className="sr-only">당근마켓 중고거래 홈 화면 따라 만들기</h1>
-      <p className="sr-only">
-        이번 주차는 화면만 만들었습니다. 흐리게 보이는 단추는 아직 동작하지 않습니다.
-      </p>
+    <main className="app">
+      <h1 className="sr-only">당근마켓 중고거래</h1>
 
       <img className="status-bar" src="/assets/status-bar.png" alt="" />
 
@@ -27,7 +24,7 @@ function App() {
       <BottomNav />
 
       <div className="home-indicator" />
-    </div>
+    </main>
   )
 }
 

@@ -7,7 +7,7 @@ import ItemCard from './ItemCard.jsx'
 function Content({ items }) {
   return (
     <>
-      <ul className="market-list">
+      <ul className="market-list" tabIndex={0} aria-label="중고거래 상품 목록">
         {/* 상품 일곱 개를 map 으로 돌린다. key 는 모델에 더해 둔 id 를 쓴다. */}
         {items.map((item) => (
           <ItemCard key={item.id} item={item} />

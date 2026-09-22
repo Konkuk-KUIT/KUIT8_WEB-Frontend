@@ -1,181 +1,75 @@
 # KUIT 8기 웹 2주차 정일혁
 
-2주차 실습(리액트 빠른 시작)과 미션(당근마켓 홈 화면) 두 가지가 들어 있습니다.
-지금은 미션 2단계(컴포넌트 분리)까지 왔습니다.
+리액트 빠른 시작 실습과 당근마켓 홈 화면 미션입니다. 실습과 미션 구현, 컴포넌트 분리, 스타일 및 검증 기록을 각각 커밋했습니다.
 
-## 페이지 구성
+## 실행
+
+```bash
+npm ci
+npm run dev
+npm run lint
+npm run build
+npm run preview
+```
 
 | 주소 | 내용 | 진입점 |
 | --- | --- | --- |
-| `/` | 미션. 당근마켓 홈 화면 | `index.html` → `src/main.jsx` → `src/App.jsx` → `src/components/` |
-| `/practice.html` | 실습. 리액트 빠른 시작 | `practice.html` → `src/practice/main.jsx` → `src/practice/PracticeApp.jsx` |
+| `/` | 당근마켓 홈 화면 미션 | `src/main.jsx` → `src/App.jsx` |
+| `/practice.html` | 리액트 빠른 시작 실습 | `src/practice/main.jsx` → `src/practice/PracticeApp.jsx` |
 
-두 페이지를 함께 빌드하려고 `vite.config.js` 에 진입점을 두 개로 적어 두었습니다.
-스타일도 진입점에서만 불러서 섞이지 않습니다. 미션은 `src/App.css`, 실습은
-`src/practice/base.css` 와 `src/practice/practice.css` 입니다.
+실습과 미션은 별도 HTML 진입점과 CSS를 사용합니다. 두 페이지 모두 프로덕션 빌드에 포함됩니다.
 
-## 미션 1단계에서 한 것
+## 실습
 
-미션 JSX 를 전부 `src/App.jsx` 한 파일에 두고 화면부터 완성했습니다.
+[리액트 공식 빠른 시작](https://ko.react.dev/learn)의 조건부 렌더링까지 실행 예제로 정리했습니다.
 
-그린 것은 이렇습니다.
-
-- 헤더: 현재 동네(`군자동`)와 펼침 화살표, 검색, 카테고리, 알림 아이콘
-- 목록: 상품 일곱 개를 `map` 으로 돌리고 `key` 에는 모델의 `id` 를 씁니다.
-  각 칸은 사진, 제목, 동네, 올린 시각, 가격을 보여 줍니다.
-- 거래완료 딱지: `isSold` 가 참인 항목에만 붙습니다.
-- 댓글 수와 관심 수: 0 이 아닐 때만 아이콘과 숫자가 나옵니다.
-- 하단 탭: 홈, 동네생활, 내 근처, 채팅, 나의 당근
-- 오른쪽 아래 주황색 글쓰기 단추
-
-### 안 되는 단추를 다루는 방법
-
-검색, 카테고리, 알림, 동네 선택, 하단 탭, 글쓰기는 아직 만들지 않은 기능입니다.
-누르면 되는 것처럼 보이면 안 되니까 전부 `disabled` 로 두고, 무엇이고 왜 안 눌리는지
-`aria-label` 과 `title` 에 적었습니다. 지금 보고 있는 홈 탭에는 `aria-current="page"`
-를 붙였습니다. 화면 맨 위에는 화면 낭독기에만 읽히는 안내 문장을 하나 넣었습니다.
-
-거래 기능은 만들지 않았습니다. 이번 미션은 목록을 props 로 그려 보는 연습입니다.
-
-## 미션 2단계에서 한 것
-
-1단계에서 한 파일에 몰려 있던 JSX 를 컴포넌트로 쪼갰습니다. 화면에 그려지는 결과는
-1단계와 같고, 파일이 나뉜 것만 달라졌습니다.
-
-| 컴포넌트 | 파일 | 받는 props | 맡는 부분 |
-| --- | --- | --- | --- |
-| `App` | `src/App.jsx` | 없음 | 모델을 한 번 불러 `location` 과 `items` 를 꺼내 아래로 넘깁니다 |
-| `Header` | `src/components/Header.jsx` | `location` | 현재 동네와 검색, 카테고리, 알림 아이콘 |
-| `Content` | `src/components/Content.jsx` | `items` | 상품 목록과 글쓰기 단추 |
-| `ItemCard` | `src/components/ItemCard.jsx` | `item` | 상품 목록의 한 칸 |
-| `BottomNav` | `src/components/BottomNav.jsx` | 없음 | 하단 탭 다섯 칸 |
-
-`marketModel` 을 불러오는 곳은 `App` 한 곳뿐입니다. 나머지 넷은 모델을 직접 읽지 않고
-props 로 받은 값만 씁니다. `Content` 는 `items.map` 으로 `ItemCard` 를 만들고 `key` 에는
-모델의 `id` 를 씁니다.
-
-`Content` 가 맡은 상품 목록과 글쓰기 단추는 원래 `.app` 바로 아래에 나란히 있던
-형제입니다. 새 `div` 로 묶으면 CSS 가 달라지므로 조각(`<> </>`)으로 감쌌습니다. 조각은
-DOM 에 태그를 남기지 않아서 결과 HTML 이 1단계와 똑같이 유지됩니다.
-
-`navItems` 와 지금 보고 있는 탭 이름은 `BottomNav` 말고 쓰는 곳이 없어서 그 파일 안에
-두었습니다.
-
-1단계에서는 상품의 `location` 이 모델 맨 위의 현재 동네 `location` 과 이름이 겹쳐서
-`location: itemLocation` 으로 바꿔 받았습니다. `ItemCard` 를 따로 떼고 나니 그 파일에는
-`location` 이 상품의 동네 하나뿐이라 이름을 바꾸지 않아도 됩니다.
-
-CSS 는 한 줄도 건드리지 않았습니다.
-
-## 데이터 출처
-
-`src/model.js/marketModel.js` 는 강사님이 주신 `week2/minseo/src/model.js/marketModel.js`
-를 옮겨 온 것입니다. 값은 그대로 두고 두 가지만 손봤습니다.
-
-1. `image` 경로를 `public/assets` 의 실제 파일로 바꿨습니다. 원본은
-   `list/Rectangle 1.png` 처럼 강사님 로컬 경로라 이 프로젝트에서는 열리지 않습니다.
-2. `map` 의 `key` 로 쓰려고 `id` 를 1부터 7까지 더했습니다.
-
-원본과 값이 같은지는 두 파일을 함께 불러 `id` 와 `image` 를 뺀 나머지를 비교해서
-확인했습니다.
-
-`컴퓨터 구조론` 과 `맥북 에어 m1 13인치` 의 사진이 `커피머신` 과 같은데, 원본 데이터가
-세 항목 모두 `list/Rectangle 4.png` 를 가리키고 있기 때문입니다. 어울리는 사진을 새로
-찾아 넣지 않고 원본 그대로 뒀습니다.
-
-## 이미지 출처
-
-시안: https://www.figma.com/design/4nvJv24TnSWljlAK79qXgd/당근마켓?node-id=102-83
-
-`public/assets` 의 파일 18개는 전부 이 시안에서 나온 것입니다. 아이콘을 직접 그리거나
-비슷한 것으로 바꿔 넣은 것은 하나도 없습니다. 피그마에서 내보낸 파일이거나, 프레임
-SVG 에 박혀 있던 원본 바이트를 그대로 꺼낸 것입니다.
-
-| 쓰임 | 파일 |
+| 내용 | 구현 위치 |
 | --- | --- |
-| 상품 사진 | `airpods.jpg`, `perfume.jpg`, `sandwich.jpg`, `iphone.jpg`, `coffee.jpg` |
-| 헤더 | `chevron-down.png`, `search.png`, `menu.png`, `bell.png` |
-| 카드 | `comments.png`, `heart.png` |
-| 하단 탭 | `home.png`, `news.png`, `nearby.png`, `chat.png`, `profile.png` |
-| 글쓰기 단추 | `plus.png` |
-| 기기 상태 표시줄 | `status-bar.png` |
+| 컴포넌트 생성과 중첩 | `src/practice/components/Greeting.jsx` |
+| JSX와 Fragment | `src/practice/components/JsxRules.jsx` |
+| className과 스타일 | `src/practice/components/ProfileCard.jsx`, `src/practice/practice.css` |
+| 데이터와 표현식 표시 | `src/practice/components/StudyInfo.jsx` |
+| if, 삼항 연산자, && | `src/practice/components/AttendanceBadge.jsx`, `src/practice/components/AttendancePanel.jsx` |
 
-## 치수
+출석 체크박스와 공지 버튼으로 조건의 참·거짓 결과를 비교할 수 있습니다. 두 상태를 직접 확인하려고 이 부분에만 다음 단계의 `useState`를 사용했습니다.
 
-같은 프레임을 SVG 로 내려받아 좌표를 읽고 그대로 옮겼습니다. 원본 프레임은 390x844
-흰 배경입니다.
+## 미션
 
-| 부분 | 값 |
-| --- | --- |
-| 기기 상태 표시줄 | 높이 47 |
-| 헤더 | 높이 52, 좌우 여백 16, 아이콘 24 에 간격 15 |
-| 목록 | 좌우 여백 16, 사진 110 정사각에 모서리 4, 사진과 글 사이 16 |
-| 카드 한 칸 | 위아래 여백 16, 전체 142, 아래에 1px `#EEEEEE` 구분선 |
-| 하단 탭 | 높이 58, 아이콘 24 |
-| 홈 인디케이터 | 높이 34, 막대 134x5 |
-| 글쓰기 단추 | 지름 48, 오른쪽에서 16, 하단 탭에서 16 위 |
+1단계에서는 모든 미션 JSX를 `App.jsx`에 작성했습니다. 2단계에서는 같은 화면을 아래 컴포넌트로 분리했습니다. 분리 직후에는 SSR 결과 HTML 5,607자가 이전 단계와 동일함을 확인했습니다. 3단계에서는 조건부 렌더링·props 전달을 검증하고 좁은 화면과 키보드 스크롤을 보완했습니다.
 
-색은 가격 `#FF7E36`, 회색 글자 `#8C8C8C`, 구분선 `#EEEEEE` 입니다.
+| 컴포넌트 | props | 역할 |
+| --- | --- | --- |
+| `App` | 없음 | 모델을 한 번 가져와 `location`, `items`를 비구조화하고 전달 |
+| `Header` | `location` | 현재 동네와 검색·메뉴·알림 아이콘 |
+| `Content` | `items` | `map`으로 상품 목록 생성, `item.id`를 key로 사용 |
+| `ItemCard` | `item` | 상품 데이터를 비구조화해 사진·제목·동네·시간·가격 표시 |
+| `BottomNav` | 없음 | 하단 메뉴 다섯 개와 현재 홈 위치 표시 |
 
-시안에는 카드가 다섯 개만 보이지만 데이터는 일곱 개라 목록이 세로로 스크롤됩니다.
-시안에 거래완료 딱지는 없는데 미션 요구사항에 있어서 모델의 `isSold` 를 보고 그렸습니다.
+`isSold`가 참인 상품에만 거래완료 배지가 표시됩니다. 댓글·관심 수는 `> 0`으로 검사해 숫자 0이 화면에 남지 않게 했습니다.
 
-## 실습 부분
+390×844 시안의 헤더, 110px 상품 사진, 하단 메뉴, 글쓰기 버튼을 구현했습니다. 320px 화면에서도 가로 넘침 없이 표시되며, 상품 목록에 키보드 초점을 두고 Home·End·방향키로 스크롤할 수 있습니다. 마지막 상품은 글쓰기 버튼과 하단 메뉴에 가리지 않도록 여백을 뒀습니다.
 
-실습 코드는 `src/practice/` 로 옮겼습니다. 지운 예제는 없습니다.
+검색·알림·탭 이동·글쓰기의 실제 서비스 동작은 이번 화면 구현 과제에 포함되지 않아 해당 버튼은 비활성 상태입니다.
 
-| 문서 단계 | 실습 위치 |
-| --- | --- |
-| 컴포넌트 만들고 중첩하기 | `src/practice/components/Greeting.jsx` |
-| JSX 로 마크업 작성하기 | `src/practice/components/JsxRules.jsx` |
-| className 으로 스타일 추가하기 | `src/practice/components/ProfileCard.jsx`, `src/practice/practice.css` |
-| 데이터 표시하기 | `src/practice/components/StudyInfo.jsx` |
-| 조건부 렌더링 (if, 삼항, &&) | `src/practice/components/AttendanceBadge.jsx`, `src/practice/components/AttendancePanel.jsx` |
+## 데이터와 자산
 
-출처: https://ko.react.dev/learn (컴포넌트 만들고 중첩하기부터 조건부 렌더링까지)
+제공된 `week2/minseo/src/model.js/marketModel.js`의 상품 일곱 개를 사용했습니다. 원본 값은 유지하고 사진 경로와 안정적인 key용 `id`만 추가했습니다. App 이외의 컴포넌트는 모델을 직접 가져오지 않습니다.
 
-`AttendancePanel` 의 체크박스와 버튼을 눌러 보면 세 가지 조건부 렌더링이 각각 어떻게
-바뀌는지 한 화면에서 비교할 수 있습니다.
+원본 데이터에서 마지막 두 상품은 커피머신과 같은 사진 경로를 사용하므로 이 구현도 동일하게 재사용합니다.
 
-`useState` 는 빠른 시작의 다음 단계 내용이지만, 조건의 두 갈래를 직접 눌러 보려고
-`AttendancePanel` 에서만 미리 썼습니다.
+사진과 아이콘 18개는 [당근마켓_1 Figma 원본](https://www.figma.com/design/4nvJv24TnSWljlAK79qXgd/당근마켓?node-id=102-83)에서 내보냈습니다. `public/assets`에는 다운로드한 원본 파일과 프레임 SVG에 포함된 이미지의 원본 바이트를 저장했습니다. 외부 임시 URL이나 직접 그린 대체 아이콘은 사용하지 않습니다.
 
-## 실행 방법
+## 검증
 
-```bash
-npm install          # 처음 한 번 (package-lock.json 이 있으면 npm ci 도 됩니다)
-npm run dev          # 개발 서버, 미션은 http://localhost:5173/ , 실습은 /practice.html
-npm run lint         # ESLint
-npm run build        # 배포용 빌드, 결과는 dist/
-npm run preview      # 빌드 결과 미리 보기
-```
+2026-09-22, Node v25.6.1 / npm 11.9.0 / Chrome에서 확인했습니다.
 
-## 확인한 것
+- `npm run lint`, `npm run build` 통과.
+- 원본 모델과 값 일치, 상품 7개·거래완료 5개·댓글 표시 2개·관심 표시 3개 확인.
+- 임의의 상품 props와 빈 배열을 렌더링해 전달된 데이터, 판매 상태, 0/양수 반응의 분기 확인.
+- 실습 체크박스와 공지 버튼을 마우스 및 Space·Enter로 변경하고 양쪽 상태 확인.
+- 320px·390px·데스크톱에서 이미지 로딩과 레이아웃 확인. 320px에서 문서와 화면 너비 모두 320px이며, End 키로 마지막 상품까지 이동 가능.
+- 원본 자산 18개 로드, 브라우저 경고·오류 없음.
 
-2026-09-22 에 이 폴더에서 직접 돌린 결과입니다. Node v25.6.1, npm 11.9.0.
+![390px 미션 화면](docs/mission-390.png)
 
-| 명령 | 결과 |
-| --- | --- |
-| `npm run lint` | exit 0, 지적 없음 |
-| `npm run build` | exit 0, `dist/index.html` 과 `dist/practice.html` 이 함께 생성, `dist/assets` 에 이미지 18개 |
-
-모델이 강사님 원본과 같은지, 화면이 요구사항대로 그려지는지는 명령으로 확인했습니다.
-
-- 원본 모델과 내 모델을 함께 불러 `id` 와 `image` 를 뺀 나머지를 비교: 같음. `id` 는 일곱 개 모두 다름.
-- `react-dom/server` 로 `App` 을 한 번 그려서 결과 문자열을 셈: 상품 칸 7개,
-  거래완료 딱지 5개(`isSold` 가 참인 개수와 같음), 댓글 아이콘 2개, 관심 아이콘 3개
-  (0 이 아닌 항목 수와 같음), 0 이 그대로 찍힌 자리 없음, 하단 탭 다섯 칸,
-  안 만든 단추 10개가 모두 `disabled`, 홈 탭에만 `aria-current="page"`.
-- 2단계로 쪼개면서 화면이 바뀌지 않았는지: 1단계 `App.jsx` 를 git 에서 꺼내 와
-  2단계 `App` 과 나란히 `react-dom/server` 로 그린 뒤 결과 문자열을 비교했습니다.
-  5607자가 한 글자도 다르지 않았습니다.
-
-브라우저로 열어 눈으로 본 것은 아직 없습니다. 스타일이 시안과 맞는지 대조하는 것은
-다음 단계에서 합니다.
-
-## 남은 것
-
-- 스타일 마무리와 시안 대조는 다음 단계입니다. 지금은 쓸 수 있을 정도의 배치까지입니다.
-- 브라우저로 직접 열어 확인하는 것도 아직 안 했습니다. 화면 크기별 배치와 접근성
-  손보기는 다음 단계에서 실제 브라우저로 보면서 합니다.
-- 검색, 알림, 탭 이동, 글쓰기 같은 실제 기능은 이번 범위가 아닙니다.
+![320px 마지막 상품과 키보드 초점](docs/mission-320-bottom.png)
