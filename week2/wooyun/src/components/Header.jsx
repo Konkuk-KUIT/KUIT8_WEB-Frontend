@@ -1,4 +1,4 @@
-const Header = ({ location }) => {
+const Header = () => {
   return (
     <header className="header">
       <div className="header-location">

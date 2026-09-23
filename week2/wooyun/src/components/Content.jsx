@@ -4,7 +4,7 @@ const Content = ({ items }) => {
   return (
     <main className="content">
       {items.map((item) => (
-        <ItemCard key={item.title} item={item} />
+        item.isSold && <ItemCard key={item.title} item={item} />
       ))}
     </main>
   );
