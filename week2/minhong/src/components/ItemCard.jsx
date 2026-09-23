@@ -18,7 +18,7 @@ const ItemCard = ({
             <div className="box__text-info">
               <p>{location + " · " + timeAgo}</p>
             </div>
-            <p className="box__text-amount">{price}원</p>
+            <p className="box__text-amount">{price}</p>
           </div>
           <div className="box_btns">
             {comments > 0 && (
