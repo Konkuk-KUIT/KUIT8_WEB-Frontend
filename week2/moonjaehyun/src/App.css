@@ -98,6 +98,7 @@
 
 .item-card__img {
   display: block;
+  flex: 0 0 110px;
   width: 110px;
   height: 110px;
   border-radius: 4px;
@@ -113,6 +114,7 @@
   flex-direction: column;
   align-self: stretch;
   min-width: 0;
+  overflow: hidden;
   gap: 4px;
 }
 
@@ -122,16 +124,24 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+  width: 100%;
   min-width: 0;
+  overflow: hidden;
+  text-align: left;
 }
 
 .item-info__title {
+  display: block;
+  align-self: stretch;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow: hidden;
   color: #000;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
+  text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

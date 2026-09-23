@@ -12,6 +12,7 @@ export function ItemCard({
   likes,
   isSold,
 }) {
+  if (!isSold) return <></>;
   return (
     <>
       <div className="item-card">
@@ -33,12 +34,14 @@ export function ItemCard({
             </div>
             <div className="item-info__like">
               <img src={heartImg} alt="" />
-              <span>{likes}</span>
+              <span>
+                {likes}
+                {isSold}
+              </span>
             </div>
           </div>
         </div>
       </div>
-      ;
     </>
   );
 }

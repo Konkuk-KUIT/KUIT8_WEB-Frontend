@@ -4,17 +4,12 @@ import menu from "../assets/menu.svg";
 import notification from "../assets/notification.svg";
 import search from "../assets/search.svg";
 
-export function Header() {
+export function Header({ location }) {
   return (
     <>
       <header className="header">
         <div className="header-left">
-          <select name="location" className="header-left__location">
-            <option value="군자동">군자동</option>
-            <option value="군자동">군자동</option>
-            <option value="군자동">군자동</option>
-            <option value="군자동">군자동</option>
-          </select>
+          <span className="header-left__location">{location}</span>
           <img
             src={expand_arrow}
             alt="지역 선택"

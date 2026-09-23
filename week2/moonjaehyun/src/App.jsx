@@ -1,13 +1,17 @@
 import "./App.css";
-import { BottomNav } from "./component/BottomNav";
-import { Content } from "./component/Content";
-import { Header } from "./component/Header";
+import { BottomNav } from "./components/BottomNav";
+import { Content } from "./components/Content";
+import { Header } from "./components/Header";
+import marketModel from "./model.js/marketModel";
 
 function App() {
+  const location = marketModel.location;
+  const items = marketModel.items;
+
   return (
     <>
-      <Header></Header>
-      <Content></Content>
+      <Header location={location}></Header>
+      <Content items={items}></Content>
       <BottomNav></BottomNav>
     </>
   );
