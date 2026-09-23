@@ -1,13 +1,6 @@
-const ItemCard = ({
-  title,
-  location,
-  timeAgo,
-  price,
-  image,
-  comments,
-  likes,
-  isSold,
-}) => {
+const ItemCard = ({ item }) => {
+  const { title, location, timeAgo, price, image, comments, likes, isSold } =
+    item;
   return (
     isSold && (
       <section className="product__item">

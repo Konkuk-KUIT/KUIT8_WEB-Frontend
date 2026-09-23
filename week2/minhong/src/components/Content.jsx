@@ -6,15 +6,7 @@ const Content = ({ items }) => {
       {items.map((item) => {
         return (
           <ItemCard
-            key={item.id}
-            title={item.title}
-            location={item.location}
-            timeAgo={item.timeAgo}
-            price={item.price}
-            image={item.image}
-            comments={item.comments}
-            likes={item.likes}
-            isSold={item.isSold}
+            item = {item}
           />
         );
       })}
