@@ -1,0 +1,167 @@
+button{
+    background: none;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+body{
+    margin-bottom: 54px;
+}
+
+.chat-header{
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeeee;
+    align-items: center;
+}
+
+.chat-header__title{
+    color: #000;
+
+    /* 18 */
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 155.556% */
+}
+
+.chat-header__icons{
+    display: flex;
+    gap: 16px;
+}
+
+.chat-post{
+    padding: 16px;
+    display: flex;
+    border-bottom: 1px solid #eeeeee;
+    justify-content: space-between;
+}
+
+.chat-post__user{
+    display: flex;
+    gap:16px;
+    width: 100%;
+    align-items: center;
+}
+
+.user-img{
+    border-radius: 100%;
+}
+
+.product-img{
+    border-radius: 4px;
+}
+
+.user-name{
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px; /* 128.571% */
+}
+
+.user-info{
+    color: #8C8C8C;
+
+    /* 12 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+}
+
+.chat-text{
+    color: #000;
+
+    /* 14 */
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 128.571% */
+}
+
+.chat-info{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.chat-content{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bottom-bar{
+    position: fixed;
+    bottom: 0;
+    padding: 8px 16px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-top: 1px solid #d9d9d9;
+}
+
+.bar-content{
+    display: flex;
+}
+
+.bar__divider{
+    width: 1px;
+    align-self: stretch;
+    background-color: #eeeeee;
+    margin: 0 16px;
+}
+
+.bar__post-info{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.post-price{
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px; /* 128.571% */
+}
+
+.post-suggest{
+    color: #8C8C8C;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px; /* 150% */
+}
+
+.bar__chat-btn{
+    color: var(--white, #FFF);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px; /* 128.571% */
+
+    border-radius: 4px;
+    background: #FF7E36;
+    padding: 8px 14px;
+}
+
+.alarm-button--disabled{
+    opacity: 0.1;
+}
+
+.alarm-button--enabled{
+    opacity: 1.0;
+}
