@@ -1,122 +1,196 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import chat from "./assets/chat.svg";
+import chat_bottom from "./assets/chat_bottom.svg";
+import expand_arrow from "./assets/expand_arrow.svg";
+import heart from "./assets/heart.svg";
+import home from "./assets/home.svg";
+import menu from "./assets/menu.svg";
+import news from "./assets/news.svg";
+import notification from "./assets/notification.svg";
+import place_marker from "./assets/place_marker.svg";
+import plus from "./assets/plus.svg";
+import search from "./assets/search.svg";
+import user from "./assets/user.svg";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+      <header class="header">
+        <div class="header-left">
+          <select name="location" class="header-left__location">
+            <option value="군자동">군자동</option>
+            <option value="군자동">군자동</option>
+            <option value="군자동">군자동</option>
+            <option value="군자동">군자동</option>
+          </select>
+          <expand_arrow
+            src={expand_arrow}
+            alt="arrow"
+            class="header-left__arrow"
+          />
+        </div>
+        <div className="header-right">
+          <img src={menu} alt="menu" className="header-right__icon" />
+          <img
+            src={notification}
+            alt="notification"
+            className="header-right__icon"
+          />
+          <img src={search} alt="search" className="header-right__icon" />
+        </div>
+      </header>
+      <div class="item-list">
+        <div className="item-card">
+          <img class="item-card__img" src="" alt="item-img" />
+          <div className="item-info">
+            <div className="item-info__texts">
+              <span className="item-info__title">에어팟 프로</span>
+              <div className="item-info__body">
+                <span className="item-info__location">군자동</span>
+                <span>.</span>
+                <span className="item-info__date">3일 전</span>
+              </div>
+              <span className="item-info__price">220,000</span>
+            </div>
+            <div className="item-info__icons">
+              <div className="item-info__chat">
+                <img src={chat} alt="" />
+                <span>3</span>
+              </div>
+              <div className="item-info__like">
+                <img src={heart} alt="" />
+                <span>11</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="item-card">
+          <img class="item-card__img" src="" alt="item-img" />
+          <div className="item-info">
+            <div className="item-info__texts">
+              <span className="item-info__title">에어팟 프로</span>
+              <div className="item-info__body">
+                <span className="item-info__location">군자동</span>
+                <span>.</span>
+                <span className="item-info__date">3일 전</span>
+              </div>
+              <span className="item-info__price">220,000</span>
+            </div>
+            <div className="item-info__icons">
+              <div className="item-info__chat">
+                <img src={chat} alt="" />
+                <span>3</span>
+              </div>
+              <div className="item-info__like">
+                <img src={heart} alt="" />
+                <span>11</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="item-card">
+          <img class="item-card__img" src="" alt="item-img" />
+          <div className="item-info">
+            <div className="item-info__texts">
+              <span className="item-info__title">에어팟 프로</span>
+              <div className="item-info__body">
+                <span className="item-info__location">군자동</span>
+                <span>.</span>
+                <span className="item-info__date">3일 전</span>
+              </div>
+              <span className="item-info__price">220,000</span>
+            </div>
+            <div className="item-info__icons">
+              <div className="item-info__chat">
+                <img src={chat} alt="" />
+                <span>3</span>
+              </div>
+              <div className="item-info__like">
+                <img src={heart} alt="" />
+                <span>11</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="item-card">
+          <img class="item-card__img" src="" alt="item-img" />
+          <div className="item-info">
+            <div className="item-info__texts">
+              <span className="item-info__title">에어팟 프로</span>
+              <div className="item-info__body">
+                <span className="item-info__location">군자동</span>
+                <span>.</span>
+                <span className="item-info__date">3일 전</span>
+              </div>
+              <span className="item-info__price">220,000</span>
+            </div>
+            <div className="item-info__icons">
+              <div className="item-info__chat">
+                <img src={chat} alt="" />
+                <span>3</span>
+              </div>
+              <div className="item-info__like">
+                <img src={heart} alt="" />
+                <span>11</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="item-card">
+          <img class="item-card__img" src="" alt="item-img" />
+          <div className="item-info">
+            <div className="item-info__texts">
+              <span className="item-info__title">에어팟 프로</span>
+              <div className="item-info__body">
+                <span className="item-info__location">군자동</span>
+                <span>.</span>
+                <span className="item-info__date">3일 전</span>
+              </div>
+              <span className="item-info__price">220,000</span>
+            </div>
+            <div className="item-info__icons">
+              <div className="item-info__chat">
+                <img src={chat} alt="" />
+                <span>3</span>
+              </div>
+              <div className="item-info__like">
+                <img src={heart} alt="" />
+                <span>11</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <bottom>
+        <div class="append-item">
+          <button class="append-item__button">
+            <img src={plus} alt="" class="append-item__img" />
+          </button>
         </div>
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <div class="footer-item">
+            <img src={user} alt="" class="footer-item__icon" />
+            <span class="footer-item__name">홈</span>
+          </div>
+          <div class="footer-item">
+            <img src={news} alt="" class="footer-item__icon" />
+            <span class="footer-item__name">동네 생활</span>
+          </div>
+          <div class="footer-item">
+            <img src={place_marker} alt="" class="footer-item__icon" />
+            <span class="footer-item__name">내 근처</span>
+          </div>
+          <div class="footer-item">
+            <img src={chat_bottom} alt="" class="footer-item__icon" />
+            <span class="footer-item__name">채팅</span>
+          </div>
+          <div class="footer-item">
+            <img src={home} alt="" class="footer-item__icon" />
+            <span class="footer-item__name">나의 당근</span>
+          </div>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      </bottom>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
