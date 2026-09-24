@@ -7,6 +7,7 @@ const marketModel = {
   location: "군자동",
   items: [
     {
+      id:1,
       title: "에어팟 프로",
       location: "군자동",
       timeAgo: "3일 전",
@@ -17,6 +18,7 @@ const marketModel = {
       isSold: true,
     },
     {
+      id:2,
       title: "바이레도 블랑쉬 50ml",
       location: "광진구 구의제3동",
       timeAgo: "26초 전",
@@ -27,6 +29,7 @@ const marketModel = {
       isSold: false,
     },
     {
+      id:3,
       title: "샌드위치",
       location: "동대문구 휘경동",
       timeAgo: "끝물 59초 전",
@@ -37,6 +40,7 @@ const marketModel = {
       isSold: false,
     },
     {
+      id:4,
       title: "아이폰 13프로맥스",
       location: "군자동",
       timeAgo: "1일 전",
@@ -47,6 +51,7 @@ const marketModel = {
       isSold: true,
     },
     {
+      id:5,
       title: "커피머신",
       location: "구리시 교문1동",
       timeAgo: "1초 전",
@@ -57,6 +62,7 @@ const marketModel = {
       isSold: true,
     },
     {
+      id:6,
       title: "컴퓨터 구조론",
       location: "서울시 화양동",
       timeAgo: "1분전",
@@ -67,6 +73,7 @@ const marketModel = {
       isSold: true,
     },
     {
+      id:7,
       title: "맥북 에어 m1 13인치",
       location: "광주",
       timeAgo: "13분 전",
