@@ -5,6 +5,7 @@ function Content({items}){
     return(
         <article className='product-list'>
             {items.map((model)=>(
+                model.isSold &&
                 <ItemCard
                     key={model.id}
                     model={model}
