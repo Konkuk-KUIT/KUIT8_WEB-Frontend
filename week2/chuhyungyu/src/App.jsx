@@ -6,11 +6,13 @@ import Content from './components/Content';
 import BottomNav from './components/BottomNav';
 
 function App() {
+  const { location, items } = marketModel;
+
   return (
     <>
-      <Header location={marketModel.location} />
+      <Header location={location} />
 
-      <Content items={marketModel.items} />
+      <Content items={items} />
 
       <button className="write-button">
         <img src="/assets/plus.svg" alt="글쓰기" />

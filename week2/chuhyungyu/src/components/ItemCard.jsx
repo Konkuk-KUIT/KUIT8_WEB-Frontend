@@ -1,39 +1,50 @@
 function ItemCard({ item }) {
+  const {
+    title,
+    location,
+    timeAgo,
+    price,
+    image,
+    comments,
+    likes,
+    isSold,
+  } = item;
+
   return (
     <article className="market-item">
       <img
         className="market-item-image"
-        src={'/assets/' + item.image}
-        alt={item.title}
+        src={'/assets/' + image}
+        alt={title}
       />
 
       <div className="market-item-content">
         <div className="market-item-info">
-          <h2 className="market-item-title">
-            {item.title}
-          </h2>
+          <h2 className="market-item-title">{title}</h2>
 
           <p className="market-item-meta">
-            {item.location} · {item.timeAgo}
+            {location} · {timeAgo}
           </p>
 
+          {isSold && <span>판매완료</span>}
+
           <strong className="market-item-price">
-            {item.price}
+            {price}
           </strong>
         </div>
 
         <div className="market-item-status">
-          {item.comments > 0 && (
+          {comments > 0 && (
             <div className="market-item-count">
               <img src="/assets/chat.svg" alt="" />
-              <span>{item.comments}</span>
+              <span>{comments}</span>
             </div>
           )}
 
-          {item.likes > 0 && (
+          {likes > 0 && (
             <div className="market-item-count">
               <img src="/assets/likes.svg" alt="" />
-              <span>{item.likes}</span>
+              <span>{likes}</span>
             </div>
           )}
         </div>
