@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 12px 16px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.header-left {
+    color: #000;
+    display: flex;
+    /* 18 */
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    /* 155.556% */
+
+    gap: 6px;
+}
+
+.header-right{
+    display: flex;
+    gap: 16px;
+}
+
+/* section */
+
+.item-list {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+/* 사진 같은 경우에 크기를 얼마를 줘야할지 잘 모르겠습니다.일단 피그마에 있는 값으로 
+    지정해주었는데 괜찮을까요?
+ */
+.item-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-meta{
+    gap: 4px;
+    display: flex;
+    color: #8C8C8C;
+
+/* 12 */
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px; /* 133.333% */
+}
+
+.item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-card {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 4px;
+}
+
+.item-name {
+    color: #000000;
+
+    /* 16 */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 125% */
+}
+
+.item-etc {
+    display: flex;
+    justify-content: flex-end;
+    gap :4px;
+}
+
+.item-chat {
+    display: flex;
+    gap:2px;
+}
+
+.item-heart {
+    display: flex;
+    gap:2px;
+}
+
+.bottom-nav {
+    display: flex;
+    padding: 8px;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    flex: 1;
+}
+
+.plus{
+    position: fixed;
+    right: 16px;
+}
+
+.plus-icon{
+    border-radius: 100px;
+background: #FF7E36;
+box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
+}
