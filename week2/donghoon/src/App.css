@@ -167,3 +167,36 @@
 .content {
   padding-bottom: 80px;
 }
+
+/* 플러스 버튼 */
+.floating-button {
+  position: fixed;
+
+  right: 16px;
+  bottom: 74px; /* BottomNav 58px + 간격 16px */
+
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 100px;
+  background: #ff7e36;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  cursor: pointer;
+  z-index: 10;
+}
+
+.floating-button img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}

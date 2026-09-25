@@ -1,12 +1,15 @@
 import ItemCard from "./ItemCard";
 
 function Content({ items }) {
+    // step 3 체크리스트 - 조건부 렌더링 사용하기
+    // step 3 체크리스트 - 배열 렌더링 사용하기
     return (
         <main className="content">
             {
-                items.filter((item)=>item.isSold === true )
-                .map((item) => (
+                items.map((item) => (
+                    item.isSold===true && (
                     <ItemCard key={item.title} item={item} />
+                    )
                 ))
             }
         </main>

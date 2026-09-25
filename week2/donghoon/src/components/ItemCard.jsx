@@ -1,4 +1,5 @@
 function ItemCard({item}) {
+    // step 3 체크리스트 - props 객체에 대한 비구조화 할당 사용하기
     return(
         <article className="item-card" key={item.title}>
             {/* 상품 사진 영역 */}
