@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -21,7 +22,7 @@
     gap: 6px;
 }
 
-.header-right{
+.header-right {
     display: flex;
     gap: 16px;
 }
@@ -44,23 +45,24 @@
     overflow: hidden;
 }
 
-.item{
+.item {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.item-meta{
+.item-meta {
     gap: 4px;
     display: flex;
     color: #8C8C8C;
 
-/* 12 */
-font-family: Inter;
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: 16px; /* 133.333% */
+    /* 12 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    /* 133.333% */
 }
 
 .item-img img {
@@ -100,17 +102,17 @@ line-height: 16px; /* 133.333% */
 .item-etc {
     display: flex;
     justify-content: flex-end;
-    gap :4px;
+    gap: 4px;
 }
 
 .item-chat {
     display: flex;
-    gap:2px;
+    gap: 2px;
 }
 
 .item-heart {
     display: flex;
-    gap:2px;
+    gap: 2px;
 }
 
 .bottom-nav {
@@ -126,13 +128,22 @@ line-height: 16px; /* 133.333% */
     flex: 1;
 }
 
-.plus{
-    position: fixed;
+.plus {
+    position: absolute;
     right: 16px;
+
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+    bottom: 470px;
+
+    border-radius: 100px;
+    background: #FF7E36;
 }
 
-.plus-icon{
+
+.plus-icon {
     border-radius: 100px;
-background: #FF7E36;
-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
+    background: #FF7E36;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
 }
