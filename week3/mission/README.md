@@ -24,7 +24,7 @@ npm run dev
 ## 제공되는 코드
 
 - Tailwind CSS로 구현된 `Stores` 화면
-- `BackBar`, `Button`, `StoreItem`, `MenuItem`, `OrderBar` 컴포넌트
+- `BackBar`, `Button`, `StoreItem`, `OrderBar` 컴포넌트
 - `stores.js` 더미 데이터
 
 Routing 코드는 미리 제공되므로 직접 구현하지 않아도 됩니다. 이번 미션에서는 `Store`와 `Cart` 화면의 컴포넌트 설계와 스타일링에 집중합니다.
