@@ -282,8 +282,8 @@ body {
   align-items: center;
   justify-content: center;
 
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
 
   padding: 0;
   border: none;
@@ -299,8 +299,8 @@ body {
 .bottom-nav__fab img {
   display: block;
 
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
 
   object-fit: contain;
 }
