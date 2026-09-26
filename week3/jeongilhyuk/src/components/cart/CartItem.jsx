@@ -3,8 +3,8 @@ import Thumbnail from "../Thumbnail";
 
 const CartItem = ({ name, options, price, quantity }) => {
 	return (
-		<div className="flex items-center py-[16px] pr-[20px] pl-[24px]">
-			<div className="flex items-start gap-[16px]">
+		<div className="flex h-[110px] items-center pr-[20px] pl-[24px]">
+			<div className="flex items-start gap-[16px] self-start pt-[16px]">
 				<div className="mt-[3px]">
 					<Thumbnail />
 				</div>

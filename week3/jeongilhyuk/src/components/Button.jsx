@@ -2,7 +2,7 @@
 const sizeStyles = {
 	sm: "rounded-[8px] p-[8px_14px_8px_15px] text-[13px] font-medium",
 	lg: "rounded-[8px] px-[16px] py-[10px] text-[15px] font-medium",
-	xl: "rounded-[16px] p-[18px_112px_19px_113px] text-[16px] font-semibold",
+	xl: "w-[350px] rounded-[16px] pt-[18px] pb-[19px] text-[16px] font-semibold",
 };
 
 const Button = ({

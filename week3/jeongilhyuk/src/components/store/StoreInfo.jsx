@@ -16,7 +16,7 @@ const StoreInfo = ({
 	];
 
 	return (
-		<section className="border-b border-[#e5e8eb] px-[24px] pt-[26px] pb-[14px]">
+		<section className="border-b border-[#e5e8eb] px-[24px] pt-[26px] pb-[13px]">
 			<h1 className="text-[26px] font-bold text-[#191f28]">{name}</h1>
 
 			<div className="mt-[8px] flex items-center pl-[1px] text-[#4e5968]">

@@ -8,7 +8,7 @@ const OrderBar = () => {
 
 
 	return (
-		<div className="fixed bottom-[0px] flex h-[77px] w-[390px] items-center justify-between rounded-t-[16px] bg-white px-[24px] shadow-[0_-8px_16px_0_rgba(0,0,0,0.1)]">
+		<div className="fixed bottom-[0px] left-0 flex h-[77px] w-[390px] items-center justify-between rounded-t-[16px] bg-white px-[24px] shadow-[0_-8px_16px_0_rgba(0,0,0,0.1)]">
 			<div className="flex flex-col gap-[5px]">
 				<span className="text-[15px] font-normal text-[#6b7684]">
 					총 주문금액
