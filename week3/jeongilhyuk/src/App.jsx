@@ -1,7 +1,11 @@
 import Router from "./pages/Router";
 
 const App = () => {
-	return <Router />;
+	return (
+		<div className="font-['Pretendard'] leading-[normal]">
+			<Router />
+		</div>
+	);
 };
 
 export default App;
