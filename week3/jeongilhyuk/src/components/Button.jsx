@@ -9,6 +9,7 @@ const Button = ({
 	size = "sm",
 	disabled = false,
 	type = "button",
+	className = "",
 	...buttonProps
 }) => {
 	const sizeClassName = sizeStyles[size] ?? sizeStyles.sm;
@@ -17,7 +18,7 @@ const Button = ({
 		<button
 			type={type}
 			disabled={disabled}
-			className={`cursor-pointer rounded-[8px] border-0 bg-[#3182f6] font-medium text-white disabled:cursor-not-allowed disabled:bg-[#d0dffb] ${sizeClassName}`}
+			className={`cursor-pointer rounded-[8px] border-0 bg-[#3182f6] font-medium text-white disabled:cursor-not-allowed disabled:bg-[#d0dffb] ${sizeClassName} ${className}`}
 			{...buttonProps}
 		>
 			{children}
