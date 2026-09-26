@@ -1,7 +1,8 @@
+// 크기마다 모서리와 굵기도 다르다. 결제하기 같은 큰 버튼(xl)은 16px 모서리에 semibold.
 const sizeStyles = {
-	sm: "p-[8px_14px_8px_15px] text-[13px]",
-	lg: "px-[16px] py-[10px] text-[15px]",
-	xl: "p-[18px_112px_19px_113px] text-[16px]",
+	sm: "rounded-[8px] p-[8px_14px_8px_15px] text-[13px] font-medium",
+	lg: "rounded-[8px] px-[16px] py-[10px] text-[15px] font-medium",
+	xl: "rounded-[16px] p-[18px_112px_19px_113px] text-[16px] font-semibold",
 };
 
 const Button = ({
@@ -18,7 +19,7 @@ const Button = ({
 		<button
 			type={type}
 			disabled={disabled}
-			className={`cursor-pointer rounded-[8px] border-0 bg-[#3182f6] font-medium text-white disabled:cursor-not-allowed disabled:bg-[#d0dffb] ${sizeClassName} ${className}`}
+			className={`cursor-pointer border-0 bg-[#3182f6] text-white disabled:cursor-not-allowed disabled:bg-[#d0dffb] ${sizeClassName} ${className}`}
 			{...buttonProps}
 		>
 			{children}
