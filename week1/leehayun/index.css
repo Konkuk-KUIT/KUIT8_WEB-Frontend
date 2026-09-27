@@ -1,0 +1,48 @@
+* { box-sizing: border-box; }
+
+body { background: #f7f8f9; color: #111; font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+button { padding: 0; border: 0; background: none; cursor: pointer; font: inherit; }
+.app { width: min(100%, 390px); min-height: 100vh; margin: 0 auto; padding-bottom: 60px; background: #fff; }
+
+/* 상단 헤더 */
+.profile-header { height: 58px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e5e5; }
+.profile-header h1 { font-size: 19px; font-weight: 700; }
+.icon-button img { display: block; width: 24px; height: 24px; }
+
+/* 프로필 */
+.profile-section { padding: 13px 16px 19px; border-bottom: 4px solid #f0f0f0; }
+.profile { min-height: 63px; display: flex; align-items: center; gap: 14px; }
+.profile__image { position: relative; flex: none; width: 58px; height: 58px; overflow: hidden; border: 1px solid #bfc0c2; border-radius: 50%; background: #d2d3d5; }
+.profile__head { position: absolute; top: 11px; left: 18px; width: 20px; height: 20px; border-radius: 50%; background: #fff; }
+.profile__body { position: absolute; top: 37px; left: 8px; width: 40px; height: 25px; border-radius: 50% 50% 0 0; background: #fff; }
+.profile__details { flex: 1; min-width: 0; }
+.profile__nickname { font-size: 17px; font-weight: 700; line-height: 24px; text-align: left; }
+.profile__nickname[hidden] { display: none; }
+.profile__id { margin-top: 3px; color: #898b8f; font-size: 13px; line-height: 18px; }
+.profile__arrow { width: 18px; height: 18px; }
+.nickname-editor { display: flex; gap: 5px; }
+.nickname-editor[hidden] { display: none; }
+.nickname-editor__input { width: min(145px, 100%); min-width: 0; height: 28px; padding: 3px 6px; border: 1px solid #ff7e36; border-radius: 4px; font-size: 14px; }
+.nickname-editor__save { padding: 0 8px; border-radius: 4px; background: #ff7e36; color: #fff; font-size: 13px; }
+
+/* 당근페이와 거래 바로가기 */
+.pay-banner { min-height: 38px; margin-top: 13px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; gap: 6px; border: 1px dashed #ff7e36; border-radius: 7px; white-space: nowrap; }
+.pay-banner strong { color: #ff7e36; font-size: 14px; font-weight: 700; }
+.pay-banner span { color: #606266; font-size: 12px; }
+.trade-menu { display: flex; justify-content: space-around; padding-top: 15px; }
+.trade-menu__item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; }
+.trade-menu__icon { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 50%; background: #ffebe0; }
+.trade-menu__icon img { width: 21px; height: 21px; }
+
+/* 활동 목록 */
+.menu-section { padding: 19px 16px 7px; border-bottom: 4px solid #f0f0f0; }
+.menu-section h2 { margin-bottom: 11px; font-size: 17px; font-weight: 700; line-height: 24px; }
+.menu-section li { min-height: 40px; display: flex; align-items: center; gap: 16px; font-size: 16px; }
+.menu-section li img { width: 20px; height: 20px; }
+
+/* 앱 하단 메뉴 */
+.bottom-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100%, 390px); height: 60px; display: flex; justify-content: space-around; border-top: 1px solid #e5e5e5; background: #fff; }
+.bottom-bar__item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; font-size: 10px; white-space: nowrap; }
+.bottom-bar__item img { width: 23px; height: 23px; }
+
+@media (max-width: 350px) { .pay-banner { white-space: normal; } .pay-banner span { text-align: right; } }

@@ -1,0 +1,216 @@
+/* Global styles */
+button {
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  margin-bottom: 54px;
+  font-family: Inter;
+}
+
+/* components styles */
+
+header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeeeee;
+  align-items: center;
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  top: 0;
+}
+
+main {
+  margin-top: 54px;
+}
+
+.header-title {
+  color: #000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.header-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.profile {
+  padding: 16px 16px 0;
+  border-bottom: 4px solid #eeeeee;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.profile-card button {
+  margin-left: auto;
+}
+
+.user-img {
+  border-radius: 100%;
+}
+
+.user-name {
+  color: #000000;
+  font-size: 16px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.user-name[hidden] {
+  display: none;
+}
+
+.name-edit {
+  display: flex;
+  gap: 8px;
+}
+
+.name-edit input {
+  width: 140px;
+  padding: 6px;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.profile-card .name-edit button {
+  margin-left: 0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: #ff8a3d;
+  color: white;
+}
+
+.user-location {
+  color: #8c8c8c;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.carrot-pay-banner {
+  border: 1px dashed #ff7e36;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.banner-title {
+  color: #ff7e36;
+  font-size: 14px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.banner-info {
+  color: #5e5e5e;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.profile-menu {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  padding: 16px;
+}
+
+.profile-menu a {
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.profile-menu span {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.profile-menu .menu-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+/* 나의 활동 */
+.activity-title,
+.neighborhood-title {
+  color: #000000;
+  font-size: 16px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 20px;
+  padding: 12px 16px 12px 16px;
+}
+
+.activity,
+.neighborhood {
+  border-bottom: 4px solid #eeeeee;
+  padding-block: 8px;
+}
+
+.activity .menu-item,
+.neighborhood .menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 16px;
+}
+
+/* 하단 메뉴바 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  padding: 8px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-top: 1px solid #d9d9d9;
+}
+
+.bar-content img {
+  width: 24px;
+  height: 24px;
+}
+
+.bar-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bar-content p {
+  font-size: 10px;
+}

@@ -1,0 +1,56 @@
+/* 채팅 목록 (당근마켓_4) */
+.chat-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chat-item__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chat-item__body {
+  flex: 1;
+  min-width: 0; /* 긴 메시지가 줄임표로 잘리게 */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.chat-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chat-item__name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.chat-item__info {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--gray);
+}
+
+.chat-item__text {
+  font-size: 14px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-item__product {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}

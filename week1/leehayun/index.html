@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 당근</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <!-- 상단 헤더 -->
+      <header class="profile-header">
+        <h1>나의 당근</h1>
+        <button class="icon-button" type="button" aria-label="설정">
+          <img src="./assets/settings.svg" alt="" />
+        </button>
+      </header>
+
+      <main>
+        <!-- 프로필과 거래 메뉴 -->
+        <section class="profile-section" aria-label="내 프로필">
+          <div class="profile">
+            <div class="profile__image" aria-hidden="true">
+              <span class="profile__head"></span>
+              <span class="profile__body"></span>
+            </div>
+            <div class="profile__details">
+              <button class="profile__nickname" type="button">가나다</button>
+              <div class="nickname-editor" hidden>
+                <input class="nickname-editor__input" type="text" maxlength="20" aria-label="새 닉네임" />
+                <button class="nickname-editor__save" type="button">수정</button>
+              </div>
+              <p class="profile__id">군자동 #123456789</p>
+            </div>
+            <img class="profile__arrow" src="./assets/chevron.svg" alt="" />
+          </div>
+
+          <div class="pay-banner">
+            <strong>당근페이</strong>
+            <span>중고거래는 이제 당근페이로 해보세요!</span>
+          </div>
+
+          <div class="trade-menu">
+            <div class="trade-menu__item">
+              <div class="trade-menu__icon"><img src="./assets/receipt.svg" alt="" /></div>
+              <span>판매내역</span>
+            </div>
+            <div class="trade-menu__item">
+              <div class="trade-menu__icon"><img src="./assets/bag.svg" alt="" /></div>
+              <span>구매내역</span>
+            </div>
+            <div class="trade-menu__item">
+              <div class="trade-menu__icon"><img src="./assets/heart.svg" alt="" /></div>
+              <span>관심목록</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 나의 활동 -->
+        <section class="menu-section">
+          <h2>나의 활동</h2>
+          <ul>
+            <li><img src="./assets/card.svg" alt="" />내 동네 설정</li>
+            <li><img src="./assets/card.svg" alt="" />동네 인증하기</li>
+            <li><img src="./assets/card.svg" alt="" />키워드 알림</li>
+            <li><img src="./assets/card.svg" alt="" />모아보기</li>
+            <li><img src="./assets/card.svg" alt="" />당근가계부</li>
+          </ul>
+        </section>
+
+        <!-- 우리동네 -->
+        <section class="menu-section">
+          <h2>우리동네</h2>
+          <ul>
+            <li><img src="./assets/card.svg" alt="" />동네생활 글/댓글</li>
+            <li><img src="./assets/card.svg" alt="" />동네홍보 글</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- 앱 하단 메뉴 -->
+      <nav class="bottom-bar" aria-label="주 메뉴">
+        <div class="bottom-bar__item"><img src="./assets/home.svg" alt="" /><span>홈</span></div>
+        <div class="bottom-bar__item"><img src="./assets/card.svg" alt="" /><span>동네생활</span></div>
+        <div class="bottom-bar__item"><img src="./assets/location.svg" alt="" /><span>내 근처</span></div>
+        <div class="bottom-bar__item"><img src="./assets/chat.svg" alt="" /><span>채팅</span></div>
+        <div class="bottom-bar__item bottom-bar__item--active" aria-current="page"><img src="./assets/user.svg" alt="" /><span>나의 당근</span></div>
+      </nav>
+    </div>
+  </body>
+</html>

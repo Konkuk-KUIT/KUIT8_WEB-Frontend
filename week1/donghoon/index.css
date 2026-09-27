@@ -1,0 +1,252 @@
+/***** 헤더 부분 *****/
+.profile-header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+  align-items: center;
+}
+
+.profile-header__title {
+  color: #000;
+
+  /* 18 */
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 155.556% */
+}
+
+.profile-header__settings {
+  background: none;
+  border: none;
+}
+
+/****** 여기부턴 프로필 박스 *****/
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+  gap: 16px;
+  border-bottom: 4px solid #eee;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-info__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  flex: 1;
+}
+
+.user-name {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+
+.user-info {
+  color: #8c8c8c;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.karrot-pay {
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px dashed #ff7e36;
+}
+
+.karrot-pay__title {
+  color: #ff7e36;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 128.571% */
+}
+
+.karrot-pay__details {
+  color: #5e5e5e;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.user-history {
+  padding: 0 16px;
+  display: flex;
+}
+
+.user-history__item {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-history__label {
+  color: #000;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.my-activity {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 4px solid #eee;
+}
+
+.my-activity__title {
+  margin: 0;
+  padding: 10px 16px;
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+
+.my-activity__item {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.my-activity__label {
+  color: #000;
+
+  /* 16 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+}
+
+.my-neighborhood {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.my-neighborhood__title {
+  padding: 12px 16px;
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+
+.my-neighborhood__item {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.my-neighborhood__label {
+  color: #000;
+
+  /* 16 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+}
+
+.bottom-bar {
+  padding: 8px 0;
+  display: flex;
+  border-top: 1px solid #d9d9d9;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.bottom-bar__item {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.bottom-bar__label {
+  color: #000;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 140% */
+}
+
+main {
+  padding-bottom: 58px;
+}
+
+.profile-info__edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-info__input {
+  width: 120px;
+  height: 32px;
+  padding: 0 8px;
+}
+
+.profile-info__button {
+  padding: 8px 12px;
+
+  color: white;
+  background-color: #ff7e36;
+
+  border: none;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
