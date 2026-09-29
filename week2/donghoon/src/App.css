@@ -1,0 +1,202 @@
+/* 헤더 쪽 관련 */
+
+.header {
+  display: flex;
+  padding: 12px 16px;
+  justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+  align-items: center;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.location-name {
+  margin: 0; /*h1 태그는 기본 브라우저 margin이 있기 때문에 이걸 써줘야함*/
+  color: #000;
+
+  /* 18 */
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 155.556% */
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/*여기 아래부터는 상품 목록 관련*/
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.item-card {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.item-image {
+  width: 110px;
+  height: 110px;
+
+  border-radius: 4px;
+}
+
+.item-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  text-align: left; /*index.css 때문*/
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-details h2 {
+  margin: 0;
+
+  color: #000;
+
+  /* 16 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+}
+
+.item-details p {
+  margin: 0;
+  color: #8c8c8c;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.item-price {
+  color: #ff7e36;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px; /* 146.667% */
+}
+
+.item-reaction {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+
+.reaction-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reaction-item span {
+  color: #8c8c8c;
+
+  /* 12 */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+/* 두 번째 부터는 위쪽에도 16px 필요 */
+.item-card + .item-card {
+  padding-top: 16px;
+}
+
+/*하단 바 영역*/
+.bottom-bar {
+  padding: 8px 0;
+  display: flex;
+  border-top: 1px solid #d9d9d9;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.bottom-bar__item {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.bottom-bar__label {
+  color: #000;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 140% */
+}
+
+.content {
+  padding-bottom: 80px;
+}
+
+/* 플러스 버튼 */
+.floating-button {
+  position: fixed;
+
+  right: 16px;
+  bottom: 74px; /* BottomNav 58px + 간격 16px */
+
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 100px;
+  background: #ff7e36;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  cursor: pointer;
+  z-index: 10;
+}
+
+.floating-button img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
