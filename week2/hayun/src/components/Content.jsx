@@ -5,7 +5,9 @@ export default function Content({ items }) {
     <main className="market-main">
       <article className="product-list">
         {items.map(product => (
-          <ItemCard key={product.title} product={product} />
+          product.isSold === true && (
+            <ItemCard key={product.title} product={product} />
+          )
         ))}
       </article>
       
