@@ -43,7 +43,7 @@ const CartStoreSection = ({
         <span className="text-[17px] leading-[20px] font-semibold">
           더 담기
         </span>
-        <img src="/cart-plus.svg" alt="" />
+        <img className="relative left-[-2px]" src="/cart-plus.svg" alt="" />
       </button>
     </section>
   );

@@ -23,7 +23,7 @@ const OrderMenu = ({ name, price, options, quantity, onQuantityClick }) => {
         className="mt-[30px] ml-[16px] flex w-[50px] shrink-0 cursor-pointer items-center gap-[11px] border-0 bg-transparent p-0 text-[#6b7684]"
         aria-label={`${name} 수량 변경`}
       >
-        <span className="text-[15px] leading-[18px] font-medium whitespace-nowrap">
+        <span className="w-[23px] text-[15px] leading-[18px] font-medium whitespace-nowrap">
           {quantity}개
         </span>
         <img src="/cart-chevron.svg" alt="" />

@@ -1,9 +1,9 @@
 const BackBar = ({ orderCancel }) => {
 	return (
-		<div className="fixed top-[0px] flex h-[41px] w-[390px] items-center justify-between bg-white pr-[15px] pl-[10px]">
-			<img src="/arrow.svg" alt="BackButton" />
+		<div className="fixed top-0 z-40 flex h-[41px] w-[390px] items-start justify-between bg-white pr-[15px] pl-[10px]">
+			<img className="mt-[7px]" src="/arrow.svg" alt="뒤로 가기" />
 			{orderCancel && (
-				<span className="text-[16px] font-semibold text-[#333d4b]">
+				<span className="mt-[9px] text-[16px] leading-[normal] font-semibold text-[#333d4b]">
 					주문취소
 				</span>
 			)}
