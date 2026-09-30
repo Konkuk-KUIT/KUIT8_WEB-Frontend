@@ -1,0 +1,54 @@
+/* 두 페이지가 같이 쓰는 기본 스타일이다. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1.25rem;
+  background-color: #f5f6f8;
+  color: #1c1d21;
+  font-family: system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 좁은 화면에서는 꽉 차고, 넓은 화면에서는 가운데로 모인다. */
+.page {
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+}
+
+a,
+button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.link-button {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  background-color: #3f6fe0;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* 키보드 탭 이동이 눈에 보이도록 초점 표시를 남겨 둔다. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #1c46a8;
+  outline-offset: 2px;
+}
