@@ -51,6 +51,19 @@ week3/A를 복사 → week4에 붙여 넣기 → week4/A
 
 수업에서 함께 구현한 가게 리스트 코드는 `week4/sanghyun/src`에서 **가게 리스트와 관련된 파일만** 자신의 `week4/A/src` 안의 같은 위치에 복사합니다. `src` 전체를 복사하거나 자신이 구현한 가게 메뉴 리스트와 주문서 파일을 덮어쓰지 않습니다.
 
+복사할 파일은 다음과 같습니다. 아래 경로는 `week4/sanghyun/src`를 기준으로 합니다.
+
+```text
+components/BackBar.tsx
+components/Button.tsx
+components/OrderBar/OrderBar.tsx
+components/StoreItem.tsx
+components/StoreSearchBar.tsx
+models/stores.ts
+pages/Stores/Stores.tsx
+types/stores.ts
+```
+
 `node_modules`와 `dist`는 제출 대상이 아닙니다. 이후 설치와 실행 명령은 반드시 `week4/자기이름` 폴더 안에서 실행합니다.
 
 ## 3. TypeScript 도입을 위해 패키지 수정

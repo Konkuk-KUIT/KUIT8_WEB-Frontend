@@ -1,6 +1,10 @@
-const BackBar = ({ orderCancel }) => {
+interface BackBarProps {
+    orderCancel?: boolean
+}
+
+const BackBar = ({ orderCancel = false }: BackBarProps) => {
     return (
-        <div className="fixed top-[0px] flex h-[41px] w-[390px] items-center justify-between bg-white pr-[15px] pl-[10px]">
+        <div className="fixed top-[0px] z-50 flex h-[41px] w-[390px] items-center justify-between bg-white pr-[15px] pl-[10px]">
         <img src="/arrow.svg" alt="BackButton" />
         {orderCancel && (
             <span className="text-[16px] font-semibold text-[#333d4b]">

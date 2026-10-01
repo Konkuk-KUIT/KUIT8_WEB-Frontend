@@ -1,8 +1,16 @@
+import type { ButtonHTMLAttributes } from "react";
+
 const sizeStyles = {
 	sm: "p-[8px_14px_8px_15px] text-[13px]",
 	lg: "px-[16px] py-[10px] text-[15px]",
 	xl: "p-[18px_112px_19px_113px] text-[16px]",
 };
+
+type ButtonSize = keyof typeof sizeStyles;
+	
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	size?: ButtonSize;
+}
 
 const Button = ({
 	children,
@@ -10,7 +18,7 @@ const Button = ({
 	disabled = false,
 	type = "button",
 	...buttonProps
-}) => {
+}: ButtonProps) => {
 	const sizeClassName = sizeStyles[size] ?? sizeStyles.sm;
 
 	return (

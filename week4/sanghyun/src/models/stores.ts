@@ -1,4 +1,6 @@
-const stores = [
+import type {Store} from '../types/stores'
+
+const stores: Store[] = [
     {
         id: 1,
         name: '샐로리 한남점',
@@ -100,6 +102,7 @@ const stores = [
         maxDeliveryTime: 30,
         minDeliveryPrice: 10000,
         deliveryFee: 2000,
+        menus: []
     },
     {
         id: 5,
@@ -110,6 +113,7 @@ const stores = [
         maxDeliveryTime: 20,
         minDeliveryPrice: 10000,
         deliveryFee: 1500,
+        menus: []
     },
     {
         id: 6,
@@ -120,6 +124,7 @@ const stores = [
         maxDeliveryTime: 30,
         minDeliveryPrice: 10000,
         deliveryFee: 2000,
+        menus: []
     },
 ]
 
