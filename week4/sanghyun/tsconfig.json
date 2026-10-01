@@ -1,4 +1,5 @@
 {
+  // 앱 소스와 Vite 설정을 각각의 TypeScript 설정으로 검사합니다.
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

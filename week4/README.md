@@ -58,7 +58,7 @@ week3/A를 복사 → week4에 붙여 넣기 → week4/A
 자신의 기존 `package.json`은 유지하고 TypeScript 관련 개발 의존성만 추가합니다.
 
 ```bash
-npm install -D typescript@~6.0.2 typescript-eslint@^8.69.0 @types/node@^24.13.3
+npm install -D typescript@~6.0.2 typescript-eslint@^8.69.0 @types/node@^24.13.3 @types/react@^19.2.18 @types/react-dom@^19.2.7
 ```
 
 파트장의 `package.json`이나 `package-lock.json`을 복사하지 않습니다. 이를 덮어쓰면 본인이 사용한 styled-components 등의 의존성이 사라질 수 있습니다.

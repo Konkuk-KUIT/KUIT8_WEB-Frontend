@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // src 안의 TypeScript와 TSX를 브라우저 환경 기준으로 검사합니다.
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "es2023",
     "lib": ["ES2023", "DOM"],
