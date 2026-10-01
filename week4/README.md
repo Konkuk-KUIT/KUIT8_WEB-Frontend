@@ -49,22 +49,9 @@ week3/A를 복사 → week4에 붙여 넣기 → week4/A
 
 이제 `week4/A`에서 자신이 3주차에 구현한 가게 메뉴 리스트와 주문서 화면을 그대로 이어서 작업합니다.
 
-수업에서 함께 구현한 가게 리스트 코드는 `week4/sanghyun/src`에서 **가게 리스트와 관련된 파일만** 자신의 `week4/A/src` 안의 같은 위치에 복사합니다. `src` 전체를 복사하거나 자신이 구현한 가게 메뉴 리스트와 주문서 파일을 덮어쓰지 않습니다.
-
-복사할 파일은 다음과 같습니다. 아래 경로는 `week4/sanghyun/src`를 기준으로 합니다.
-
-```text
-components/BackBar.tsx
-components/Button.tsx
-components/OrderBar/OrderBar.tsx
-components/StoreItem.tsx
-components/StoreSearchBar.tsx
-models/stores.ts
-pages/Stores/Stores.tsx
-types/stores.ts
-```
-
 `node_modules`와 `dist`는 제출 대상이 아닙니다. 이후 설치와 실행 명령은 반드시 `week4/자기이름` 폴더 안에서 실행합니다.
+
+이 단계에서는 아직 파트장 파일을 복사하지 않습니다. 먼저 3~6번에 따라 자신의 week3 프로젝트를 TypeScript로 전환한 뒤, 6번 마지막의 안내에 따라 가게 리스트 코드를 반영합니다.
 
 ## 3. TypeScript 도입을 위해 패키지 수정
 
@@ -150,6 +137,18 @@ JSX가 들어 있는 React 파일은 `.tsx`, JSX가 없는 데이터·유틸리�
 <script type="module" src="/src/main.tsx"></script>
 ```
 
+`main.tsx`에서는 `root` 요소가 존재한다는 것을 TypeScript에 알려줘야 합니다. `document.getElementById("root")` 뒤에 non-null assertion인 `!`를 추가합니다.
+
+```tsx
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+```
+
+`!`는 이 위치에서 `root`가 `null`이 아니라는 것을 TypeScript에 알려주는 문법입니다.
+
 기존 import에 `.js` 또는 `.jsx`가 남아 있다면 확장자를 제거하는 방식을 권장합니다.
 
 ```ts
@@ -182,9 +181,58 @@ import App from "./App";
 2. import 경로에 .js 또는 .jsx가 남아 있지 않은가?
 ```
 
+### 파트장 가게 리스트 코드 반영
+
+여기까지 완료하여 자신의 프로젝트에 `.js`, `.jsx` 파일이 남아 있지 않을 때 파트장 코드를 반영합니다. 아래 경로는 `week4/sanghyun/src`를 기준으로 합니다.
+
+#### 파일 전체 내용을 파트장 코드로 교체
+
+다음 파일은 `/store` 가게 리스트 구현 파일입니다. 자신의 `week4/본인이름/src` 안에서 같은 경로의 파일을 열고 **파일 전체 내용을 파트장 파일의 내용으로 복사·붙여넣기** 합니다. 파일이 없다면 새로 만듭니다.
+
+```text
+components/StoreItem.tsx
+components/StoreSearchBar.tsx
+pages/Stores/Stores.tsx
+types/stores.ts
+```
+
+`StoreItem.tsx`에는 목록 컴포넌트인 `StoreItems`와 한 행을 담당하는 `StoreItem`이 함께 들어 있습니다.
+
+#### 기존 코드를 유지하고 TypeScript 타입만 반영
+
+다음 파일은 `/store/:storeId` 또는 `/cart`에서도 사용할 수 있는 공통 파일입니다. week3에서 자신이 수정한 JSX, 스타일, Event와 state를 파트장 코드로 덮어쓰지 않습니다. 파트장 파일을 참고하여 import, interface, 매개변수 타입처럼 **TypeScript 전환에 필요한 부분만 자신의 코드에 직접 반영** 합니다.
+
+```text
+components/BackBar.tsx
+components/Button.tsx
+components/OrderBar/OrderBar.tsx
+models/stores.ts
+```
+
+각 파일에서 참고할 TypeScript 부분은 다음과 같습니다.
+
+| 파일 | 자신의 코드에 반영할 부분 |
+| --- | --- |
+| `BackBar.tsx` | `BackBarProps`와 컴포넌트 매개변수 타입 |
+| `Button.tsx` | `ButtonHTMLAttributes`, `ButtonSize`, `ButtonProps`와 컴포넌트 매개변수 타입 |
+| `OrderBar.tsx` | `Menu` type import와 메뉴 배열 등 기존 값의 타입 |
+| `stores.ts` | `Store` type import, `Store[]` 타입, Store 타입에 필요한 누락 속성 |
+
+자신이 구현한 다음 파일은 파트장 코드로 교체하지 않습니다.
+
+```text
+App.tsx
+main.tsx
+pages/Router.tsx
+pages/Store/Store.tsx
+pages/Cart/Cart.tsx
+```
+
+`src` 폴더 전체를 복사하지 않습니다. 파일을 반영한 뒤 import 경로가 자신의 폴더 구조와 일치하는지 확인합니다.
+
 ## 7. 미션 안내
 
-파트장 예시는 `/store` 가게 리스트에 검색과 찜 기능을 구현합니다. 부원들은 자신의 3주차 UI를 유지하면서 다음 두 미션을 구현합니다.
+파트장 예시는 `/store` 가게 리스트에 검색과 좋아요 기능을 구현합니다. 부원들은 자신의 3주차 UI를 유지하면서 다음 두 미션을 구현합니다.
 
 | 경로       | 미션             |
 | ---------- | ---------------- |
