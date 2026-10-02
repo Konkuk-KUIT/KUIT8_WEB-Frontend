@@ -102,7 +102,6 @@ const stores: Store[] = [
         maxDeliveryTime: 30,
         minDeliveryPrice: 10000,
         deliveryFee: 2000,
-        menus: []
     },
     {
         id: 5,
@@ -113,7 +112,6 @@ const stores: Store[] = [
         maxDeliveryTime: 20,
         minDeliveryPrice: 10000,
         deliveryFee: 1500,
-        menus: []
     },
     {
         id: 6,
@@ -124,7 +122,6 @@ const stores: Store[] = [
         maxDeliveryTime: 30,
         minDeliveryPrice: 10000,
         deliveryFee: 2000,
-        menus: []
     },
 ]
 
