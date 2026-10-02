@@ -1,6 +1,6 @@
 import BackBar from "../../components/BackBar";
 import stores from "../../models/stores";
-import OrderMenu from "../../components/OrderMeun";
+import OrderMenu from "../../components/OrderMenu";
 import PriceRow from "../../components/PriceRow";
 import PaymentBar from "../../components/PaymentBar";
 

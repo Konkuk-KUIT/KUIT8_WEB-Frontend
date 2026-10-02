@@ -1,7 +1,7 @@
 import BackBar from "../../components/BackBar";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreInfo from "../../components/StoreInfo";
-import Meun from "../../components/Meun";
+import Menu from "../../components/Menu";
 import stores from "../../models/stores";
 
 const Store = () => {
@@ -10,7 +10,7 @@ const Store = () => {
       <BackBar orderCancel={false} />
       <StoreInfo store={stores[0]} />
       {stores[0].menus.map((item) => (
-        <Meun key={item.id} item={item} />
+        <Menu key={item.id} item={item} />
       ))}
       <OrderBar />
     </main>

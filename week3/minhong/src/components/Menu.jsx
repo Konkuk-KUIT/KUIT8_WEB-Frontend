@@ -1,6 +1,6 @@
-import Button from "../components/Button";
+import Button from "./Button";
 
-const Meun = ({ item }) => {
+const Menu = ({ item }) => {
   const { name, isBest, price, ingredients } = item;
   return (
     <div className="w-96 h-28 relative overflow-hidden">
@@ -24,4 +24,4 @@ const Meun = ({ item }) => {
   );
 };
 
-export default Meun;
+export default Menu;
