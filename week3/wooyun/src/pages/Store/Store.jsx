@@ -1,7 +1,7 @@
 import BackBar from "../../components/BackBar";
-import MenuItem from "../../components/MenuItem";
 import OrderBar from "../../components/OrderBar/OrderBar";
-import StoreInfo from "../../components/StoreInfo";
+import MenuItem from "../../components/Store/MenuItem";
+import StoreInfo from "../../components/Store/StoreInfo";
 import stores from "../../models/stores";
 
 const Store = () => {
