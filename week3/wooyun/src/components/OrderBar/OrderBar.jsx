@@ -1,10 +1,10 @@
 import Button from "../Button";
 
-const OrderBar = () => {
+const OrderBar = ({ menus = [], totalPrice: totalPriceProp, onOrder }) => {
 	//이번 주차에는 사용하지 않아도 괜찮습니다.
-	const menus = [];
-	const handleOrder = () => {};
-	const totalPrice = menus.reduce((acc, cur) => acc + cur.price, 0);
+	const handleOrder = onOrder ?? (() => {});
+	const totalPrice =
+		totalPriceProp ?? menus.reduce((acc, cur) => acc + cur.price, 0);
 
 
 	return (
