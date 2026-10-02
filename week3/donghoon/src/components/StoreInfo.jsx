@@ -9,7 +9,7 @@ const StoreInfo = ({ store }) => {
   } = store;
 
   return (
-    <section className="w-[390px] border-b border-[#f2f4f6]">
+    <section className="w-[390px] border-b border-[#E5E8EB]">
       {/* 가게 이름 */}
       <h1 className="pt-[26px] pr-[24px] pb-[2px] pl-[24px] text-[26px] font-bold text-[#191f28]">
         {name}
@@ -18,9 +18,11 @@ const StoreInfo = ({ store }) => {
       {/* 별점 / 리뷰 */}
       <div className="flex items-center pt-[7px] pr-[24px] pb-[12px] pl-[23px] text-[17px] text-[#4e5968]">
         <div className="flex items-center gap-[5px]">
-          <span className="text-[20px] leading-[19px] text-[#ffc342]">
-            ★
-          </span>
+            <img
+                src="/yellowstar.svg"
+                alt="별점"
+                className="h-[19px] w-[18px]"
+            />
 
           <span className="font-semibold">
             {rate}
