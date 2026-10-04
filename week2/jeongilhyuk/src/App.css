@@ -1,0 +1,275 @@
+/* 2주차 미션 화면 스타일이다. 실습 스타일(src/practice/)과 파일이 갈려 있고
+   진입점도 달라서 서로 섞이지 않는다.
+   치수는 피그마 원본 프레임(390x844)에서 읽은 값을 그대로 쓴다. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #f2f3f5;
+  color: #010101;
+  font-family: system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  line-height: 1.4;
+}
+
+#root {
+  width: 100%;
+  max-width: 390px;
+  min-width: 0;
+}
+
+/* 원본 프레임 크기 그대로. 화면이 더 짧으면 목록만 줄어들게 한다. */
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 844px;
+  max-height: 100dvh;
+  overflow: clip;
+  background-color: #ffffff;
+}
+
+/* 눈에는 안 보이지만 화면 낭독기에는 읽히는 글이다. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 아직 안 만든 기능은 disabled 로 둔다. 진짜 되는 것처럼 보이면 안 되지만
+   시안과 같은 색으로는 보여야 해서 흐려지는 기본 스타일만 되돌린다. */
+button:disabled {
+  opacity: 1;
+  color: inherit;
+  cursor: default;
+}
+
+/* 아이폰 상태 표시줄. 시안 프레임에 들어 있어서 같이 그린다. */
+.status-bar {
+  display: block;
+  flex: none;
+  width: 100%;
+  height: 47px;
+}
+
+/* 헤더 52px */
+.market-header {
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: 52px;
+  padding: 0 16px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.location-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: #010101;
+}
+
+.location-chevron {
+  width: 14px;
+  height: 14px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.icon-button {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.icon-button img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* 목록. 시안에는 다섯 개가 보이지만 데이터가 일곱 개라 여기서 스크롤된다. */
+.market-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 16px 72px;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.market-list::-webkit-scrollbar {
+  display: none;
+}
+
+.market-list:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: -3px;
+}
+
+.market-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.item-photo {
+  flex: none;
+  width: 110px;
+  height: 110px;
+  border-radius: 4px;
+  background-color: #d9d9d9;
+  object-fit: cover;
+}
+
+.item-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.badge-sold {
+  align-self: flex-start;
+  margin-bottom: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #8c8c8c;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.item-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.item-meta {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #8c8c8c;
+}
+
+.item-price {
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff7e36;
+}
+
+/* 댓글·관심 수는 카드 아래쪽 오른편에 붙는다. 0 이면 아예 없다. */
+.item-counts {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  font-size: 13px;
+  color: #8c8c8c;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.count img {
+  width: 16px;
+  height: 16px;
+}
+
+/* 글쓰기 단추. 시안에서 오른쪽 16px, 하단 탭에서 16px 위다. */
+.fab {
+  position: absolute;
+  right: 16px;
+  bottom: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background-color: #ff7e36;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fab img {
+  width: 24px;
+  height: 24px;
+}
+
+/* 하단 탭 58px */
+.bottom-nav {
+  display: flex;
+  flex: none;
+  height: 58px;
+  border-top: 1px solid #d9d9d9;
+  background-color: #ffffff;
+}
+
+.nav-item {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 10px;
+  color: #010101;
+}
+
+.nav-item img {
+  width: 24px;
+  height: 24px;
+}
+
+/* 아이폰 홈 인디케이터 34px */
+.home-indicator {
+  display: flex;
+  flex: none;
+  align-items: flex-end;
+  justify-content: center;
+  height: 34px;
+  padding-bottom: 8px;
+}
+
+.home-indicator::after {
+  content: "";
+  width: 134px;
+  height: 5px;
+  border-radius: 2.5px;
+  background-color: #000000;
+}

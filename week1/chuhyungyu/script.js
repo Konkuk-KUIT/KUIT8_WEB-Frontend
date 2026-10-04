@@ -21,6 +21,6 @@ function changeName() {
 
         nameButton.textContent = input.value;
     });
-}
+} 
 
 nameButton.addEventListener("click", changeName);
