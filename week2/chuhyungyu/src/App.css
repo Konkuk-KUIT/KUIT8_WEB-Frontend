@@ -1,0 +1,231 @@
+/* Global styles */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 64px;
+  font-family: Inter, sans-serif;
+  background-color: #fff;
+}
+
+button {
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* 상단 헤더 */
+
+.header {
+display: flex;
+padding: 12px 16px;
+justify-content: space-between;
+align-items: flex-start;
+align-self: stretch;
+height:52px;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.header-location {
+  display: flex;
+align-items: center;
+gap: 6px;
+}
+
+.header-title {
+  color: #000;
+
+/* 18 */
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 28px; /* 155.556% */
+}
+
+.header-location img {
+  width: 14px;
+  height: 14px;
+}
+
+.header-icons {
+  display: flex;
+align-items: flex-start;
+gap: 16px;
+}
+
+.header-icons img {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* 상품 리스트 */
+
+.market-list {
+  display: flex;
+padding: 16px;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 16px;
+align-self: stretch;
+}
+
+.market-item {
+  display: flex;
+align-items: flex-start;
+gap: 16px;
+align-self: stretch;
+border-bottom: 1px solid #EEE;
+padding: 16px 0;
+}
+
+.market-item-image {
+  width: 110px;
+height: 110px;
+}
+
+.market-item-content {
+ display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 4px;
+flex: 1 0 0;
+align-self: stretch;
+  text-align: left;
+}
+
+.market-item-info{
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 4px;
+flex: 1 0 0;
+}
+.market-item-title {
+  
+  color: #000;
+
+/* 16 */
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px; /* 125% */
+}
+
+.market-item-meta {
+color: #8C8C8C;
+
+/* 12 */
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px; /* 133.333% */
+}
+.market-item:first-child {
+  padding-top: 0;
+}
+.market-item-price {
+  color: #FF7E36;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: 22px; /* 146.667% */
+}
+
+.market-item-status {
+  display: flex;
+justify-content: flex-end;
+align-items: center;
+gap: 4px;
+align-self: stretch;
+}
+
+.market-item-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  font-size: 14px;
+}
+
+.market-item-count img {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* 글쓰기 버튼 */
+
+.write-button {
+  display: flex;
+padding: 12px;
+align-items: flex-start;
+gap: 10px;
+border-radius: 100px;
+background: #FF7E36;
+box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
+width:48px;
+height:48px;
+position: fixed;
+bottom: 74px;
+right:16px;
+}
+
+
+/* 하단 바 */
+
+.bottom-bar {
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 64px;
+
+  background-color: #fff;
+  border-top: 1px solid #eeeeee;
+
+  z-index: 100;
+}
+
+.bar-content {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+}
+
+.bar-content button {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 3px;
+}
+
+.bar-content button img {
+  width: 24px;
+  height: 24px;
+}
+
+.bar-info {
+  color: #000;
+
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 14px;
+}

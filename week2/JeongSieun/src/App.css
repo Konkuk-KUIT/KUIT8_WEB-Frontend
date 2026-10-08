@@ -1,0 +1,346 @@
+/* 전체 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f2f2f2;
+}
+
+/* 전체 화면 */
+.app {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #ffffff;
+  font-family: 'Inter', 'Pretendard', sans-serif;
+  padding-bottom: 58px;
+}
+
+/* =========================
+   Header
+========================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 52px;
+  padding: 12px 16px;
+
+  background: #ffffff;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.header__location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 0;
+  border: none;
+  background: none;
+
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+
+  color: #000000;
+  cursor: pointer;
+}
+
+.header__location img {
+  width: 14px;
+  height: 14px;
+}
+
+.header__icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__icons img {
+  width: 24px;
+  height: 24px;
+}
+
+/* =========================
+   상품 목록
+========================= */
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 16px;
+  gap: 16px;
+
+  background: #ffffff;
+}
+
+/* =========================
+   상품 카드
+========================= */
+
+.item-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  width: 100%;
+  min-height: 110px;
+
+  gap: 16px;
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.item-card:last-child {
+  border-bottom: none;
+}
+
+/* 상품 사진 */
+.item-card__image {
+  flex-shrink: 0;
+
+  width: 110px;
+  height: 110px;
+
+  border-radius: 4px;
+
+  background: #d9d9d9;
+
+  /* 사진이 위아래로 이상하게 잘리지 않도록 */
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =========================
+   상품 정보
+========================= */
+
+.item-card__info {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+  min-width: 0;
+  height: 110px;
+}
+
+/* 제목 / 지역 / 가격 */
+.item-card__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 4px;
+
+  width: 100%;
+}
+
+.item-card__title {
+  width: 100%;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+
+  color: #000000;
+
+  /* 사진 바로 오른쪽에서 시작 */
+  text-align: left;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-card__meta {
+  display: block;
+
+  width: 100%;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+
+  color: #8c8c8c;
+
+  text-align: left;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-card__price {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22px;
+
+  color: #ff7e36;
+
+  text-align: left;
+}
+
+.item-card__sold-badge {
+  align-self: flex-start;
+
+  padding: 2px 6px;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #ffffff;
+  background: #8c8c8c;
+}
+
+/* =========================
+   채팅 / 좋아요
+========================= */
+
+.item-card__stats {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 4px;
+
+  height: 16px;
+}
+
+.item-card__stat {
+  display: flex;
+  align-items: center;
+
+  gap: 2px;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+
+  color: #8c8c8c;
+}
+
+.item-card__stat img {
+  width: 16px;
+  height: 16px;
+}
+
+/* =========================
+   Bottom Navigation
+========================= */
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 600px;
+
+  background: #ffffff;
+
+  z-index: 100;
+}
+
+/* 플러스 버튼 */
+.bottom-nav__fab {
+  position: absolute;
+
+  right: 16px;
+  bottom: 74px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+
+  padding: 0;
+  border: none;
+
+  /* plus.svg 자체에 주황색 원이 있으므로 배경 제거 */
+  background: transparent;
+
+  cursor: pointer;
+
+  z-index: 101;
+}
+
+.bottom-nav__fab img {
+  display: block;
+
+  width: 60px;
+  height: 60px;
+
+  object-fit: contain;
+}
+
+/* 하단 네비 바 */
+.bottom-nav__nav-bar {
+  display: flex;
+  align-items: flex-start;
+
+  width: 100%;
+  height: 58px;
+
+  padding: 8px 0;
+
+  background: #ffffff;
+
+  border-top: 1px solid #d9d9d9;
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4px;
+
+  flex: 1;
+
+  height: 42px;
+}
+
+.bottom-nav__item img {
+  width: 24px;
+  height: 24px;
+}
+
+.bottom-nav__item span {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+
+  color: #000000;
+}
