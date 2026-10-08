@@ -1,20 +1,63 @@
 import Button from "./Button";
 import CartCard from "./CartCard";
 import type { Store } from "../types/stores";
+import { useEffect, useState } from "react";
 
-const TotalOrder = ({item}:{item:Store})=>{
+interface TotalOrderProps {
+    item: Store
+}
+
+const TotalOrder = ({item}: TotalOrderProps)=>{
+    const [cartMenuIds, setCartMenuIds] = useState<number[]>([1]);
+    const [remainTime, setRemainTime]=useState(60);
+
+    useEffect(() => {
+        if(remainTime<=0) return;
+
+        const timer = setInterval(() => {
+            setRemainTime((prev)=>prev-1);
+        }, 1000);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, [remainTime]);
+
+    const handleCartMenu = (menuId: number) => {
+            setCartMenuIds((prev)=>[...prev,menuId]);
+        }
+
+    const handleRemoveMenu = (menuId: number) => {
+            setCartMenuIds((prev)=>{
+                const index = prev.indexOf(menuId);
+
+                // 해당 메뉴가 없으면 그대로 유지
+                if (index === -1) return prev;
+
+                // 해당 인덱스의 요소 하나만 제거
+                return prev.filter((_, i) => i !== index);
+            });
+        }
+
     const menus = item.menus ?? [];
 
-    let orderPrice = 0;
-    menus.forEach((menu) => {
-        if (menu.isCart) {
-            orderPrice += menu.price;
-        }
-    });
+    const cartItems = menus
+        .map((menu) => ({
+            menu,
+            quantity: cartMenuIds.filter((id) => id === menu.id).length,
+        }))
+        .filter((item) => item.quantity > 0);
 
-    const totalPrice = orderPrice+item.deliveryFee;
+    const orderPrice = cartItems.reduce(
+        (sum, { menu, quantity }) => sum + menu.price * quantity,
+        0
+    );
+
+    const totalPrice = orderPrice?(orderPrice+item.deliveryFee):0;
 
     const canOrder = orderPrice >= item.minDeliveryPrice; 
+
+    const timeUp=remainTime<=0;
 
     return(
         <>
@@ -24,18 +67,31 @@ const TotalOrder = ({item}:{item:Store})=>{
                         {item.name}
                     </div>
 
-                    {!canOrder && (
-                        <div className="flex items-center gap-[6px] ">
-                            <span className="text-rose-500 text-base font-medium font-['Pretendard']">
-                                최소금액 미달
-                            </span>
-                            <img src="/warning.svg" alt="warning" />
-                        </div>
-                    )}
+                    <span
+                        className={timeUp?"text-red-500":"text-gray-500"}>
+                        {timeUp? "시간 만료": remainTime}
+                    </span>
+
+                    <div
+                        className={`flex items-center gap-[6px] ${
+                            canOrder ? "invisible" : ""
+                        }`}
+                    >
+                        <span className="text-rose-500 text-base font-medium font-['Pretendard']">
+                            최소금액 미달
+                        </span>
+                        <img src="/warning.svg" alt="warning" />
+                    </div>
                 </div>
 
-                {menus.map((menu)=>(
-                    menu.isCart && <CartCard key={menu.id} menu={menu} />
+                {cartItems.map(({ menu, quantity }) => (
+                    <CartCard
+                        key={menu.id}
+                        menu={menu}
+                        quantity={quantity}
+                        onCartMenu={handleCartMenu}
+                        onRemoveMenu={handleRemoveMenu}
+                    />
                 ))}
 
                 <button className="cursor-pointer flex py-[20px] w-full items-center justify-center gap-[3px] border-t border-gray-200">
@@ -86,7 +142,7 @@ const TotalOrder = ({item}:{item:Store})=>{
                 </span>
 
                 <div className="w-full [&>button]:w-full [&>button]:h-[56px] [&>button]:rounded-[16px]">
-                    <Button disabled={!canOrder}>
+                    <Button disabled={!canOrder || remainTime<=0}>
                         {totalPrice.toLocaleString()}원 결제하기
                     </Button>
                 </div>

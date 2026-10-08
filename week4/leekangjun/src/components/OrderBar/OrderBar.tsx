@@ -1,9 +1,12 @@
 import type {Menu} from "../../types/stores.ts"
 import Button from "../Button";
 
-const OrderBar = () => {
+interface OrderBarProps {
+	menus?: Menu[];
+}
+
+const OrderBar = ({menus=[]}: OrderBarProps) => {
 	//이번 주차에는 사용하지 않아도 괜찮습니다.
-	const menus: Menu[] = [];
 	const handleOrder = () => {};
 	const totalPrice = menus.reduce((acc, cur) => acc + cur.price, 0);
 

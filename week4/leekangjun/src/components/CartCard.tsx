@@ -1,6 +1,13 @@
 import type { Menu } from "../types/stores";
 
-const CartCard= ({menu}:{menu:Menu})=>{
+interface CartCardProps {
+  menu: Menu;
+  quantity:number;
+  onCartMenu: (menuId: number) => void;
+  onRemoveMenu: (menuId: number) => void;
+}
+
+const CartCard= ({menu, quantity, onCartMenu, onRemoveMenu}: CartCardProps)=>{
     return (
         <div className="flex pr-[20px] pl-[24px]">
             <img className="mt-[19px] mr-[16px] self-start" 
@@ -18,14 +25,26 @@ const CartCard= ({menu}:{menu:Menu})=>{
                 </div>
             </div>
 
-            <div className="flex items-center gap-[14px]">
-                <div className="text-gray-500 text-base font-medium font-['Pretendard']">
-                    1개
+            <div className="flex shrink-0 items-center gap-[14px]">
+                <div className="whitespace-nowrap text-gray-500 text-base font-medium font-['Pretendard']">
+                    {quantity}개
                 </div>
 
-                <button className="cursor-pointer">
-                    <img src="/right.svg" alt="right button" />
-                </button>
+                <div className="flex flex-col gap-[10px]">
+                    <button 
+                        className="cursor-pointer" 
+                        onClick={() => onCartMenu(menu.id)}
+                    >
+                        <img src="/top.svg" alt="top button" />
+                    </button>
+
+                    <button 
+                        className="cursor-pointer"
+                        onClick={() => onRemoveMenu(menu.id)}
+                    >
+                        <img src="/bottom.svg" alt="bottom button" />
+                    </button>
+                </div>
             </div>
         </div>
     );

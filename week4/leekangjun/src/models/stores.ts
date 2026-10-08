@@ -17,7 +17,6 @@ const stores: Store[] = [
 			isBest: true,
 			price: 10600,
 			ingredients: "계란, 옥수수, 양파, 올리브, 베이컨, 시저드레싱",
-			isCart: true
 		},
 		{
 			id: 2,
@@ -25,7 +24,6 @@ const stores: Store[] = [
 			isBest: false,
 			price: 6900,
 			ingredients: "로메인 상추와 크루통이며, 달걀, 올리브유, 레몬 즙, 마늘",
-			isCart: false
 		},
 		{
 			id: 3,
@@ -33,7 +31,6 @@ const stores: Store[] = [
 			isBest: false,
 			price: 6900,
 			ingredients: "리코타치즈, 양상추, 베이비채소, 방울토마톹, 블랙올리브",
-			isCart: false
 		},
 		{
 			id: 4,
@@ -41,7 +38,6 @@ const stores: Store[] = [
 			isBest: false,
 			price: 7600,
 			ingredients: "치킨, 고구마, 견과류, 크래배리, 오리엔탈",
-			isCart: false
 		},
 		],
 	},

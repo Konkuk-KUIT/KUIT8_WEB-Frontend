@@ -1,7 +1,12 @@
 import Button from "./Button";
 import type { Menu } from "../types/stores";
 
-const MenuCard=({menu}:{menu:Menu})=>{
+interface MenuCardProps {
+  menu: Menu;
+  onCartMenu: (menuId: number) => void;
+}
+
+const MenuCard=({menu, onCartMenu}: MenuCardProps)=>{
     return(
         <div className="flex items-center py-[16px] px-[24px]">
             <img className="mr-[16px] size-[54px] shrink-0" src="/thumbNail.svg" alt="thumbnail" />
@@ -24,7 +29,10 @@ const MenuCard=({menu}:{menu:Menu})=>{
             </div>
 
             <div className="ml-auto shrink-0">
-                <Button children="담기" />
+                <Button 
+                    children="담기" 
+                    onClick={() => onCartMenu(menu.id)}    
+                />
             </div>
         </div>
     );

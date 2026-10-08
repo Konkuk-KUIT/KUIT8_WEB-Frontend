@@ -4,7 +4,6 @@ export interface Menu {
     isBest: boolean;
     price: number;
     ingredients: string;
-    isCart?: boolean;
 }
 
 export interface Store {
