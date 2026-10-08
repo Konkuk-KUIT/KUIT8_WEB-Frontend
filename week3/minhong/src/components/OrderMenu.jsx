@@ -1,10 +1,10 @@
-const OrderMenu = ({ store, item, cnt }) => {
+const OrderMenu = ({ store, item, cnt, isOverPrice }) => {
   const { name, price, options } = item;
   return (
     <article className="flex w-full flex-col">
       <div className="flex items-center justify-between px-6 pt-6.5">
         <h2 className="text-base font-bold text-gray-500">{store.name}</h2>
-        {store.minDeliveryPrice > price && (
+        {!isOverPrice && (
           <p className="flex items-center gap-1 text-base font-medium text-rose-500">
             최소금액 미달
             <img src="/Warning.svg" alt="경고" className="size-5" />

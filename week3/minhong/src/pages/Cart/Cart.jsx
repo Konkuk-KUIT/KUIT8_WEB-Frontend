@@ -10,6 +10,7 @@ const Cart = () => {
   const orderPrice = menu.price;
   const { deliveryFee, minDeliveryPrice } = store;
   const totalPrice = orderPrice + deliveryFee;
+  const isOverPrice = totalPrice >= minDeliveryPrice;
 
   return (
     <main className="w-[390px] mt-[41px] mb-[140px]">
@@ -18,14 +19,22 @@ const Cart = () => {
         <div className="h-4 w-full bg-gray-100" aria-hidden="true" />
 
         <section aria-label="주문 메뉴">
-          <OrderMenu store={store} item={menu} cnt={1} />
+          <OrderMenu
+            store={store}
+            item={menu}
+            cnt={1}
+            isOverPrice={isOverPrice}
+          />
           <div className="flex h-14 w-full items-center justify-center border-t border-gray-200">
             <button
               type="button"
               className="flex items-center gap-1.5 text-base font-semibold text-blue-500"
             >
               더 담기
-              <span className="grid size-4 place-items-center" aria-hidden="true">
+              <span
+                className="grid size-4 place-items-center"
+                aria-hidden="true"
+              >
                 <span className="col-start-1 row-start-1 h-[1.5px] w-3 bg-blue-500" />
                 <span className="col-start-1 row-start-1 h-[1.5px] w-3 rotate-90 bg-blue-500" />
               </span>
@@ -42,9 +51,9 @@ const Cart = () => {
         </dl>
 
         <PaymentBar
-          orderPrice={orderPrice}
           totalPrice={totalPrice}
           minDeliveryPrice={minDeliveryPrice}
+          isOverPrice={isOverPrice}
         />
       </div>
     </main>
