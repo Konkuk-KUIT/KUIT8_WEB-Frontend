@@ -1,4 +1,8 @@
-const StoreInfo = ({ store }) => {
+import type { Store } from "../type/stores";
+
+
+const StoreInfo = ({ store } : {store : Store}) => {
+
   return (
     <div className="flex w-full flex-col gap-2 border-b border-[#E5E8EB] px-6 pt-6.5 pb-4">
       <h1 className="text-2xl font-bold text-gray-900">{store.name}</h1>

@@ -1,6 +1,11 @@
 import Button from "./Button";
+type PaymentBarProps = {
+  totalPrice : number;
+  minDeliveryPrice : number;
+  PayBtnDisable : boolean
+}
 
-const PaymentBar = ({ totalPrice, minDeliveryPrice , isOverPrice}) => {
+const PaymentBar = ({ totalPrice, minDeliveryPrice , PayBtnDisable}: PaymentBarProps) => {
   return (
     <section
       aria-label="결제"
@@ -13,7 +18,7 @@ const PaymentBar = ({ totalPrice, minDeliveryPrice , isOverPrice}) => {
         size="xl"
         type="button"
         className="w-full px-0 whitespace-nowrap"
-        disabled={!isOverPrice}
+        disabled={PayBtnDisable}
       >
         {totalPrice.toLocaleString()}원 결제하기
       </Button>

@@ -1,4 +1,15 @@
-const OrderMenu = ({ store, item, cnt, isOverPrice }) => {
+import type { Menu, Store } from "../type/stores";
+
+type OrderMenuProps = {
+  store : Store;
+  item : Menu;
+  cnt : number;
+  isOverPrice : boolean;
+  onIncrease : () => void;
+  onDecrease : () => void;
+}
+
+const OrderMenu = ({ store, item, cnt, isOverPrice, onIncrease, onDecrease } : OrderMenuProps) => {
   const { name, price, options } = item;
   return (
     <article className="flex w-full flex-col">
@@ -22,8 +33,24 @@ const OrderMenu = ({ store, item, cnt, isOverPrice }) => {
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <span className="text-base font-medium text-gray-500">{cnt}개</span>
-          <img src="/arrow.svg" alt="" className="size-4 rotate-180" />
+          <button
+            type="button"
+            onClick={onDecrease}
+            disabled={cnt <= 1}
+            aria-label="수량 감소"
+            className="grid size-7 cursor-pointer place-items-center rounded-full border border-gray-200 text-gray-500 disabled:cursor-not-allowed disabled:text-gray-300"
+          >
+            −
+          </button>
+          <span className="min-w-8 text-center text-base font-medium text-gray-500">{cnt}개</span>
+          <button
+            type="button"
+            onClick={onIncrease}
+            aria-label="수량 증가"
+            className="grid size-7 cursor-pointer place-items-center rounded-full border border-gray-200 text-gray-500"
+          >
+            +
+          </button>
         </div>
       </div>
     </article>

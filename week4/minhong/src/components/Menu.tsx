@@ -1,7 +1,17 @@
+import type { Menu as MenuType } from "../type/stores";
 import Button from "./Button";
 
-const Menu = ({ item }) => {
-  const { name, isBest, price, ingredients } = item;
+type MenuProps = {
+  item : MenuType;
+  clickHandler : (id : number)=>void;
+};
+
+
+
+
+const Menu = ({ item, clickHandler } : MenuProps) => {
+  const { name, isBest, price, ingredients, id } = item;
+  
   return (
     <div className="flex w-full items-center gap-3.5 py-4 pr-4 pl-6">
       <div className="size-14 shrink-0 rounded-3xl bg-gray-200" />
@@ -15,7 +25,7 @@ const Menu = ({ item }) => {
         </p>
         <p className="text-xs font-medium text-gray-500">{ingredients}</p>
       </div>
-      <Button type="button" className="shrink-0">
+      <Button onClick={()=>clickHandler(id)} type="button" className="shrink-0">
         담기
       </Button>
     </div>
