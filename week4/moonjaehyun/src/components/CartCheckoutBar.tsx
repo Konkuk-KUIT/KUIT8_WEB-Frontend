@@ -1,11 +1,18 @@
 import Button from "./Button";
 
+interface CartCheckoutBarProps {
+  minimumOrderPrice: number;
+  totalPrice: number;
+  disabled: boolean;
+  onCheckout: number;
+}
+
 const CartCheckoutBar = ({
   minimumOrderPrice,
   totalPrice,
   disabled,
   onCheckout,
-}) => {
+}: CartCheckoutBarProps) => {
   return (
     <div className="fixed bottom-0 z-30 flex h-[95px] w-[390px] flex-col items-center bg-white">
       <p className="text-center text-[17px] leading-[20px] font-medium whitespace-nowrap text-[#6b7684]">

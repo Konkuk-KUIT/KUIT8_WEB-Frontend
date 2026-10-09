@@ -1,6 +1,16 @@
 import OrderPrice from "./OrderPrice";
 
-const OrderSummary = ({ orderPrice, deliveryFee, totalPrice }) => {
+interface OrderSummaryProps {
+  orderPrice: number;
+  deliveryFee: number;
+  totalPrice: number;
+}
+
+const OrderSummary = ({
+  orderPrice,
+  deliveryFee,
+  totalPrice,
+}: OrderSummaryProps) => {
   return (
     <section
       className="flex h-[147px] w-[390px] flex-col bg-white"

@@ -1,6 +1,13 @@
 import Button from "./Button";
 
-const StoreMenu = ({ name, isBest, price, ingredients }) => {
+interface StoreMenuProps {
+  name: string;
+  isBest: boolean;
+  price: number;
+  ingredients: string[];
+}
+
+const StoreMenu = ({ name, isBest, price, ingredients }: StoreMenuProps) => {
   return (
     <div className="flex min-h-[110px] w-[390px] items-start gap-[16px] px-[24px] pt-[16px]">
       <div className="mt-[12px] size-[54px] shrink-0 rounded-[27px] bg-[#ececec]" />

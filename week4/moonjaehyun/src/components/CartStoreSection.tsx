@@ -1,12 +1,20 @@
 import OrderMenu from "./OrderMenu";
 
+interface CartStoreSectionProps {
+  storeName: string;
+  items: string;
+  isBelowMinimum: string;
+  onAddMore: string;
+  onQuantityClick: string;
+}
+
 const CartStoreSection = ({
   storeName,
   items,
   isBelowMinimum,
   onAddMore,
   onQuantityClick,
-}) => {
+}: CartStoreSectionProps) => {
   return (
     <section className="w-[390px] bg-white" aria-labelledby="cart-store-name">
       <header className="flex h-[58px] w-[390px] items-start px-[24px] pt-[26px]">

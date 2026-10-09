@@ -1,5 +1,14 @@
 import SimpleInfo from "./SimpleInfo";
 
+interface InfoStoreProps {
+  name: string;
+  rate: number;
+  reviewCnt: number;
+  minDeliveryPrice: number;
+  minDeliveryTime: number;
+  maxDeliveryTime: number;
+}
+
 const InfoStore = ({
   name,
   rate,
@@ -7,7 +16,7 @@ const InfoStore = ({
   minDeliveryPrice,
   minDeliveryTime,
   maxDeliveryTime,
-}) => {
+}: InfoStoreProps) => {
   return (
     <div className="inline-flex flex-col items-start pb-4">
       <div className="flex items-center text-[#191F28] text-[26px] not-italic font-bold leading-[normal] pl-6 pr-[225px] pt-[26px] pb-0.5">
@@ -28,7 +37,10 @@ const InfoStore = ({
         title="결재방법"
         description="토스결제만 현장결제 안됨"
       ></SimpleInfo>
-      <SimpleInfo title="최소주문" description={minDeliveryPrice}></SimpleInfo>
+      <SimpleInfo
+        title="최소주문"
+        description={minDeliveryPrice.toString()}
+      ></SimpleInfo>
       <SimpleInfo
         title="배달시간"
         description={`약 ${minDeliveryTime} ~ ${maxDeliveryTime}분`}

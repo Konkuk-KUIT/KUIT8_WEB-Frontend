@@ -1,10 +1,14 @@
-const OrderPrice = ({ title, price, emphasized = false }) => {
+interface OrderPriceProps {
+  title: string;
+  price: number;
+  emphasized?: boolean;
+}
+
+const OrderPrice = ({ title, price, emphasized = false }: OrderPriceProps) => {
   return (
     <div
       className={`flex w-[390px] items-start justify-between bg-white pr-[23px] pl-[24px] text-[17px] leading-[20px] ${
-        emphasized
-          ? "h-[54px] pt-[16px] text-[#4e5968]"
-          : "h-[38px] pt-[8px]"
+        emphasized ? "h-[54px] pt-[16px] text-[#4e5968]" : "h-[38px] pt-[8px]"
       }`}
     >
       <span
@@ -14,9 +18,7 @@ const OrderPrice = ({ title, price, emphasized = false }) => {
       </span>
       <span
         className={
-          emphasized
-            ? "font-semibold"
-            : "mt-px font-medium text-[#505967]"
+          emphasized ? "font-semibold" : "mt-px font-medium text-[#505967]"
         }
       >
         {price.toLocaleString()}원

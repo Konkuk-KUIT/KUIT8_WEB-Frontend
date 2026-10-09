@@ -1,4 +1,18 @@
-const OrderMenu = ({ name, price, options, quantity, onQuantityClick }) => {
+interface OrderMenuProps {
+  name: string;
+  price: number;
+  options: string;
+  quantity: number;
+  onQuantityClick: () => number;
+}
+
+const OrderMenu = ({
+  name,
+  price,
+  options,
+  quantity,
+  onQuantityClick,
+}: OrderMenuProps) => {
   const itemPrice = price * quantity;
 
   return (
