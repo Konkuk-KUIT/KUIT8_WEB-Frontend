@@ -7,7 +7,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 const sizeStyles = {
 	sm: "p-[8px_14px_8px_15px] text-[13px]",
 	lg: "px-[16px] py-[10px] text-[15px]",
-	xl: "p-[18px_112px_19px_113px] text-[16px]",
+	xl: "w-full px-[20px] pt-[18px] pb-[19px] text-[14px] whitespace-nowrap",
 };
 
 const Button = ({

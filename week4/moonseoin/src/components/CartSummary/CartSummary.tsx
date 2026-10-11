@@ -3,11 +3,12 @@ interface CartSummaryProps {
   deliveryFee: number;
   finalPrice: number;
   minDeliveryPrice: number;
+  isExpired: boolean;
 }
 
 import Button from "../Button";
 
-const CartSummary = ({ totalOrder, deliveryFee, finalPrice, minDeliveryPrice }: CartSummaryProps) => {
+const CartSummary = ({ totalOrder, deliveryFee, finalPrice, minDeliveryPrice, isExpired }: CartSummaryProps) => {
   const isBelowMin = totalOrder < minDeliveryPrice;
 
   return (
@@ -33,7 +34,7 @@ const CartSummary = ({ totalOrder, deliveryFee, finalPrice, minDeliveryPrice }: 
       <div className="fixed bottom-0 w-[390px] bg-white px-5 py-5">
         <div className="text-center text-[#6B7684] text-sm mt-3 mb-3">최소 주문금액 {minDeliveryPrice.toLocaleString()}원</div>
 
-        <Button disabled={isBelowMin} size="xl">
+        <Button disabled={isBelowMin || isExpired} size="xl">
           {finalPrice.toLocaleString()}원 결제하기
         </Button>
       </div>

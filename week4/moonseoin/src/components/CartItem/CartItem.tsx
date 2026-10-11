@@ -1,4 +1,6 @@
 interface CartItemProps {
+  onIncrease: () => void;
+  onDecrease: () => void;
   item: {
     id: number;
     name: string;
@@ -8,7 +10,7 @@ interface CartItemProps {
   };
 }
 
-const CartItem = ({ item }: CartItemProps) => {
+const CartItem = ({ item, onIncrease, onDecrease }: CartItemProps) => {
   return (
     <div className="px-5 py-4 flex items-start bg-white border-b border-[#F2F4F6]">
       <div className="w-[54px] h-[54px] bg-[#ECECEC] rounded-lg mr-3" />
@@ -19,8 +21,9 @@ const CartItem = ({ item }: CartItemProps) => {
           <p className="text-[13px] text-[#6B7684] whitespace-normal break-keep leading-[1.3]">{item.extra}</p>
 
           <div className="flex items-center gap-3 shrink-0 ml-3">
+            <button type="button" onClick={onDecrease} disabled={item.quantity === 1} aria-label={`${item.name} 수량 감소`} className="cursor-pointer disabled:opacity-30">−</button>
             <span className="text-[15px] text-[#6B7684]">{item.quantity}개</span>
-            <img src="/chevron-right.svg" className="w-3 h-3" />
+            <button type="button" onClick={onIncrease} aria-label={`${item.name} 수량 증가`} className="cursor-pointer">+</button>
           </div>
         </div>
 
