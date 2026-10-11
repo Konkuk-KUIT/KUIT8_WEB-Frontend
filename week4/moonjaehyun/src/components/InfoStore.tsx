@@ -39,7 +39,7 @@ const InfoStore = ({
       ></SimpleInfo>
       <SimpleInfo
         title="최소주문"
-        description={minDeliveryPrice.toString()}
+        description={`${minDeliveryPrice.toString()}원`}
       ></SimpleInfo>
       <SimpleInfo
         title="배달시간"

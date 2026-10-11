@@ -4,7 +4,7 @@ interface CartCheckoutBarProps {
   minimumOrderPrice: number;
   totalPrice: number;
   disabled: boolean;
-  onCheckout: number;
+  onCheckout?: () => void;
 }
 
 const CartCheckoutBar = ({

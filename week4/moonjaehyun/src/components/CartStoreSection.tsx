@@ -1,11 +1,19 @@
 import OrderMenu from "./OrderMenu";
 
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  options: string;
+  quantity: number;
+}
+
 interface CartStoreSectionProps {
   storeName: string;
-  items: string;
-  isBelowMinimum: string;
-  onAddMore: string;
-  onQuantityClick: string;
+  items: CartItem[];
+  isBelowMinimum: boolean;
+  onAddMore?: () => void;
+  onQuantityChange: (id: number, delta: 1 | -1) => void;
 }
 
 const CartStoreSection = ({
@@ -13,7 +21,7 @@ const CartStoreSection = ({
   items,
   isBelowMinimum,
   onAddMore,
-  onQuantityClick,
+  onQuantityChange,
 }: CartStoreSectionProps) => {
   return (
     <section className="w-[390px] bg-white" aria-labelledby="cart-store-name">
@@ -39,7 +47,8 @@ const CartStoreSection = ({
         <OrderMenu
           key={item.id}
           {...item}
-          onQuantityClick={() => onQuantityClick?.(item.id)}
+          onIncrease={() => onQuantityChange(item.id, 1)}
+          onDecrease={() => onQuantityChange(item.id, -1)}
         />
       ))}
 
