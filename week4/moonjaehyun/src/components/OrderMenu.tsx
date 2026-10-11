@@ -3,7 +3,8 @@ interface OrderMenuProps {
   price: number;
   options: string;
   quantity: number;
-  onQuantityClick: () => number;
+  onIncrease: () => void;
+  onDecrease: () => void;
 }
 
 const OrderMenu = ({
@@ -11,7 +12,8 @@ const OrderMenu = ({
   price,
   options,
   quantity,
-  onQuantityClick,
+  onIncrease,
+  onDecrease,
 }: OrderMenuProps) => {
   const itemPrice = price * quantity;
 
@@ -19,11 +21,11 @@ const OrderMenu = ({
     <article className="flex h-[110px] w-[390px] items-start pt-[16px] pr-[20px] pl-[24px]">
       <div className="mt-[3px] size-[54px] shrink-0 rounded-[8px] bg-[#ececec]" />
 
-      <div className="ml-[16px] flex w-[210px] shrink-0 flex-col">
-        <h3 className="text-[17px] leading-[20px] font-bold whitespace-nowrap text-[#333d4b]">
+      <div className="ml-[16px] flex min-w-0 flex-1 flex-col">
+        <h3 className="truncate text-[17px] leading-[20px] font-bold text-[#333d4b]">
           {name}
         </h3>
-        <p className="mt-[5px] h-[32px] w-[210px] text-[13px] leading-[16px] font-medium text-[#6b7684]">
+        <p className="mt-[5px] line-clamp-2 h-[32px] text-[13px] leading-[16px] font-medium text-[#6b7684]">
           {options}
         </p>
         <p className="mt-[5px] text-[13px] leading-[16px] font-medium whitespace-nowrap text-[#6b7684]">
@@ -31,17 +33,27 @@ const OrderMenu = ({
         </p>
       </div>
 
-      <button
-        type="button"
-        onClick={onQuantityClick}
-        className="mt-[30px] ml-[16px] flex w-[50px] shrink-0 cursor-pointer items-center gap-[11px] border-0 bg-transparent p-0 text-[#6b7684]"
-        aria-label={`${name} 수량 변경`}
-      >
-        <span className="w-[23px] text-[15px] leading-[18px] font-medium whitespace-nowrap">
+      <div className="mt-[30px] ml-[8px] flex shrink-0 items-center gap-[4px] text-[#6b7684]">
+        <button
+          type="button"
+          onClick={onDecrease}
+          className="size-[28px] cursor-pointer rounded border border-[#e5e8eb]"
+          aria-label={`${name} 수량 감소`}
+        >
+          −
+        </button>
+        <span className="min-w-[24px] text-center text-[15px] whitespace-nowrap">
           {quantity}개
         </span>
-        <img src="/cart-chevron.svg" alt="" />
-      </button>
+        <button
+          type="button"
+          onClick={onIncrease}
+          className="size-[28px] cursor-pointer rounded border border-[#e5e8eb]"
+          aria-label={`${name} 수량 증가`}
+        >
+          +
+        </button>
+      </div>
     </article>
   );
 };
