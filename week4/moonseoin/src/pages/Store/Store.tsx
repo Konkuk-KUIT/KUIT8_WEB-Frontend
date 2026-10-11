@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Menu } from "../../models/stores";
 import BackBar from "../../components/BackBar";
 import { useParams } from "react-router-dom";
@@ -10,24 +10,44 @@ import stores from "../../models/stores";
 type CartMenu = Menu & { quantity: number };
 
 const Store = () => {
-  const [menus, setMenus] = useState<CartMenu[]>([]);
+  const { storeId } = useParams();
+  const [cartMenus, setCartMenus] = useState<Record<string, CartMenu[]>>(() => {
+    try {
+      return JSON.parse(localStorage.getItem("requirement2") ?? "{}");
+    } catch {
+      return {};
+    }
+  });
+  const menus = cartMenus[storeId ?? ""] ?? [];
+
+  useEffect(() => {
+    localStorage.setItem("requirement2", JSON.stringify(cartMenus));
+  }, [cartMenus]);
 
   const handleAddToCart = (menu: Menu) => {
-    setMenus((currentMenus) => {
+    if (!storeId) return;
+
+    setCartMenus((currentCartMenus) => {
+      const currentMenus = currentCartMenus[storeId] ?? [];
       const existingMenu = currentMenus.find((item) => item.id === menu.id);
 
       if (existingMenu) {
-        return currentMenus.map((item) =>
-          item.id === menu.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
+        return {
+          ...currentCartMenus,
+          [storeId]: currentMenus.map((item) =>
+            item.id === menu.id ? { ...item, quantity: item.quantity + 1 } : item
+          ),
+        };
       }
 
-      return [...currentMenus, { ...menu, quantity: 1 }];
+      return {
+        ...currentCartMenus,
+        [storeId]: [...currentMenus, { ...menu, quantity: 1 }],
+      };
     });
   };
 
   const totalPrice = menus.reduce((total, menu) => total + menu.price * menu.quantity, 0);
-  const { storeId } = useParams();
   const store = stores.find((s) => s.id === Number(storeId));
 
   if (!store) {

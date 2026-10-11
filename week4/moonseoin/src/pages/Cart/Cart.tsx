@@ -9,21 +9,25 @@ const Cart = () => {
   const [menus, setMenus] = useState(() =>
     store.menus!.slice(0, 1).map((menu) => ({ ...menu, quantity: 1 }))
   );
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [endTime] = useState(() => {
+    const savedTime = localStorage.getItem("requirement3");
+    const time = Number(savedTime);
+    return savedTime && Number.isFinite(time) && time > 0 ? time : Date.now() + 60000;
+  });
+  const [timeLeft, setTimeLeft] = useState(() =>
+    Math.max(0, Math.ceil((endTime - Date.now()) / 1000))
+  );
 
   useEffect(() => {
+    localStorage.setItem("requirement3", String(endTime));
     const timer = window.setInterval(() => {
-      setTimeLeft((time) => {
-        if (time <= 1) {
-          window.clearInterval(timer);
-          return 0;
-        }
-        return time - 1;
-      });
+      const time = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+      setTimeLeft(time);
+      if (time === 0) window.clearInterval(timer);
     }, 1000);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [endTime]);
 
   const handleQuantity = (id: number, change: number) => {
     setMenus((currentMenus) =>
