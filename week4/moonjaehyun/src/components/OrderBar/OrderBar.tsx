@@ -1,11 +1,14 @@
-import { Menu } from "../../types/stores";
+import type { Menu } from "../../types/stores";
 import Button from "../Button";
 
-const OrderBar = () => {
+interface OrderBarProps {
+  totalPrice: number;
+}
+
+const OrderBar = ({ totalPrice }: OrderBarProps) => {
   //이번 주차에는 사용하지 않아도 괜찮습니다.
   const menus: Menu[] = [];
   const handleOrder = () => {};
-  const totalPrice = menus.reduce((acc, cur) => acc + cur.price, 0);
 
   return (
     <div className="fixed bottom-[0px] flex h-[77px] w-[390px] items-center justify-between rounded-t-[16px] bg-white px-[24px] shadow-[0_-8px_16px_0_rgba(0,0,0,0.1)]">

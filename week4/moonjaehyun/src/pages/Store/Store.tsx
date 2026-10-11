@@ -1,12 +1,53 @@
+import { useEffect, useState } from "react";
 import BackBar from "../../components/BackBar";
 import InfoStore from "../../components/InfoStore";
 import OrderBar from "../../components/OrderBar/OrderBar";
-import StoreMenu from "../../components/StoreMenu";
-import stores from "../../models/stores";
+import StoreMenu from "../../components/StoreMenu.tsx";
+import stores from "../../models/stores.ts";
+
+const CART_STORAGE_KEY = "contain-store-ids";
+
+interface StoredMenus {
+  id: number;
+  count: number;
+}
 
 const Store = () => {
   const data = stores[0];
-  const menus = data.menus.map((menu) => <StoreMenu key={menu.id} {...menu} />);
+  const menus = data.menus;
+
+  const [cartStoredMenus, setCartStoredMenus] = useState<StoredMenus[]>(() => {
+    const savedCartStoredMenuIds = localStorage.getItem(CART_STORAGE_KEY);
+
+    if (!savedCartStoredMenuIds) {
+      return [];
+    }
+
+    return JSON.parse(savedCartStoredMenuIds) as StoredMenus[];
+  });
+
+  const handleContain = (containId: number) => {
+    setCartStoredMenus((prev) =>
+      prev.some((item) => item.id === containId)
+        ? prev.map((item) =>
+            item.id === containId ? { ...item, count: item.count + 1 } : item,
+          )
+        : [...prev, { id: containId, count: 1 }],
+    );
+  };
+
+  const totalPrice = cartStoredMenus.reduce((total, item) => {
+    const menu = menus?.find((menu) => menu.id === item.id);
+    return total + (menu?.price ?? 0) * item.count;
+  }, 0);
+
+  useEffect(() => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartStoredMenus));
+  }, [cartStoredMenus]);
+
+  const storeMenus = menus?.map((menu) => (
+    <StoreMenu key={menu.id} menu={menu} onContainMenu={handleContain} />
+  ));
 
   return (
     <main className="mt-[41px] mb-[77px] w-[390px] ">
@@ -28,9 +69,9 @@ const Store = () => {
             샐러드
           </h2>
         </div>
-        {menus}
+        {storeMenus}
       </section>
-      <OrderBar />
+      <OrderBar totalPrice={totalPrice}></OrderBar>
     </main>
   );
 };
