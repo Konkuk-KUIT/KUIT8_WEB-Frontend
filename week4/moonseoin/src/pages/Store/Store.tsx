@@ -1,3 +1,5 @@
+import { useState } from "react";
+import type { Menu } from "../../models/stores";
 import BackBar from "../../components/BackBar";
 import { useParams } from "react-router-dom";
 import OrderBar from "../../components/OrderBar/OrderBar";
@@ -5,7 +7,26 @@ import StoreHeader from "../../components/StoreHeader/StoreHeader";
 import MenuItem from "../../components/MenuItem/MenuItem";
 import stores from "../../models/stores";
 
+type CartMenu = Menu & { quantity: number };
+
 const Store = () => {
+  const [menus, setMenus] = useState<CartMenu[]>([]);
+
+  const handleAddToCart = (menu: Menu) => {
+    setMenus((currentMenus) => {
+      const existingMenu = currentMenus.find((item) => item.id === menu.id);
+
+      if (existingMenu) {
+        return currentMenus.map((item) =>
+          item.id === menu.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+
+      return [...currentMenus, { ...menu, quantity: 1 }];
+    });
+  };
+
+  const totalPrice = menus.reduce((total, menu) => total + menu.price * menu.quantity, 0);
   const { storeId } = useParams();
   const store = stores.find((s) => s.id === Number(storeId));
 
@@ -31,11 +52,12 @@ const Store = () => {
             price={menu.price}
             ingredients={menu.ingredients}
             isBest={menu.isBest}
+            onAdd={() => handleAddToCart(menu)}
           />
         ))}
       </div>
 
-      <OrderBar />
+      <OrderBar totalPrice={totalPrice} />
     </main>
   );
 };

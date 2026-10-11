@@ -1,11 +1,13 @@
 import type { Menu } from "../../models/stores";
 
-type MenuItemProps = Pick<Menu, "name" | "price" | "ingredients" | "isBest">;
+type MenuItemProps = Pick<Menu, "name" | "price" | "ingredients" | "isBest"> & {
+  onAdd: () => void;
+};
 
 import Button from "../Button";
 
 
-const MenuItem = ({ name, price, ingredients, isBest }: MenuItemProps) => {
+const MenuItem = ({ name, price, ingredients, isBest, onAdd }: MenuItemProps) => {
   return (
     <div className="flex items-center px-5 py-2">
       <div className="w-[54px] h-[54px] bg-[#ECECEC] rounded-full mr-4" />
@@ -19,7 +21,7 @@ const MenuItem = ({ name, price, ingredients, isBest }: MenuItemProps) => {
         <p className="text-[13px] text-[#6B7684] mb-1 whitespace-normal break-keep">{ingredients}</p>
       </div>
 
-      <Button size="sm" type="button">
+      <Button size="sm" type="button" onClick={onAdd}>
         담기
       </Button>
     </div>
