@@ -58,6 +58,7 @@ const Store = () => {
         onAddMenu={handleAddMenu}
       />
 
+      {/*Store.tsx - 실제 장바구니 금액 전달 */}
       <OrderBar totalPrice={totalPrice} />
     </main>
   );

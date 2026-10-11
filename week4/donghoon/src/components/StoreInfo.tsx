@@ -1,4 +1,10 @@
-const StoreInfo = ({ store }) => {
+import type { Store } from "../types/stores";
+
+interface StoreInfoProps {
+  store: Store;
+}
+
+const StoreInfo = ({ store }: StoreInfoProps) => {
   const {
     name,
     rate,

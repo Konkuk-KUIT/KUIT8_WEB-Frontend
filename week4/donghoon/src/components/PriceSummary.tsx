@@ -1,8 +1,17 @@
+interface PriceSummaryProps {
+  orderPrice: number;
+  deliveryFee: number;
+  totalPrice: number;
+}
+
+//금액 Props 타입 추가
+//여기는 금액을 계산하는 컴포넌트가 아니라 
+//부모가 계산한 금액을 표시하는 컴포넌트로 유지
 const PriceSummary = ({
   orderPrice,
   deliveryFee,
   totalPrice,
-}) => {
+}: PriceSummaryProps) => {
   return (
     <section className="w-[390px] bg-white">
       {/* 회색바 아래 흰색 여백 */}
