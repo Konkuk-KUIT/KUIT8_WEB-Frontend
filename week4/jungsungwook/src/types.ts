@@ -18,3 +18,8 @@ export type store = {
   deliveryFee: number;
   menus: Menu[];
 };
+
+export type SelectedMenu = {
+  menu : Menu;
+  quantity : number;
+}

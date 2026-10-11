@@ -1,11 +1,15 @@
 import Button from "./Button";
 import type { Menu } from "../models/stores";
 
+
+
 type StoreItemsProps = {
   menus: Menu[];
+  addMenu : (menu : Menu) => void;
 };
 
-const StoreItems = ({ menus }: StoreItemsProps) => {
+const StoreItems = ({ menus,addMenu }: StoreItemsProps) => {
+
   return (
     <div>
       {menus.map((menu) => (
@@ -40,7 +44,7 @@ const StoreItems = ({ menus }: StoreItemsProps) => {
           </div>
 
           <div className="absolute right-[24px] top-[40px]">
-            <Button>담기</Button>
+            <Button onClick={()=>addMenu(menu)}>담기</Button>
           </div>
         </div>
       ))}
