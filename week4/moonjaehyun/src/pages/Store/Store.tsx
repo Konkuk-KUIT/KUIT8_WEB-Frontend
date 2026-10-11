@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BackBar from "../../components/BackBar";
 import InfoStore from "../../components/InfoStore";
 import OrderBar from "../../components/OrderBar/OrderBar";
@@ -7,9 +8,9 @@ import stores from "../../models/stores.ts";
 
 const CART_STORAGE_KEY = "contain-store-ids";
 
-interface StoredMenus {
+export interface StoredMenus {
   id: number;
-  count: number;
+  quantity: number;
 }
 
 const Store = () => {
@@ -30,15 +31,17 @@ const Store = () => {
     setCartStoredMenus((prev) =>
       prev.some((item) => item.id === containId)
         ? prev.map((item) =>
-            item.id === containId ? { ...item, count: item.count + 1 } : item,
+            item.id === containId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item,
           )
-        : [...prev, { id: containId, count: 1 }],
+        : [...prev, { id: containId, quantity: 1 }],
     );
   };
 
   const totalPrice = cartStoredMenus.reduce((total, item) => {
     const menu = menus?.find((menu) => menu.id === item.id);
-    return total + (menu?.price ?? 0) * item.count;
+    return total + (menu?.price ?? 0) * item.quantity;
   }, 0);
 
   useEffect(() => {
@@ -48,6 +51,8 @@ const Store = () => {
   const storeMenus = menus?.map((menu) => (
     <StoreMenu key={menu.id} menu={menu} onContainMenu={handleContain} />
   ));
+
+  const navigate = useNavigate();
 
   return (
     <main className="mt-[41px] mb-[77px] w-[390px] ">
@@ -71,7 +76,10 @@ const Store = () => {
         </div>
         {storeMenus}
       </section>
-      <OrderBar totalPrice={totalPrice}></OrderBar>
+      <OrderBar
+        totalPrice={totalPrice}
+        handleOrder={() => navigate("/cart")}
+      ></OrderBar>
     </main>
   );
 };
