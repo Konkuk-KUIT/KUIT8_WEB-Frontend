@@ -15,7 +15,7 @@ const StoreSearchBar = ({ keyword, onKeywordChange } : StoreSearchBarProps) => {
         onKeywordChange(event.target.value);
     }
 
-    const handleFocus= () => {
+    const handleFocus = () => {
         inputRef.current?.focus();
     }
 

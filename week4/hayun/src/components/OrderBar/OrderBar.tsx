@@ -1,9 +1,12 @@
-import type {Menu} from "../../types/stores";
+import type { Menu } from "../../types/stores";
 import Button from "../Button";
 
-const OrderBar = () => {
-	//이번 주차에는 사용하지 않아도 괜찮습니다.
-	const menus: Menu[] = [];
+interface OrderBarProps {
+	cartMenus?: Menu[];
+}
+
+const OrderBar = ({ cartMenus = [] }: OrderBarProps) => {
+	const menus = cartMenus;
 	const handleOrder = () => {};
 	const totalPrice = menus.reduce((acc, cur) => acc + cur.price, 0);
 
