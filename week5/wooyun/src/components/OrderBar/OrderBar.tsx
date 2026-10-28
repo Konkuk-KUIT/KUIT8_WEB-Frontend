@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import type { CartItem } from "../../types/stores";
 
@@ -12,15 +13,14 @@ const OrderBar = ({
 	totalPrice: totalPriceProp,
 	onOrder,
 }: OrderBarProps) => {
-	const handleOrder = onOrder ?? (() => {});
+	const navigate = useNavigate();
+	const handleOrder = onOrder ?? (() => navigate("/cart"));
 	const totalPrice =
 		totalPriceProp ??
 		cartItems.reduce(
 			(sum, { price, count }) => sum + price * count,
 			0,
 		);
-
-
 	return (
 		<div className="fixed bottom-[0px] flex h-[77px] w-[390px] items-center justify-between rounded-t-[16px] bg-white px-[24px] shadow-[0_-8px_16px_0_rgba(0,0,0,0.1)]">
 			<div className="flex flex-col gap-[5px]">

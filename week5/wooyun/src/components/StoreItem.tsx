@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Store } from "../types/stores";
 
 interface StoreItemProps {
@@ -35,9 +36,13 @@ const StoreItem = ({
 						key={id}
 						className="flex w-[390px] gap-[17px] p-[16px_24px_17px_24px]"
 					>
-						<div className="h-[54px] w-[54px] shrink-0 rounded-[8px] bg-[#ececec]" />
+						<Link
+							to={`/store/${id}`}
+							className="flex min-w-0 flex-1 gap-[17px] text-inherit no-underline"
+						>
+							<div className="h-[54px] w-[54px] shrink-0 rounded-[8px] bg-[#ececec]" />
 
-						<div className="flex min-w-0 flex-1 flex-col gap-[5px]">
+							<div className="flex min-w-0 flex-1 flex-col gap-[5px]">
 								<div className="flex flex-col gap-[2px] text-[17px] font-semibold text-[#333d4b]">
 									{id < 4 && <span>{id}위</span>}
 									<span>{name}</span>
@@ -54,7 +59,8 @@ const StoreItem = ({
 									{minDeliveryTime}분~{maxDeliveryTime}분 ∙ 배달비{" "}
 									{deliveryFee.toLocaleString()}원
 								</span>
-						</div>
+							</div>
+						</Link>
 
 						<button
 							type="button"
