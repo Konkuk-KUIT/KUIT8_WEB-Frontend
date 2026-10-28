@@ -1,17 +1,16 @@
-import type { CartItem } from '../../type/stores'
+import { useCartStore, getOrderPrice } from '../../stores/cartStore';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button'
 
-type OrderBarProps = {
-    addedList?: CartItem[];
-}
 
-const OrderBar = ({addedList = []} : OrderBarProps) => {
+
+const OrderBar = () => {
     const nav = useNavigate();
+    const menus = useCartStore((state)=>state.menus);
     const handleOrder = () => {
         nav("/cart");
     }
-    const totalPrice = addedList.reduce((acc, cur) => acc + cur.price * cur.cnt, 0)
+    const totalPrice = getOrderPrice(menus);
 
     return (
         <div className="fixed bottom-[0px] flex h-[77px] w-[390px] items-center justify-between rounded-t-[16px] bg-white px-[24px] shadow-[0_-8px_16px_0_rgba(0,0,0,0.1)]">

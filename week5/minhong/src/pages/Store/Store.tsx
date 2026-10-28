@@ -3,15 +3,13 @@ import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreInfo from "../../components/StoreInfo";
 import Menu from "../../components/Menu";
 import stores from "../../models/stores";
-import { useState } from "react";
-import type { CartItem } from "../../type/stores";
 import { useParams, Link } from "react-router-dom";
 import Button from "../../components/Button";
-type addedListType = {
-  menus : CartItem[];
-}
+import { useCartStore } from "../../stores/cartStore";
+
 const Store = () => {
-  const [addedList, setAddedList] = useState<addedListType>({menus : []});
+
+  const addMenu = useCartStore((state)=>state.addMenu);
   const {storeId} = useParams();
   const store = stores.find((s)=>s.id === Number(storeId));
 
@@ -29,24 +27,15 @@ const Store = () => {
       </main>
     );
   }
-  const clickHandler = (id : number)=>{
-    const menu = store.menus.find((m)=>m.id === id);
-    if(!menu) return;
-    const isAdded = addedList.menus.some((m)=>m.id === id);
-    setAddedList({
-      menus : isAdded
-        ? addedList.menus.map((m)=>(m.id === id ? { ...m, cnt : m.cnt + 1 } : m))
-        : [...addedList.menus, { ...menu, cnt : 1 }]
-    })
-  }
+ 
   return (
     <main className="mt-[41px] mb-[77px] w-[390px]">
       <BackBar orderCancel={false} />
       <StoreInfo store={store} />
       {store.menus.map((item) => (
-        <Menu key={item.id} item={item} clickHandler={clickHandler} />
+        <Menu key={item.id} item={item} clickHandler={()=>addMenu(item, store.id)} />
       ))}
-      <OrderBar addedList={addedList.menus}/>
+      <OrderBar/>
     </main>
   );
 };

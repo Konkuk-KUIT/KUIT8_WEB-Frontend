@@ -3,39 +3,32 @@ import stores from "../../models/stores";
 import OrderMenu from "../../components/OrderMenu";
 import PriceRow from "../../components/PriceRow";
 import PaymentBar from "../../components/PaymentBar";
-import { useState, useEffect } from "react";
-import type { CartItem } from "../../type/stores";
-type addedListType ={
-  menus : CartItem[]
-}
+import { useNavigate } from "react-router-dom";
+import { useCartStore, getOrderPrice } from "../../stores/cartStore";
+import useCountdown from "../../hooks/useCountdown";
+
 
 const Cart = () => {
-  const store = stores[0];
-  const menu = store.menus[0];
-  const [addedList, setAddedList] = useState<addedListType>({menus : [{ ...menu, cnt : 1 }]});
-  const [left, setLeft] = useState(60); //1분
-  const { deliveryFee, minDeliveryPrice } = store;
-  const orderPrice = addedList.menus.reduce((acc, cur) => acc + cur.price * cur.cnt, 0);
-  const totalPrice = orderPrice + deliveryFee;
-  const isOverPrice = orderPrice >= minDeliveryPrice;
+  const nav = useNavigate();
+  const menus = useCartStore((state)=>state.menus);
+  const changeCnt = useCartStore((state)=>state.changeCnt);
+  const { time, isOver } = useCountdown(60); //1분
 
-  const changeCnt = (id : number, diff : number) => {
-    setAddedList({
-      menus : addedList.menus.map((m) =>
-        m.id === id ? { ...m, cnt : Math.max(1, m.cnt + diff) } : m
-      )
-    })
+  const store = stores.find((s)=>s.id === menus[0]?.storeId);
+  if(!store){
+    return (
+      <main className="w-[390px] mt-[41px]">
+        <BackBar />
+        <p className="py-20 text-center text-base font-medium text-gray-500">장바구니가 비어있어요</p>
+        <PaymentBar totalPrice={0} minDeliveryPrice={0} PayBtnDisable />
+      </main>
+    );
   }
 
-  useEffect(()=>{
-    if(left <= 0) return;
-    const id = setTimeout(()=>setLeft((prev)=> prev-1), 1000);
-    return ()=> clearTimeout(id);
-  }, [left]);
-
-  const mm = String(Math.floor(left / 60)).padStart(2, "0");
-  const ss = String(left % 60).padStart(2, "0");
-  const time = mm + ":"+ss;
+  const { deliveryFee, minDeliveryPrice } = store;
+  const orderPrice = getOrderPrice(menus);
+  const totalPrice = orderPrice + deliveryFee;
+  const isOverPrice = orderPrice >= minDeliveryPrice;
 
 
   return (
@@ -45,13 +38,20 @@ const Cart = () => {
         <div className="h-4 w-full bg-gray-100" aria-hidden="true" />
 
         <section aria-label="주문 메뉴">
-          {addedList.menus.map((item) => (
+          <div className="flex items-center justify-between px-6 pt-6.5">
+            <h2 className="text-base font-bold text-gray-500">{store.name}</h2>
+            {!isOverPrice && (
+              <p className="flex items-center gap-1 text-base font-medium text-rose-500">
+                최소금액 미달
+                <img src="/Warning.svg" alt="경고" className="size-5" />
+              </p>
+            )}
+          </div>
+          {menus.map((item) => (
             <OrderMenu
               key={item.id}
-              store={store}
               item={item}
               cnt={item.cnt}
-              isOverPrice={isOverPrice}
               onIncrease={() => changeCnt(item.id, 1)}
               onDecrease={() => changeCnt(item.id, -1)}
             />
@@ -59,6 +59,7 @@ const Cart = () => {
           <div className="flex h-14 w-full items-center justify-center border-t border-gray-200">
             <button
               type="button"
+              onClick={() => nav(`/store/${store.id}`)}
               className="flex items-center gap-1.5 text-base font-semibold text-blue-500"
             >
               더 담기
@@ -84,7 +85,7 @@ const Cart = () => {
         <PaymentBar
           totalPrice={totalPrice}
           minDeliveryPrice={minDeliveryPrice}
-          PayBtnDisable={!isOverPrice || left === 0}
+          PayBtnDisable={!isOverPrice || isOver}
         />
       </div>
     </main>

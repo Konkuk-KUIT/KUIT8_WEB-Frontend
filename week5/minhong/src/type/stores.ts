@@ -21,4 +21,5 @@ export interface Store{
 
 export interface CartItem extends Menu{
     cnt : number;
+    storeId : number;
 }
