@@ -1,21 +1,25 @@
 import Button from "../Button";
-import type { Menu } from "../../types/stores";
+import type { CartItem } from "../../types/stores";
 
 interface OrderBarProps {
-	menus?: Menu[];
+	cartItems?: CartItem[];
 	totalPrice?: number;
 	onOrder?: () => void;
 }
 
 const OrderBar = ({
-	menus = [],
+	cartItems = [],
 	totalPrice: totalPriceProp,
 	onOrder,
 }: OrderBarProps) => {
 	//이번 주차에는 사용하지 않아도 괜찮습니다.
 	const handleOrder = onOrder ?? (() => {});
 	const totalPrice =
-		totalPriceProp ?? menus.reduce((acc, cur) => acc + cur.price, 0);
+		totalPriceProp ??
+		cartItems.reduce(
+			(sum, { price, quantity }) => sum + price * quantity,
+			0,
+		);
 
 
 	return (

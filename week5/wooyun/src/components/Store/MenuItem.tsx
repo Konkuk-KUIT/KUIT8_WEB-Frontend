@@ -3,9 +3,10 @@ import type { Menu } from "../../types/stores";
 
 interface MenuItemProps {
 	menu: Menu;
+	onAddToCart: (menu: Menu) => void;
 }
 
-const MenuItem = ({ menu }: MenuItemProps) => {
+const MenuItem = ({ menu, onAddToCart }: MenuItemProps) => {
 	return (
 		<article className="flex w-full items-center gap-4 px-6 py-4">
 			<div className="h-13.5 w-13.5 shrink-0 rounded-[27px] bg-[#ececec]" />
@@ -30,7 +31,11 @@ const MenuItem = ({ menu }: MenuItemProps) => {
 				</p>
 			</div>
 
-			<Button type="button" size="sm">
+			<Button
+				type="button"
+				size="sm"
+				onClick={() => onAddToCart(menu)}
+			>
 				담기
 			</Button>
 		</article>

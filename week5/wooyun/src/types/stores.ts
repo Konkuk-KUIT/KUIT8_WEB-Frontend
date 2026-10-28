@@ -6,6 +6,10 @@ export interface Menu {
 	ingredients: string;
 }
 
+export interface CartItem extends Menu {
+	quantity: number;
+}
+
 export interface Store {
 	id: number;
 	name: string;
