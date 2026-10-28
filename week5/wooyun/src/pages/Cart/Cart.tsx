@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BackBar from "../../components/BackBar";
 import Button from "../../components/Button";
 import CartBar from "../../components/Cart/CartBar";
@@ -8,6 +9,33 @@ import type { CartItem } from "../../types/stores";
 
 const ORDER_LIMIT_SECONDS = 60;
 const ORDER_DEADLINE_STORAGE_KEY = "wooyun-order-deadline";
+const ACTIVE_STORE_ID_STORAGE_KEY = "wooyun-active-store-id";
+const getCartStorageKey = (storeId: number) =>
+	`wooyun-cart-items:${storeId}`;
+
+const loadActiveStore = () => {
+	try {
+		const savedStoreId = Number(
+			localStorage.getItem(ACTIVE_STORE_ID_STORAGE_KEY),
+		);
+
+		return (
+			stores.find(({ id }) => id === savedStoreId) ?? stores[0]
+		);
+	} catch {
+		return stores[0];
+	}
+};
+
+const loadCartItems = (storeId: number): CartItem[] => {
+	try {
+		const savedCart = localStorage.getItem(getCartStorageKey(storeId));
+		const parsedCart: unknown = savedCart ? JSON.parse(savedCart) : [];
+		return Array.isArray(parsedCart) ? (parsedCart as CartItem[]) : [];
+	} catch {
+		return [];
+	}
+};
 
 const createOrderDeadline = () => {
 	const deadline = Date.now() + ORDER_LIMIT_SECONDS * 1000;
@@ -37,15 +65,26 @@ const calculateRemainingSeconds = (deadline: number) =>
 	Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
 
 const Cart = () => {
-	const store = stores[0];
-	const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-		const firstMenu = store.menus?.[0];
-		return firstMenu ? [{ ...firstMenu, count: 1 }] : [];
-	});
+	const navigate = useNavigate();
+	const [store] = useState(loadActiveStore);
+	const [cartItems, setCartItems] = useState<CartItem[]>(() =>
+		loadCartItems(store.id),
+	);
 	const [orderDeadline] = useState(loadOrderDeadline);
 	const [remainingSeconds, setRemainingSeconds] = useState(() =>
 		calculateRemainingSeconds(orderDeadline),
 	);
+
+	useEffect(() => {
+		try {
+			localStorage.setItem(
+				getCartStorageKey(store.id),
+				JSON.stringify(cartItems),
+			);
+		} catch {
+			// Storage를 사용할 수 없는 환경에서도 수량 변경은 계속 동작한다.
+		}
+	}, [cartItems, store.id]);
 
 	useEffect(() => {
 		const timerId = window.setInterval(() => {
@@ -68,6 +107,20 @@ const Cart = () => {
 					: item,
 			),
 		);
+	};
+
+	const handleCancelOrder = () => {
+		try {
+			localStorage.removeItem(ORDER_DEADLINE_STORAGE_KEY);
+			localStorage.removeItem(ACTIVE_STORE_ID_STORAGE_KEY);
+			stores.forEach(({ id }) => {
+				localStorage.removeItem(getCartStorageKey(id));
+			});
+		} catch {
+			// Storage를 사용할 수 없어도 주문취소와 화면 이동은 계속 진행한다.
+		}
+
+		navigate("/store");
 	};
 
 	const handleDecrease = (menuId: number) => {
@@ -96,7 +149,10 @@ const Cart = () => {
 
 	return (
 		<main className="min-h-screen w-[390px] pt-[41px] pb-[162px]">
-			<BackBar orderCancel />
+			<BackBar
+				orderCancel
+				onOrderCancel={handleCancelOrder}
+			/>
 			<CartBar
 				store={store}
 				cartItems={cartItems}
