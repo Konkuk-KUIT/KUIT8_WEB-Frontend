@@ -1,4 +1,12 @@
-const CartBar = ({ store, menu, quantity }) => {
+import type { Menu, Store } from "../../types/stores";
+
+interface CartBarProps {
+	store: Store;
+	menu: Menu;
+	quantity: number;
+}
+
+const CartBar = ({ store, menu, quantity }: CartBarProps) => {
 	return (
 		<section className="border-y-[16px] border-[#F2F4F6] bg-white pt-[27px]">
 			<div className="px-[24px]">

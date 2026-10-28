@@ -1,4 +1,10 @@
-const StoreItem = ({ items }) => {
+import type { Store } from "../types/stores";
+
+interface StoreItemProps {
+	items: Store[];
+}
+
+const StoreItem = ({ items }: StoreItemProps) => {
 	return (
 		<div className="mt-[100px] flex w-[390px] flex-col">
 			{items.map(

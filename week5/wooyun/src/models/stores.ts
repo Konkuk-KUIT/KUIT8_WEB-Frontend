@@ -1,4 +1,6 @@
-const stores = [
+import type { Store } from "../types/stores";
+
+const stores: Store[] = [
 	{
 		id: 1,
 		name: "샐로리 한남점",

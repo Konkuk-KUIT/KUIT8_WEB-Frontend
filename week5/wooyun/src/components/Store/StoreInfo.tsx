@@ -1,4 +1,10 @@
-const StoreInfo = ({ store }) => {
+import type { Store } from "../../types/stores";
+
+interface StoreInfoProps {
+  store: Store;
+}
+
+const StoreInfo = ({ store }: StoreInfoProps) => {
   return (
     <article className="inline-flex flex-col align-start">
       <section className="flex w-[390px] pt-[26px] pb-[2px] pl-[24px] align-center">

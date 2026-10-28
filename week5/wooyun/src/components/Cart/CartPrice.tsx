@@ -1,4 +1,14 @@
-const CartPrice = ({ orderPrice, deliveryFee, totalPrice }) => {
+interface CartPriceProps {
+	orderPrice: number;
+	deliveryFee: number;
+	totalPrice: number;
+}
+
+const CartPrice = ({
+	orderPrice,
+	deliveryFee,
+	totalPrice,
+}: CartPriceProps) => {
 	return (
 		<section className="bg-white p-6">
 			<div className="flex justify-between text-[17px] font-medium text-[#8b95a1]">

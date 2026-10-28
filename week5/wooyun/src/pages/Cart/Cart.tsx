@@ -6,12 +6,16 @@ import stores from "../../models/stores";
 
 const Cart = () => {
 	const store = stores[0];
-	const menu = store.menus[0];
+	const menu = store.menus?.[0];
 	const quantity = 1;
 	const orderPrice = 10600;
 	const deliveryFee = 2000;
 	const totalPrice = 12600;
 	const minDeliveryPrice = 13000;
+
+	if (!menu) {
+		return null;
+	}
 
 	return (
 		<main className="min-h-screen w-[390px] pt-[41px] pb-[132px]">

@@ -1,6 +1,11 @@
 import Button from "../Button";
+import type { Menu } from "../../types/stores";
 
-const MenuItem = ({ menu }) => {
+interface MenuItemProps {
+	menu: Menu;
+}
+
+const MenuItem = ({ menu }: MenuItemProps) => {
 	return (
 		<article className="flex w-full items-center gap-4 px-6 py-4">
 			<div className="h-13.5 w-13.5 shrink-0 rounded-[27px] bg-[#ececec]" />
