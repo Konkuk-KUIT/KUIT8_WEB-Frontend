@@ -7,7 +7,7 @@ export interface Menu {
 }
 
 export interface CartItem extends Menu {
-	quantity: number;
+	count: number;
 }
 
 export interface Store {

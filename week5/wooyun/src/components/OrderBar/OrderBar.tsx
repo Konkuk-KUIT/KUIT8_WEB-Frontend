@@ -12,12 +12,11 @@ const OrderBar = ({
 	totalPrice: totalPriceProp,
 	onOrder,
 }: OrderBarProps) => {
-	//이번 주차에는 사용하지 않아도 괜찮습니다.
 	const handleOrder = onOrder ?? (() => {});
 	const totalPrice =
 		totalPriceProp ??
 		cartItems.reduce(
-			(sum, { price, quantity }) => sum + price * quantity,
+			(sum, { price, count }) => sum + price * count,
 			0,
 		);
 

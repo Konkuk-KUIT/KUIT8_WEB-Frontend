@@ -1,12 +1,20 @@
-import type { Menu, Store } from "../../types/stores";
+import type { CartItem, Store } from "../../types/stores";
 
 interface CartBarProps {
 	store: Store;
-	menu: Menu;
-	quantity: number;
+	cartItems: CartItem[];
+	isMinimumMet: boolean;
+	onIncrease: (menuId: number) => void;
+	onDecrease: (menuId: number) => void;
 }
 
-const CartBar = ({ store, menu, quantity }: CartBarProps) => {
+const CartBar = ({
+	store,
+	cartItems,
+	isMinimumMet,
+	onIncrease,
+	onDecrease,
+}: CartBarProps) => {
 	return (
 		<section className="border-y-[16px] border-[#F2F4F6] bg-white pt-[27px]">
 			<div className="px-[24px]">
@@ -14,31 +22,58 @@ const CartBar = ({ store, menu, quantity }: CartBarProps) => {
 					<h1 className="text-[17px] font-bold text-[#6B7684]">
 						{store.name}
 					</h1>
-					<span className="text-[15px] font-medium text-[#f04452]">
-						최소금액 미달 ⓘ
+					<span
+						className={`text-[15px] font-medium ${
+							isMinimumMet ? "text-[#3182f6]" : "text-[#f04452]"
+						}`}
+					>
+						{isMinimumMet ? "최소금액 충족" : "최소금액 미달 ⓘ"}
 					</span>
 				</div>
 
-				<div className="mt-7 flex items-center gap-4 pb-4 border-b-[1px] border-[#f2f4f6]">
-					<div className="h-[54px] w-[54px] shrink-0 rounded-[8px] bg-[#ececec]" />
+				{cartItems.map((item) => (
+					<div
+						key={item.id}
+						className="mt-7 flex items-center gap-4 border-b-[1px] border-[#f2f4f6] pb-4"
+					>
+						<div className="h-[54px] w-[54px] shrink-0 rounded-[8px] bg-[#ececec]" />
 
-					<div className="min-w-0 flex-1">
-						<h2 className="text-[17px] font-bold text-[#333d4b]">
-							{menu.name}
-						</h2>
-						<p className="mt-1.25 line-clamp-2 text-[13px] font-medium leading-[18px] text-[#6b7684]">
-							{menu.ingredients}
-						</p>
-						<p className="mt-1.25 text-[13px] font-medium text-[#6b7684]">
-							{menu.price.toLocaleString()}원
-						</p>
-					</div>
+						<div className="min-w-0 flex-1">
+							<h2 className="text-[17px] font-bold text-[#333d4b]">
+								{item.name}
+							</h2>
+							<p className="mt-1.25 line-clamp-2 text-[13px] font-medium leading-[18px] text-[#6b7684]">
+								{item.ingredients}
+							</p>
+							<p className="mt-1.25 text-[13px] font-medium text-[#6b7684]">
+								{item.price.toLocaleString()}원
+							</p>
+						</div>
 
-					<div className="flex shrink-0 items-center gap-[12px] text-[15px] font-medium text-[#6b7684]">
-						<span>{quantity}개</span>
-						<span className="text-[26px] font-light text-[#6b7684]">›</span>
+						<div className="flex shrink-0 items-center gap-2 text-[15px] font-medium text-[#6b7684]">
+							<button
+								type="button"
+								aria-label={`${item.name} 수량 감소`}
+								disabled={item.count <= 1}
+								onClick={() => onDecrease(item.id)}
+								className="grid h-7 w-7 cursor-pointer place-items-center rounded-full border border-[#d1d6db] bg-white text-[18px] disabled:cursor-not-allowed disabled:text-[#b0b8c1]"
+							>
+								−
+							</button>
+							<span className="min-w-8 text-center" aria-live="polite">
+								{item.count}개
+							</span>
+							<button
+								type="button"
+								aria-label={`${item.name} 수량 증가`}
+								onClick={() => onIncrease(item.id)}
+								className="grid h-7 w-7 cursor-pointer place-items-center rounded-full border border-[#d1d6db] bg-white text-[18px]"
+							>
+								+
+							</button>
+						</div>
 					</div>
-				</div>
+				))}
 			</div>
 
 			<button

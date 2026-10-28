@@ -1,26 +1,57 @@
+import { useState } from "react";
 import BackBar from "../../components/BackBar";
 import Button from "../../components/Button";
 import CartBar from "../../components/Cart/CartBar";
 import CartPrice from "../../components/Cart/CartPrice";
 import stores from "../../models/stores";
+import type { CartItem } from "../../types/stores";
 
 const Cart = () => {
 	const store = stores[0];
-	const menu = store.menus?.[0];
-	const quantity = 1;
-	const orderPrice = 10600;
-	const deliveryFee = 2000;
-	const totalPrice = 12600;
-	const minDeliveryPrice = 13000;
+	const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+		const firstMenu = store.menus?.[0];
+		return firstMenu ? [{ ...firstMenu, count: 1 }] : [];
+	});
 
-	if (!menu) {
-		return null;
-	}
+	const handleIncrease = (menuId: number) => {
+		setCartItems((previousItems) =>
+			previousItems.map((item) =>
+				item.id === menuId
+					? { ...item, count: item.count + 1 }
+					: item,
+			),
+		);
+	};
+
+	const handleDecrease = (menuId: number) => {
+		setCartItems((previousItems) =>
+			previousItems.map((item) =>
+				item.id === menuId
+					? { ...item, count: Math.max(1, item.count - 1) }
+					: item,
+			),
+		);
+	};
+
+	const orderPrice = cartItems.reduce(
+		(sum, { price, count }) => sum + price * count,
+		0,
+	);
+	const deliveryFee = store.deliveryFee;
+	const totalPrice = orderPrice + deliveryFee;
+	const minDeliveryPrice = store.minDeliveryPrice;
+	const isMinimumMet = orderPrice >= minDeliveryPrice;
 
 	return (
 		<main className="min-h-screen w-[390px] pt-[41px] pb-[132px]">
 			<BackBar orderCancel />
-			<CartBar store={store} menu={menu} quantity={quantity} />
+			<CartBar
+				store={store}
+				cartItems={cartItems}
+				isMinimumMet={isMinimumMet}
+				onIncrease={handleIncrease}
+				onDecrease={handleDecrease}
+			/>
 
 			<CartPrice
 				orderPrice={orderPrice}
@@ -33,7 +64,7 @@ const Cart = () => {
 					최소 주문금액 {minDeliveryPrice.toLocaleString()}원
 				</p>
 				<div className="mt-[13px]">
-					<Button type="button" size="xl">
+					<Button type="button" size="xl" disabled={!isMinimumMet}>
 						<span className="whitespace-nowrap">
 							{totalPrice.toLocaleString()}원 결제하기
 						</span>
