@@ -36,7 +36,7 @@ const Store = () => {
 				JSON.stringify(cartItems),
 			);
 		} catch {
-
+			// Storage를 사용할 수 없는 환경에서도 장바구니 기능은 계속 동작한다.
 		}
 	}, [cartItems, store.id]);
 
