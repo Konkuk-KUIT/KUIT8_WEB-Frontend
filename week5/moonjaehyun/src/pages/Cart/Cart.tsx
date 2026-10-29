@@ -4,16 +4,17 @@ import BackBar from "../../components/BackBar";
 import CartCheckoutBar from "../../components/CartCheckoutBar";
 import CartStoreSection from "../../components/CartStoreSection";
 import OrderSummary from "../../components/OrderSummary";
-import stores from "../../models/stores";
 import { useCartStore } from "../../stores/useCartStore";
-import { CART_STORAGE_KEY } from "../../types/stores";
 
 const DEADLINE_STORAGE_KEY = "cart-order-deadline";
 const ORDER_DURATION_MS = 60_000;
 
 const Cart = () => {
-  const store = stores[0];
   const navigate = useNavigate();
+
+  const cartStore = useCartStore();
+  const store = cartStore.store;
+  const menus = cartStore.menus;
 
   const [deadline, setDeadline] = useState(() => {
     const saved = sessionStorage.getItem(DEADLINE_STORAGE_KEY);
@@ -25,8 +26,6 @@ const Cart = () => {
   const [now, setNow] = useState(() => Date.now());
   const remainingSeconds = Math.max(0, Math.ceil((deadline - now) / 1000));
   const isExpired = remainingSeconds === 0;
-
-  const cartMenus = useCartStore();
 
   const handleRestartOrder = () => {
     const startedAt = Date.now();
@@ -56,31 +55,26 @@ const Cart = () => {
     };
   }, [deadline]);
 
-  useEffect(() => {
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartStoredMenus));
-  }, [cartStoredMenus]);
+  if (!store) {
+    return (
+      <main className="mx-auto w-[390px] pt-[41px]">
+        <BackBar orderCancel={false} />
+        <section className="px-[24px] py-[60px] text-center">
+          <h1 className="text-[20px] font-semibold text-[#333d4b]">
+            장바구니가 비어 있습니다
+          </h1>
+          <button
+            onClick={() => navigate("/store")}
+            className="mt-[24px] rounded-[8px] bg-[#3182f6] px-[20px] py-[12px] text-white"
+          >
+            가게 목록으로 이동
+          </button>
+        </section>
+      </main>
+    );
+  }
 
-  // id 기반으로 메뉴 찾고 quantity만 교체
-  const cartItems = cartStoredMenus.flatMap((item) => {
-    const menu = store.menus?.find((menu) => menu.id === item.id);
-
-    if (!menu) {
-      return [];
-    }
-
-    return [
-      {
-        id: menu.id,
-        name: menu.name,
-        price: menu.price,
-        options: menu.ingredients,
-        quantity: item.quantity,
-      },
-    ];
-  });
-
-  // 나머지 넣기
-  const orderPrice = cartItems.reduce(
+  const orderPrice = menus.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
   );
@@ -90,8 +84,7 @@ const Cart = () => {
 
   // 최소 금액 이하인 거 판정
   const isBelowMinimum = orderPrice < store.minDeliveryPrice;
-  const isCheckoutDisabled =
-    isBelowMinimum || isExpired || cartItems.length === 0;
+  const isCheckoutDisabled = isBelowMinimum || isExpired || menus.length === 0;
 
   return (
     <main className="mx-auto min-h-screen w-[390px] bg-white pt-[41px] pb-[95px]">
@@ -121,11 +114,11 @@ const Cart = () => {
 
       <CartStoreSection
         storeName={store.name}
-        items={cartItems}
+        items={menus}
         isBelowMinimum={isBelowMinimum}
         onAddMore={() => navigate(`/store/${store.id}`)}
-        onAddMenu={cartMenus.addMenu()}
-        onSubMenu={cartMenus.subMenu()}
+        onAddMenu={(menu) => cartStore.addMenu(store, menu)}
+        onSubMenu={(menu) => cartStore.subMenu(menu)}
       />
 
       <div className="h-[16px] w-[390px] bg-[#f2f4f6]" />

@@ -7,7 +7,7 @@ interface CartStoreInfo {
   minDeliveryPrice: number;
 }
 
-interface CartMenu {
+export interface CartMenu {
   id: number;
   name: string;
   price: number;
@@ -20,7 +20,7 @@ interface CartState {
   menus: CartMenu[];
 
   addMenu: (store: CartStoreInfo, menu: CartMenu) => void;
-  subMenu: (store: CartStoreInfo, menu: CartMenu) => void;
+  subMenu: (menu: CartMenu) => void;
   clearCart: () => void;
 }
 

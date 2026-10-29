@@ -1,20 +1,13 @@
+import type { CartMenu } from "../stores/useCartStore";
 import OrderMenu from "./OrderMenu";
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  options: string;
-  quantity: number;
-}
 
 interface CartStoreSectionProps {
   storeName: string;
-  items: CartItem[];
+  items: CartMenu[];
   isBelowMinimum: boolean;
   onAddMore?: () => void;
-  onAddMenu: (id: number) => void;
-  onSubMenu: (id: number) => void;
+  onAddMenu: (menu: CartMenu) => void;
+  onSubMenu: (menu: CartMenu) => void;
 }
 
 const CartStoreSection = ({
@@ -49,8 +42,9 @@ const CartStoreSection = ({
         <OrderMenu
           key={item.id}
           {...item}
-          onIncrease={() => onAddMenu(item.id)}
-          onDecrease={() => onSubMenu(item.id)}
+          options={item.ingredients}
+          onIncrease={() => onAddMenu(item)}
+          onDecrease={() => onSubMenu(item)}
         />
       ))}
 
