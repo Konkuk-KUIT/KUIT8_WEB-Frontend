@@ -148,6 +148,9 @@ Fetch는 `404`, `400` 응답에서도 자동으로 오류가 발생하지 않으
 }
 ```
 
+- `$schema`는 에디터의 문법 검사와 자동완성을 위한 Vercel 공식 JSON Schema 주소입니다. 개인 주소가 아니며 웹 배포에서도 수정하지 않습니다.
+- `rewrites`는 `/store/1`처럼 React Router 경로로 직접 접속하거나 새로고침해도 `index.html`을 보여주기 위한 설정입니다.
+
 Vercel 프로젝트에도 다음 환경변수를 등록합니다.
 
 ```env
@@ -155,6 +158,28 @@ VITE_API_BASE_URL=https://kuit-8th-mission-server.vercel.app
 ```
 
 Git 저장소를 가져와 배포한다면 자신의 프로젝트 폴더인 `week6/자기이름`을 Root Directory로 지정합니다.
+
+### 배포 파일 관리
+
+`.gitignore`에 다음 항목이 포함되어 있는지 확인합니다. `*.local`에는 `.env.local`이 포함됩니다.
+
+```gitignore
+node_modules
+dist
+*.local
+.vercel
+```
+
+| 구분 | 파일·폴더 | 이유 |
+| --- | --- | --- |
+| 커밋 O | 소스 코드 | 구현 결과이므로 공유해야 합니다. |
+| 커밋 O | `package.json`, `package-lock.json` | 같은 패키지와 버전으로 설치하기 위해 필요합니다. |
+| 커밋 O | `.env.example` | 필요한 환경변수 이름과 예시를 안내합니다. |
+| 커밋 O | `vercel.json` | Vercel 웹 배포가 Routing 설정을 읽는 파일입니다. |
+| 커밋 X | `.env.local` | 개인 개발 환경에서 사용하는 실제 환경변수 파일입니다. |
+| 커밋 X | `node_modules` | `npm install`로 다시 만들 수 있습니다. |
+| 커밋 X | `dist` | `npm run build`로 다시 만드는 빌드 결과물입니다. |
+| 커밋 X | `.vercel` | Vercel 프로젝트 연결 정보가 담기는 로컬 폴더입니다. |
 
 ### 배포 확인
 
@@ -167,5 +192,3 @@ Git 저장소를 가져와 배포한다면 자신의 프로젝트 폴더인 `wee
 - [ ] `npm run lint`와 `npm run build`가 성공하는가?
 - [ ] 개발 서버와 Vercel 배포 주소에서 미션을 확인했는가?
 - [ ] 프론트엔드 소스 코드와 Vercel 배포 주소를 제출했는가?
-
-`.env.local`, `node_modules`, `dist`, `.vercel`은 커밋하지 않습니다. `.env.example`과 `vercel.json`은 커밋합니다.
