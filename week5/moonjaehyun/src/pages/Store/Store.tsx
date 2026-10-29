@@ -63,11 +63,6 @@ const Store = () => {
     });
   };
 
-  const totalPrice = cartStore.menus.reduce((total, item) => {
-    const menu = menus?.find((menu) => menu.id === item.id);
-    return total + (menu?.price ?? 0) * item.quantity;
-  }, 0);
-
   const storeMenus = menus?.map((menu) => (
     <StoreMenu key={menu.id} menu={menu} onContainMenu={handleContain} />
   ));
@@ -94,10 +89,7 @@ const Store = () => {
         </div>
         {storeMenus}
       </section>
-      <OrderBar
-        totalPrice={totalPrice}
-        handleOrder={() => navigate("/cart")}
-      ></OrderBar>
+      <OrderBar></OrderBar>
     </main>
   );
 };

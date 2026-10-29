@@ -58,7 +58,7 @@ const Home = () => {
           </div>
         </main>
 
-        <OrderBar totalPrice={0} />
+        <OrderBar />
       </div>
     </div>
   );

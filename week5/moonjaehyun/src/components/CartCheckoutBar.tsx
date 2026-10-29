@@ -1,15 +1,14 @@
+import { useTotalPrice } from "../stores/useCartStore";
 import Button from "./Button";
 
 interface CartCheckoutBarProps {
   minimumOrderPrice: number;
-  totalPrice: number;
   disabled: boolean;
   onCheckout?: () => void;
 }
 
 const CartCheckoutBar = ({
   minimumOrderPrice,
-  totalPrice,
   disabled,
   onCheckout,
 }: CartCheckoutBarProps) => {
@@ -24,7 +23,7 @@ const CartCheckoutBar = ({
         onClick={onCheckout}
         className="mt-[19px]"
       >
-        {totalPrice.toLocaleString()}원 결제하기
+        {useTotalPrice().toLocaleString()}원 결제하기
       </Button>
     </div>
   );

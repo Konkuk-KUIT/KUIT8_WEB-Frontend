@@ -56,7 +56,7 @@ const Stores = () => {
         likedStoreIds={likedStoreIds}
         onToggleLike={handleToggleLike}
       />
-      <OrderBar totalPrice={0} />
+      <OrderBar />
     </main>
   );
 };

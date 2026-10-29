@@ -87,3 +87,18 @@ export const useCartStore = create<CartState>((set, get) => ({
     });
   },
 }));
+
+// total price 계산하는
+export const useTotalPrice = () =>
+  useCartStore((state) => {
+    if (!state.store || state.menus.length === 0) {
+      return 0;
+    }
+
+    const orderPrice = state.menus.reduce(
+      (total, menu) => total + menu.price * menu.quantity,
+      0,
+    );
+
+    return orderPrice + state.store.deliveryFee;
+  });

@@ -79,9 +79,6 @@ const Cart = () => {
     0,
   );
 
-  // 총 금액
-  const totalPrice = orderPrice + store.deliveryFee;
-
   // 최소 금액 이하인 거 판정
   const isBelowMinimum = orderPrice < store.minDeliveryPrice;
   const isCheckoutDisabled = isBelowMinimum || isExpired || menus.length === 0;
@@ -124,15 +121,10 @@ const Cart = () => {
       <div className="h-[16px] w-[390px] bg-[#f2f4f6]" />
       <div className="h-[16px] w-[390px] bg-white" />
 
-      <OrderSummary
-        orderPrice={orderPrice}
-        deliveryFee={store.deliveryFee}
-        totalPrice={totalPrice}
-      />
+      <OrderSummary orderPrice={orderPrice} deliveryFee={store.deliveryFee} />
 
       <CartCheckoutBar
         minimumOrderPrice={store.minDeliveryPrice}
-        totalPrice={totalPrice}
         disabled={isCheckoutDisabled}
       />
     </main>
