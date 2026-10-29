@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackBar from "../../components/BackBar";
 import Button from "../../components/Button.tsx";
@@ -6,8 +5,7 @@ import InfoStore from "../../components/InfoStore";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreMenu from "../../components/StoreMenu.tsx";
 import stores from "../../models/stores.ts";
-
-const CART_STORAGE_KEY = "contain-store-ids";
+import { useCartStore } from "../../stores/useCartStore.tsx";
 
 export interface StoredMenus {
   id: number;
@@ -21,9 +19,15 @@ const Store = () => {
 
   // 0번부터 시작
   const storeId = Number(id);
-  const data = stores.find((store) => store.id === Number(storeId));
+  const store = stores.find((store) => store.id === Number(storeId));
 
-  if (data === undefined) {
+  const cartStore = useCartStore();
+
+  // useEffect(() => {
+  //   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartStoredMenus));
+  // }, [cartStoredMenus]);
+
+  if (!store) {
     return (
       <main className="mx-auto mt-[41px] w-[390px]">
         <BackBar orderCancel={false} />
@@ -48,38 +52,21 @@ const Store = () => {
     );
   }
 
-  const menus = data.menus;
-
-  const [cartStoredMenus, setCartStoredMenus] = useState<StoredMenus[]>(() => {
-    const savedCartStoredMenuIds = localStorage.getItem(CART_STORAGE_KEY);
-
-    if (!savedCartStoredMenuIds) {
-      return [];
-    }
-
-    return JSON.parse(savedCartStoredMenuIds) as StoredMenus[];
-  });
+  const menus = store.menus;
 
   const handleContain = (containId: number) => {
-    setCartStoredMenus((prev) =>
-      prev.some((item) => item.id === containId)
-        ? prev.map((item) =>
-            item.id === containId
-              ? { ...item, quantity: item.quantity + 1 }
-              : item,
-          )
-        : [...prev, { id: containId, quantity: 1 }],
-    );
+    const menu = menus?.find((item) => item.id === containId);
+    if (!menu) throw new Error("메뉴가 존재하지 않습니다!");
+    cartStore.addMenu(store, {
+      ...menu,
+      quantity: 1,
+    });
   };
 
-  const totalPrice = cartStoredMenus.reduce((total, item) => {
+  const totalPrice = cartStore.menus.reduce((total, item) => {
     const menu = menus?.find((menu) => menu.id === item.id);
     return total + (menu?.price ?? 0) * item.quantity;
   }, 0);
-
-  useEffect(() => {
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartStoredMenus));
-  }, [cartStoredMenus]);
 
   const storeMenus = menus?.map((menu) => (
     <StoreMenu key={menu.id} menu={menu} onContainMenu={handleContain} />
@@ -89,12 +76,12 @@ const Store = () => {
     <main className="mx-auto mt-[41px] mb-[77px] w-[390px] ">
       <BackBar orderCancel={false} />
       <InfoStore
-        name={data.name}
-        rate={data.rate}
-        reviewCnt={data.reviewCnt}
-        minDeliveryPrice={data.minDeliveryPrice}
-        minDeliveryTime={data.minDeliveryTime}
-        maxDeliveryTime={data.maxDeliveryTime}
+        name={store.name}
+        rate={store.rate}
+        reviewCnt={store.reviewCnt}
+        minDeliveryPrice={store.minDeliveryPrice}
+        minDeliveryTime={store.minDeliveryTime}
+        maxDeliveryTime={store.maxDeliveryTime}
       ></InfoStore>
       <section>
         <div className="box-border flex h-[57px] w-[390px] items-start border-t border-[#e5e8eb] pt-[25px] pl-[24px]">

@@ -5,9 +5,9 @@ import CartCheckoutBar from "../../components/CartCheckoutBar";
 import CartStoreSection from "../../components/CartStoreSection";
 import OrderSummary from "../../components/OrderSummary";
 import stores from "../../models/stores";
-import type { StoredMenus } from "../Store/Store";
+import { useCartStore } from "../../stores/useCartStore";
+import { CART_STORAGE_KEY } from "../../types/stores";
 
-const CART_STORAGE_KEY = "contain-store-ids";
 const DEADLINE_STORAGE_KEY = "cart-order-deadline";
 const ORDER_DURATION_MS = 60_000;
 
@@ -26,25 +26,7 @@ const Cart = () => {
   const remainingSeconds = Math.max(0, Math.ceil((deadline - now) / 1000));
   const isExpired = remainingSeconds === 0;
 
-  const [cartStoredMenus, setCartStoredMenus] = useState<StoredMenus[]>(() => {
-    const savedCartStoredMenuIds = localStorage.getItem(CART_STORAGE_KEY);
-
-    if (!savedCartStoredMenuIds) {
-      return [];
-    }
-
-    return JSON.parse(savedCartStoredMenuIds) as StoredMenus[];
-  });
-
-  const handleQuantityChange = (id: number, delta: 1 | -1) => {
-    setCartStoredMenus((prev) =>
-      prev
-        .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity + delta } : item,
-        )
-        .filter((item) => item.quantity > 0),
-    );
-  };
+  const cartMenus = useCartStore();
 
   const handleRestartOrder = () => {
     const startedAt = Date.now();
@@ -141,8 +123,9 @@ const Cart = () => {
         storeName={store.name}
         items={cartItems}
         isBelowMinimum={isBelowMinimum}
-        onQuantityChange={handleQuantityChange}
         onAddMore={() => navigate(`/store/${store.id}`)}
+        onAddMenu={cartMenus.addMenu()}
+        onSubMenu={cartMenus.subMenu()}
       />
 
       <div className="h-[16px] w-[390px] bg-[#f2f4f6]" />

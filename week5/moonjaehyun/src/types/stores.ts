@@ -17,3 +17,6 @@ export interface Store {
   deliveryFee: number;
   menus?: Menu[];
 }
+
+export const CART_STORAGE_KEY = "contain-store-ids";
+

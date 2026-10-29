@@ -12,6 +12,7 @@ interface CartMenu {
   name: string;
   price: number;
   ingredients: string;
+  quantity: number;
 }
 
 interface CartState {
@@ -19,10 +20,11 @@ interface CartState {
   menus: CartMenu[];
 
   addMenu: (store: CartStoreInfo, menu: CartMenu) => void;
+  subMenu: (store: CartStoreInfo, menu: CartMenu) => void;
   clearCart: () => void;
 }
 
-const useCartStore = create<CartState>((set, get) => ({
+export const useCartStore = create<CartState>((set, get) => ({
   store: null,
   menus: [],
 
@@ -44,16 +46,44 @@ const useCartStore = create<CartState>((set, get) => ({
       return;
     }
 
+    const currentMenus = get().menus;
+    if (currentMenus.some((item) => item.id === menu.id)) {
+      set((state) => ({
+        store,
+        menus: state.menus.map((item) =>
+          item.id === menu.id ? { ...item, quantity: item.quantity + 1 } : item,
+        ),
+      }));
+
+      return;
+    }
+
     set((state) => ({
       store,
       menus: [...state.menus, menu],
     }));
   },
 
+  subMenu(menu) {
+    const currentMenus = get().menus;
+    if (currentMenus.some((item) => item.id === menu.id)) {
+      set((state) => ({
+        store: get().store,
+        menus: state.menus.map((item) =>
+          item.id === menu.id
+            ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
+            : item,
+        ),
+      }));
+
+      return;
+    }
+  },
+
   clearCart: () => {
     set({
       store: null,
-      menu: [],
+      menus: [],
     });
   },
 }));

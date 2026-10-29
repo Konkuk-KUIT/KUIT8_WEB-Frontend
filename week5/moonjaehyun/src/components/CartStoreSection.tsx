@@ -13,7 +13,8 @@ interface CartStoreSectionProps {
   items: CartItem[];
   isBelowMinimum: boolean;
   onAddMore?: () => void;
-  onQuantityChange: (id: number, delta: 1 | -1) => void;
+  onAddMenu: (id: number) => void;
+  onSubMenu: (id: number) => void;
 }
 
 const CartStoreSection = ({
@@ -21,7 +22,8 @@ const CartStoreSection = ({
   items,
   isBelowMinimum,
   onAddMore,
-  onQuantityChange,
+  onAddMenu,
+  onSubMenu,
 }: CartStoreSectionProps) => {
   return (
     <section className="w-[390px] bg-white" aria-labelledby="cart-store-name">
@@ -47,8 +49,8 @@ const CartStoreSection = ({
         <OrderMenu
           key={item.id}
           {...item}
-          onIncrease={() => onQuantityChange(item.id, 1)}
-          onDecrease={() => onQuantityChange(item.id, -1)}
+          onIncrease={() => onAddMenu(item.id)}
+          onDecrease={() => onSubMenu(item.id)}
         />
       ))}
 
