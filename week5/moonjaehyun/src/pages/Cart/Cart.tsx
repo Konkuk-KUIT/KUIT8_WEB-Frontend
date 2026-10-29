@@ -112,7 +112,7 @@ const Cart = () => {
     isBelowMinimum || isExpired || cartItems.length === 0;
 
   return (
-    <main className="min-h-screen w-[390px] bg-white pt-[41px] pb-[95px]">
+    <main className="mx-auto min-h-screen w-[390px] bg-white pt-[41px] pb-[95px]">
       <BackBar orderCancel={true} />
       <section className="px-[24px] py-[16px]" aria-label="주문 제한 시간">
         {isExpired ? (

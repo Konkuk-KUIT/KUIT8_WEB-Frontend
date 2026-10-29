@@ -67,7 +67,7 @@ const Store = () => {
   ));
 
   return (
-    <main className="mt-[41px] mb-[77px] w-[390px] ">
+    <main className="mx-auto mt-[41px] mb-[77px] w-[390px] ">
       <BackBar orderCancel={false} />
       <InfoStore
         name={data.name}

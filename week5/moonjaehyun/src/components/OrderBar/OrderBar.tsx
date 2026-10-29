@@ -1,5 +1,5 @@
+import { Link } from "react-router-dom";
 import Button from "../Button";
-
 interface OrderBarProps {
   totalPrice: number;
   handleOrder?: () => void;
@@ -17,9 +17,11 @@ const OrderBar = ({ totalPrice, handleOrder }: OrderBarProps) => {
         </strong>
       </div>
 
-      <Button onClick={handleOrder} type="button" size="lg">
-        주문하기
-      </Button>
+      <Link to={"/cart"}>
+        <Button onClick={handleOrder} type="button" size="lg">
+          주문하기
+        </Button>
+      </Link>
     </div>
   );
 };
