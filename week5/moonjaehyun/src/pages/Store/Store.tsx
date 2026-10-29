@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackBar from "../../components/BackBar";
+import Button from "../../components/Button.tsx";
 import InfoStore from "../../components/InfoStore";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreMenu from "../../components/StoreMenu.tsx";
@@ -18,17 +19,35 @@ const Store = () => {
 
   const id = useParams().storeId; // string|undefined
 
-  if (id === undefined) {
-    throw new Error("id가 적절하지 않습니다.");
-  }
-
   // 0번부터 시작
   const storeId = Number(id);
   const data = stores.find((store) => store.id === Number(storeId));
 
   if (data === undefined) {
-    throw new Error("id에 해당하는 가게가 없습니다.");
+    return (
+      <main className="mx-auto mt-[41px] w-[390px]">
+        <BackBar orderCancel={false} />
+        <section className="flex min-h-[60vh] flex-col items-center justify-center px-[20px] text-center">
+          <h1 className="text-[20px] font-semibold text-[#333d4b]">
+            가게를 찾을 수 없습니다
+          </h1>
+          <p className="mt-[12px] text-[15px] leading-[22px] text-[#6b7684]">
+            주소가 잘못되었거나 존재하지 않는 가게입니다.
+            <br />
+            가게 목록에서 다시 선택해 주세요.
+          </p>
+          <Button
+            size="checkout"
+            className="mt-[28px]"
+            onClick={() => navigate("/store")}
+          >
+            가게 목록으로 이동
+          </Button>
+        </section>
+      </main>
+    );
   }
+
   const menus = data.menus;
 
   const [cartStoredMenus, setCartStoredMenus] = useState<StoredMenus[]>(() => {
