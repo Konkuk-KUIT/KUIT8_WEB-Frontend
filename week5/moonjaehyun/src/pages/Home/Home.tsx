@@ -52,6 +52,7 @@ const Home = () => {
                 image={category.image}
                 name={category.name}
                 //link 속성 넣기
+                isLink={category.isLink}
               />
             ))}
           </div>
