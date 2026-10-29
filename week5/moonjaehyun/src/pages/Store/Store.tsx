@@ -16,15 +16,19 @@ export interface StoredMenus {
 const Store = () => {
   const navigate = useNavigate();
 
-  const id = useParams(); // store|undefined
+  const id = useParams().storeId; // string|undefined
 
   if (id === undefined) {
-    // 이거 에러 처리해야 하는데 그냥 0으로 navigate 하도록 일단 처리
-    navigate("/store/0");
+    throw new Error("id가 적절하지 않습니다.");
   }
 
+  // 0번부터 시작
   const storeId = Number(id);
-  const data = stores[storeId];
+  const data = stores.find((store) => store.id === Number(storeId));
+
+  if (data === undefined) {
+    throw new Error("id에 해당하는 가게가 없습니다.");
+  }
   const menus = data.menus;
 
   const [cartStoredMenus, setCartStoredMenus] = useState<StoredMenus[]>(() => {
