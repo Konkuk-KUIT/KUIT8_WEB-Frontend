@@ -3,10 +3,9 @@ import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreInfo from "../../components/StoreInfo";
 import MenuList from "../../components/MenuList";
 import stores from "../../models/stores";
-import type { Menu } from "../../types/stores";
-import {useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../components/Button";
+import { selectedTotalPrice, useCartStore } from "../Stores/cartStore";
 
 const Store = () => {
     const { storeId } = useParams();
@@ -14,7 +13,11 @@ const Store = () => {
 
     const store = stores.find((item) => item.id === Number(storeId));
 
-    const [cartMenuIds, setCartMenuIds] = useState<number[]>([]);
+    const items = useCartStore((state)=>state.items);
+    const increase = useCartStore((state)=>state.increase);
+    const clearCart = useCartStore((state)=>state.clearCart);
+
+    const totalPrice = useCartStore(selectedTotalPrice);
 
     if (!store) {
         return (
@@ -26,12 +29,18 @@ const Store = () => {
     }
 
     const handleCartMenu = (menuId: number) => {
-        setCartMenuIds((prev)=>[...prev,menuId]);
-    }
+        if(items.some((item)=>item.storeId!=store.id)) {
+            const confirmed = window.confirm("장바구니를 교체할까요?");
 
-    const cartMenus = cartMenuIds.map((id)=>
-        store.menus?.find((menu)=>menu.id===id))
-        .filter((menu): menu is Menu=> menu !== undefined);
+            if(confirmed) {
+                clearCart();
+            }
+            else{
+                return;
+            }
+        }
+        increase(store.id, menuId);
+    }
 
     return (
         <main className="mt-[41px] mb-[77px] w-[390px]">
@@ -42,7 +51,7 @@ const Store = () => {
                 onCartMenu={handleCartMenu}    
             />
 			<OrderBar 
-                menus={cartMenus}
+                totalPrice={totalPrice}
             />
 		</main>
     );

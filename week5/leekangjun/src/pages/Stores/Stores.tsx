@@ -4,10 +4,12 @@ import StoreItems from "../../components/StoreItem";
 import StoreSearchBar from "../../components/StoreSearchBar";
 import stores from "../../models/stores";
 import { useEffect, useState } from "react";
+import { selectedTotalPrice, useCartStore } from "./cartStore";
 
 const LIKE_STORAGE_KEY = "liked-store-ids";
 
 const Stores = () => {
+  const totalPrice = useCartStore(selectedTotalPrice);
   const [keyword, setKeyword] = useState("");
   const [likedStoreIds, setLikedStoreIds] = useState<number[]>(() => {
     const savedLikedStoredIds = localStorage.getItem(LIKE_STORAGE_KEY);
@@ -53,7 +55,9 @@ const Stores = () => {
         likedStoreIds={likedStoreIds}
         onToggleLike={handleToggleLike}
       />
-      <OrderBar />
+      <OrderBar 
+        totalPrice={totalPrice}
+      />
     </main>
   );
 };

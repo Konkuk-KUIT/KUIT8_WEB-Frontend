@@ -2,13 +2,17 @@ import Button from "./Button";
 import CartCard from "./CartCard";
 import type { Store } from "../types/stores";
 import { useEffect, useState } from "react";
+import { selectedTotalPrice, useCartStore } from "../pages/Stores/cartStore";
 
 interface TotalOrderProps {
     item: Store
 }
 
 const TotalOrder = ({item}: TotalOrderProps)=>{
-    const [cartMenuIds, setCartMenuIds] = useState<number[]>([1]);
+    const items = useCartStore((state)=>state.items);
+    const increase = useCartStore((state)=>state.increase);
+    const decrease = useCartStore((state)=>state.decrease);
+
     const [remainTime, setRemainTime]=useState(60);
 
     useEffect(() => {
@@ -24,34 +28,27 @@ const TotalOrder = ({item}: TotalOrderProps)=>{
     }, [remainTime]);
 
     const handleCartMenu = (menuId: number) => {
-            setCartMenuIds((prev)=>[...prev,menuId]);
+            increase(item.id,menuId);
         }
 
     const handleRemoveMenu = (menuId: number) => {
-            setCartMenuIds((prev)=>{
-                const index = prev.indexOf(menuId);
-
-                // 해당 메뉴가 없으면 그대로 유지
-                if (index === -1) return prev;
-
-                // 해당 인덱스의 요소 하나만 제거
-                return prev.filter((_, i) => i !== index);
-            });
+            decrease(item.id,menuId);
         }
 
-    const menus = item.menus ?? [];
+    const cartItems = items.flatMap((cartItem)=>{
+        const menu = item.menus?.find(
+            (menu)=>menu.id===cartItem.menuId
+        );
 
-    const cartItems = menus
-        .map((menu) => ({
+        if(!menu) return [];
+
+        return [{
             menu,
-            quantity: cartMenuIds.filter((id) => id === menu.id).length,
-        }))
-        .filter((item) => item.quantity > 0);
+            quantity: cartItem.quantity
+        }];
+    });
 
-    const orderPrice = cartItems.reduce(
-        (sum, { menu, quantity }) => sum + menu.price * quantity,
-        0
-    );
+    const orderPrice = useCartStore(selectedTotalPrice);
 
     const totalPrice = orderPrice?(orderPrice+item.deliveryFee):0;
 
