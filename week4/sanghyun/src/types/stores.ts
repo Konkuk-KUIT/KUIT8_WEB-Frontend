@@ -15,5 +15,5 @@ export interface Store {
     maxDeliveryTime: number;
     minDeliveryPrice: number;
     deliveryFee: number;
-    menus: Menu[];
+    menus?: Menu[];
 }
