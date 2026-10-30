@@ -53,7 +53,7 @@ const Stores = () => {
         likedStoreIds={likedStoreIds}
         onToggleLike={handleToggleLike}
       />
-      <OrderBar />
+      {/* <OrderBar /> */}
     </main>
   );
 };

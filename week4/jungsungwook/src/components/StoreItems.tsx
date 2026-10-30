@@ -8,7 +8,7 @@ type StoreItemsProps = {
   addMenu : (menu : Menu) => void;
 };
 
-const StoreItems = ({ menus,addMenu }: StoreItemsProps) => {
+const StoreItems = ({ menus,addMenu}: StoreItemsProps) => {
 
   return (
     <div>
