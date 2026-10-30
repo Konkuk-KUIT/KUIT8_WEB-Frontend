@@ -93,11 +93,23 @@ const Cart = () => {
 	)}:${String(remainingSeconds % 60).padStart(2, "0")}`;
 
 	return (
-		<main className="min-h-screen w-[390px] pt-[41px] pb-[162px]">
+		<main className="min-h-screen w-[390px] pt-[41px] pb-[132px]">
 			<BackBar
 				orderCancel
 				onOrderCancel={handleCancelOrder}
 			/>
+			<div className="flex h-10 items-center bg-white px-6">
+				<p
+					className={`text-left text-[15px] font-semibold ${
+						isExpired ? "text-[#f04452]" : "text-[#3182f6]"
+					}`}
+					aria-live="polite"
+				>
+					{isExpired
+						? "주문 시간이 만료되었어요"
+						: `남은 주문 시간 ${formattedTime}`}
+				</p>
+			</div>
 			<CartBar
 				store={store}
 				cartItems={cartItems}
@@ -112,17 +124,7 @@ const Cart = () => {
 				totalPrice={totalPrice}
 			/>
 
-			<div className="fixed bottom-[20px] flex h-[142px] w-[390px] flex-col items-center bg-white px-[24px] pt-[12px]">
-				<p
-					className={`whitespace-nowrap text-[15px] font-semibold ${
-						isExpired ? "text-[#f04452]" : "text-[#3182f6]"
-					}`}
-					aria-live="polite"
-				>
-					{isExpired
-						? "주문 시간이 만료되었어요"
-						: `남은 주문 시간 ${formattedTime}`}
-				</p>
+			<div className="fixed bottom-[20px] flex h-[112px] w-[390px] flex-col items-center bg-white px-[24px] pt-[12px]">
 				<p className="whitespace-nowrap text-[15px] font-medium text-[#6b7684]">
 					최소 주문금액 {minDeliveryPrice.toLocaleString()}원
 				</p>

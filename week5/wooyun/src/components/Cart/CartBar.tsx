@@ -16,7 +16,7 @@ const CartBar = ({
 	onDecrease,
 }: CartBarProps) => {
 	return (
-		<section className="border-y-[16px] border-[#F2F4F6] bg-white pt-[27px]">
+		<section className="border-b-[16px] border-[#F2F4F6] bg-white pt-5">
 			<div className="px-[24px]">
 				<div className="flex items-center justify-between">
 					<h1 className="text-[17px] font-bold text-[#6B7684]">
