@@ -1,0 +1,36 @@
+//실제 브라우저가 button에 제공하는 속성 불러오기
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+
+const sizeStyles = {
+  sm: "h-[32px] px-[14px] text-[13px]",
+  lg: "px-[16px] py-[10px] text-[15px]",
+  xl: "p-[18px_112px_19px_113px] text-[16px]",
+};
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: ReactNode;
+  size?: keyof typeof sizeStyles;
+};
+
+const Button = ({
+  children,
+  size = "sm",
+  disabled = false,
+  type = "button",
+  ...buttonProps
+}: ButtonProps) => {
+  const sizeClassName = sizeStyles[size];
+
+  return (
+    <button
+      type={type}
+      disabled={disabled}
+      className={`cursor-pointer rounded-[8px] border-0 bg-[#3182f6] font-medium text-white disabled:cursor-not-allowed disabled:bg-[#d0dffb] ${sizeClassName}`}
+      {...buttonProps}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
