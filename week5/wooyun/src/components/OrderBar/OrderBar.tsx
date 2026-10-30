@@ -1,26 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import {
+	selectMenuTotal,
+	useCartStore,
+} from "../../stores/useCartStore";
 import Button from "../Button";
-import type { CartItem } from "../../types/stores";
 
 interface OrderBarProps {
-	cartItems?: CartItem[];
-	totalPrice?: number;
 	onOrder?: () => void;
 }
 
-const OrderBar = ({
-	cartItems = [],
-	totalPrice: totalPriceProp,
-	onOrder,
-}: OrderBarProps) => {
+const OrderBar = ({ onOrder }: OrderBarProps) => {
 	const navigate = useNavigate();
+	const menuTotal = useCartStore(selectMenuTotal);
 	const handleOrder = onOrder ?? (() => navigate("/cart"));
-	const totalPrice =
-		totalPriceProp ??
-		cartItems.reduce(
-			(sum, { price, count }) => sum + price * count,
-			0,
-		);
+
 	return (
 		<div className="fixed bottom-[0px] flex h-[77px] w-[390px] items-center justify-between rounded-t-[16px] bg-white px-[24px] shadow-[0_-8px_16px_0_rgba(0,0,0,0.1)]">
 			<div className="flex flex-col gap-[5px]">
@@ -28,7 +21,7 @@ const OrderBar = ({
 					총 주문금액
 				</span>
 				<strong className="text-[17px] font-semibold text-[#4e5968]">
-					{totalPrice.toLocaleString()}원
+					{menuTotal.toLocaleString()}원
 				</strong>
 			</div>
 

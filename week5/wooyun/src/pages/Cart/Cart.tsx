@@ -5,37 +5,13 @@ import Button from "../../components/Button";
 import CartBar from "../../components/Cart/CartBar";
 import CartPrice from "../../components/Cart/CartPrice";
 import stores from "../../models/stores";
-import type { CartItem } from "../../types/stores";
+import {
+	selectMenuTotal,
+	useCartStore,
+} from "../../stores/useCartStore";
 
 const ORDER_LIMIT_SECONDS = 60;
 const ORDER_DEADLINE_STORAGE_KEY = "wooyun-order-deadline";
-const ACTIVE_STORE_ID_STORAGE_KEY = "wooyun-active-store-id";
-const getCartStorageKey = (storeId: number) =>
-	`wooyun-cart-items:${storeId}`;
-
-const loadActiveStore = () => {
-	try {
-		const savedStoreId = Number(
-			localStorage.getItem(ACTIVE_STORE_ID_STORAGE_KEY),
-		);
-
-		return (
-			stores.find(({ id }) => id === savedStoreId) ?? stores[0]
-		);
-	} catch {
-		return stores[0];
-	}
-};
-
-const loadCartItems = (storeId: number): CartItem[] => {
-	try {
-		const savedCart = localStorage.getItem(getCartStorageKey(storeId));
-		const parsedCart: unknown = savedCart ? JSON.parse(savedCart) : [];
-		return Array.isArray(parsedCart) ? (parsedCart as CartItem[]) : [];
-	} catch {
-		return [];
-	}
-};
 
 const createOrderDeadline = () => {
 	const deadline = Date.now() + ORDER_LIMIT_SECONDS * 1000;
@@ -66,25 +42,17 @@ const calculateRemainingSeconds = (deadline: number) =>
 
 const Cart = () => {
 	const navigate = useNavigate();
-	const [store] = useState(loadActiveStore);
-	const [cartItems, setCartItems] = useState<CartItem[]>(() =>
-		loadCartItems(store.id),
-	);
+	const storeId = useCartStore((state) => state.storeId);
+	const cartItems = useCartStore((state) => state.items);
+	const orderPrice = useCartStore(selectMenuTotal);
+	const increaseMenu = useCartStore((state) => state.increaseMenu);
+	const decreaseMenu = useCartStore((state) => state.decreaseMenu);
+	const clearCart = useCartStore((state) => state.clearCart);
+	const store = stores.find(({ id }) => id === storeId);
 	const [orderDeadline] = useState(loadOrderDeadline);
 	const [remainingSeconds, setRemainingSeconds] = useState(() =>
 		calculateRemainingSeconds(orderDeadline),
 	);
-
-	useEffect(() => {
-		try {
-			localStorage.setItem(
-				getCartStorageKey(store.id),
-				JSON.stringify(cartItems),
-			);
-		} catch {
-			// Storage를 사용할 수 없는 환경에서도 수량 변경은 계속 동작한다.
-		}
-	}, [cartItems, store.id]);
 
 	useEffect(() => {
 		const timerId = window.setInterval(() => {
@@ -99,23 +67,11 @@ const Cart = () => {
 		return () => window.clearInterval(timerId);
 	}, [orderDeadline]);
 
-	const handleIncrease = (menuId: number) => {
-		setCartItems((previousItems) =>
-			previousItems.map((item) =>
-				item.id === menuId
-					? { ...item, count: item.count + 1 }
-					: item,
-			),
-		);
-	};
-
 	const handleCancelOrder = () => {
+		clearCart();
+
 		try {
 			localStorage.removeItem(ORDER_DEADLINE_STORAGE_KEY);
-			localStorage.removeItem(ACTIVE_STORE_ID_STORAGE_KEY);
-			stores.forEach(({ id }) => {
-				localStorage.removeItem(getCartStorageKey(id));
-			});
 		} catch {
 			// Storage를 사용할 수 없어도 주문취소와 화면 이동은 계속 진행한다.
 		}
@@ -123,24 +79,13 @@ const Cart = () => {
 		navigate("/store");
 	};
 
-	const handleDecrease = (menuId: number) => {
-		setCartItems((previousItems) =>
-			previousItems.map((item) =>
-				item.id === menuId
-					? { ...item, count: Math.max(1, item.count - 1) }
-					: item,
-			),
-		);
-	};
-
-	const orderPrice = cartItems.reduce(
-		(sum, { price, count }) => sum + price * count,
-		0,
-	);
-	const deliveryFee = store.deliveryFee;
+	const deliveryFee = store?.deliveryFee ?? 0;
 	const totalPrice = orderPrice + deliveryFee;
-	const minDeliveryPrice = store.minDeliveryPrice;
-	const isMinimumMet = orderPrice >= minDeliveryPrice;
+	const minDeliveryPrice = store?.minDeliveryPrice ?? 0;
+	const isMinimumMet =
+		store !== undefined &&
+		cartItems.length > 0 &&
+		orderPrice >= minDeliveryPrice;
 	const isExpired = remainingSeconds === 0;
 	const formattedTime = `${String(Math.floor(remainingSeconds / 60)).padStart(
 		2,
@@ -157,8 +102,8 @@ const Cart = () => {
 				store={store}
 				cartItems={cartItems}
 				isMinimumMet={isMinimumMet}
-				onIncrease={handleIncrease}
-				onDecrease={handleDecrease}
+				onIncrease={increaseMenu}
+				onDecrease={decreaseMenu}
 			/>
 
 			<CartPrice

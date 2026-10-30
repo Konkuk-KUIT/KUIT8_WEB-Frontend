@@ -1,7 +1,7 @@
 import type { CartItem, Store } from "../../types/stores";
 
 interface CartBarProps {
-	store: Store;
+	store?: Store;
 	cartItems: CartItem[];
 	isMinimumMet: boolean;
 	onIncrease: (menuId: number) => void;
@@ -20,14 +20,18 @@ const CartBar = ({
 			<div className="px-[24px]">
 				<div className="flex items-center justify-between">
 					<h1 className="text-[17px] font-bold text-[#6B7684]">
-						{store.name}
+						{store?.name ?? "장바구니"}
 					</h1>
 					<span
 						className={`text-[15px] font-medium ${
 							isMinimumMet ? "text-[#3182f6]" : "text-[#f04452]"
 						}`}
 					>
-						{isMinimumMet ? "최소금액 충족" : "최소금액 미달 ⓘ"}
+						{cartItems.length === 0
+							? "장바구니가 비어 있어요"
+							: isMinimumMet
+								? "최소금액 충족"
+								: "최소금액 미달 ⓘ"}
 					</span>
 				</div>
 
