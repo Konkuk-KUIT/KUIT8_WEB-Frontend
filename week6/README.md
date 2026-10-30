@@ -176,13 +176,13 @@ rsync -av \
   --exclude='.env.local' \
   --exclude='.vercel' \
   ./KUIT8_WEB-Frontend/week6/자기이름/ \
-  ./KUIT-week6-자기이름-deploy/
+  ./KUIT-8th-week6-자기이름-deploy/
 ```
 
 #### Windows PowerShell
 
 ```powershell
-robocopy ".\KUIT8_WEB-Frontend\week6\자기이름" ".\KUIT-week6-자기이름-deploy" /E /XD node_modules dist .vercel /XF .env.local
+robocopy ".\KUIT8_WEB-Frontend\week6\자기이름" ".\KUIT-8th-week6-자기이름-deploy" /E /XD node_modules dist .vercel /XF .env.local
 ```
 
 개인 배포 저장소에서 검증한 뒤 push합니다.
