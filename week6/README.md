@@ -151,13 +151,65 @@ Fetch는 `404`, `400` 응답에서도 자동으로 오류가 발생하지 않으
 - `$schema`는 에디터의 문법 검사와 자동완성을 위한 Vercel 공식 JSON Schema 주소입니다. 개인 주소가 아니며 웹 배포에서도 수정하지 않습니다.
 - `rewrites`는 `/store/1`처럼 React Router 경로로 직접 접속하거나 새로고침해도 `index.html`을 보여주기 위한 설정입니다.
 
-Vercel 프로젝트에도 다음 환경변수를 등록합니다.
+### 개인 배포 저장소 준비
+
+미션을 완료하여 공용 저장소의 자기 브랜치에 push한 뒤, GitHub에 빈 개인 배포 저장소를 만들고 clone합니다. 공용 저장소와 개인 배포 저장소는 같은 상위 폴더에 둡니다.
+
+```text
+KUIT/
+├── KUIT8_WEB-Frontend/
+└── KUIT-week6-자기이름-deploy/
+```
+
+```bash
+git clone https://github.com/본인아이디/KUIT-week6-자기이름-deploy.git
+```
+
+두 저장소의 상위 폴더에서 운영체제에 맞는 명령을 실행하여 `week6/자기이름`의 내용만 복사합니다.
+
+#### macOS
+
+```bash
+rsync -av \
+  --exclude='node_modules' \
+  --exclude='dist' \
+  --exclude='.env.local' \
+  --exclude='.vercel' \
+  ./KUIT8_WEB-Frontend/week6/자기이름/ \
+  ./KUIT-week6-자기이름-deploy/
+```
+
+#### Windows PowerShell
+
+```powershell
+robocopy ".\KUIT8_WEB-Frontend\week6\자기이름" ".\KUIT-week6-자기이름-deploy" /E /XD node_modules dist .vercel /XF .env.local
+```
+
+개인 배포 저장소에서 검증한 뒤 push합니다.
+
+```bash
+npm install
+npm run lint
+npm run build
+git add .
+git commit -m "feat: 6주차 프론트엔드 배포"
+git push origin main
+```
+
+### Vercel 배포
+
+Vercel에서 `Create New → Project`로 이동하여 개인 배포 저장소를 Import합니다.
+
+```text
+Framework Preset: Vite
+Root Directory: ./
+```
+
+다음 환경변수를 `Production`과 `Preview`에 등록하고 배포합니다.
 
 ```env
 VITE_API_BASE_URL=https://kuit-8th-mission-server.vercel.app
 ```
-
-Git 저장소를 가져와 배포한다면 자신의 프로젝트 폴더인 `week6/자기이름`을 Root Directory로 지정합니다.
 
 ### 배포 파일 관리
 
