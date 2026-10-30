@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  background: #f2f4f6;
+  color: #333d4b;
+}
+
+#root {
+  width: 100%;
+  max-width: 390px;
+  min-height: 100dvh;
+  margin-inline: auto;
+  background: white;
+}
+
+button:focus-visible {
+  outline: 2px solid #3182f6;
+  outline-offset: 3px;
+}
+
+.quantity-button {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid #d1d6db;
+  border-radius: 6px;
+  color: #3182f6;
+  cursor: pointer;
+}
+
+.quantity-button:disabled {
+  color: #b0b8c1;
+  cursor: not-allowed;
+}
