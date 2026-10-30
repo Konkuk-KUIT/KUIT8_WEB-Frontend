@@ -2,12 +2,24 @@ import BackBar from "../../components/BackBar";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreItems from "../../components/StoreItem";
 import StoreSearchBar from "../../components/StoreSearchBar";
-import stores from "../../models/stores";
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getStores } from "../../api/stores";
 
 const LIKE_STORAGE_KEY = "liked-store-ids";
 
 const Stores = () => {
+  const {
+    data: stores = [],
+    isPending,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["stores"],
+    queryFn: getStores,
+    retry: false,
+  });
+
   const [keyword, setKeyword] = useState("");
   const [likedStoreIds, setLikedStoreIds] = useState<number[]>(() => {
     const savedLikedStoredIds = localStorage.getItem(LIKE_STORAGE_KEY);
@@ -48,11 +60,34 @@ const Stores = () => {
         />
       </header>
 
-      <StoreItems
-        items={filteredStores}
-        likedStoreIds={likedStoreIds}
-        onToggleLike={handleToggleLike}
-      />
+      {isPending ? (
+        <p
+          aria-live="polite"
+          className="px-6 py-10 text-center text-[15px] text-[#6b7684]"
+        >
+          가게 목록을 불러오는 중입니다.
+        </p>
+      ) : isError ? (
+        <div
+          role="alert"
+          className="flex flex-col items-center gap-3 px-6 py-10 text-[15px] text-[#6b7684]"
+        >
+          <p>가게 목록을 불러오지 못했습니다.</p>
+          <button
+            type="button"
+            onClick={() => void refetch()}
+            className="cursor-pointer rounded-lg border-0 bg-[#3182f6] px-4 py-2 text-white"
+          >
+            다시 시도
+          </button>
+        </div>
+      ) : (
+        <StoreItems
+          items={filteredStores}
+          likedStoreIds={likedStoreIds}
+          onToggleLike={handleToggleLike}
+        />
+      )}
       <OrderBar />
     </main>
   );
