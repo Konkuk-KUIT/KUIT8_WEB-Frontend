@@ -1,0 +1,22 @@
+import { useTotalPrice } from "../stores/useCartStore";
+import OrderPrice from "./OrderPrice";
+
+interface OrderSummaryProps {
+  orderPrice: number;
+  deliveryFee: number;
+}
+
+const OrderSummary = ({ orderPrice, deliveryFee }: OrderSummaryProps) => {
+  return (
+    <section
+      className="flex h-[147px] w-[390px] flex-col bg-white"
+      aria-label="결제 금액"
+    >
+      <OrderPrice title="주문금액" price={orderPrice} />
+      <OrderPrice title="배달요금" price={deliveryFee} />
+      <OrderPrice title="총 결제금액" price={useTotalPrice()} emphasized />
+    </section>
+  );
+};
+
+export default OrderSummary;
