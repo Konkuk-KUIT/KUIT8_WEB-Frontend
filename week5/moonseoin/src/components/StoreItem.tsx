@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Store } from "../models/stores";
 
 interface StoreItemProps {
@@ -17,7 +18,7 @@ const StoreItem = ({ items }: StoreItemProps) => {
 					maxDeliveryTime,
 					deliveryFee,
 				}) => (
-					<div key={id}>
+					<Link key={id} to={`/store/${id}`}>
 						<div className="flex w-[390px] gap-[17px] p-[16px_0_17px_24px]">
 							<div className="h-[54px] w-[54px] rounded-[8px] bg-[#ececec]" />
 
@@ -40,7 +41,7 @@ const StoreItem = ({ items }: StoreItemProps) => {
 								</span>
 							</div>
 						</div>
-					</div>
+					</Link>
 				),
 			)}
 		</div>

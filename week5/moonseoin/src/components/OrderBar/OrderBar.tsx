@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 
 interface OrderBarProps {
@@ -5,8 +6,8 @@ interface OrderBarProps {
 }
 
 const OrderBar = ({ totalPrice = 0 }: OrderBarProps) => {
-	const handleOrder = () => {};
-
+	const navigate = useNavigate();
+	const handleOrder = () => navigate("/cart");
 
 	return (
 		<div className="fixed bottom-[0px] flex h-[77px] w-[390px] items-center justify-between rounded-t-[16px] bg-white px-[24px] shadow-[0_-8px_16px_0_rgba(0,0,0,0.1)]">
