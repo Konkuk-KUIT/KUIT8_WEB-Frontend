@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 
-interface OrderBarProps {
-  totalPrice?: number;
-}
+import useCartStore from "../../stores/useCartStore";
 
-const OrderBar = ({ totalPrice = 0 }: OrderBarProps) => {
+const OrderBar = () => {
+	const menus = useCartStore((state) => state.menus);
+	const totalPrice = menus.reduce((total, menu) => total + menu.price * menu.quantity, 0);
 	const navigate = useNavigate();
 	const handleOrder = () => navigate("/cart");
 
