@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Menu } from "../../models/stores";
 import BackBar from "../../components/BackBar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Button from "../../components/Button";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreHeader from "../../components/StoreHeader/StoreHeader";
 import MenuItem from "../../components/MenuItem/MenuItem";
@@ -11,6 +12,7 @@ type CartMenu = Menu & { quantity: number };
 
 const Store = () => {
   const { storeId } = useParams();
+  const navigate = useNavigate();
   const [cartMenus, setCartMenus] = useState<Record<string, CartMenu[]>>(() => {
     try {
       return JSON.parse(localStorage.getItem("requirement2") ?? "{}");
@@ -48,12 +50,13 @@ const Store = () => {
   };
 
   const totalPrice = menus.reduce((total, menu) => total + menu.price * menu.quantity, 0);
-  const store = stores.find((s) => s.id === Number(storeId));
+  const store = stores.find((s) => String(s.id) === storeId);
 
   if (!store) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex flex-col gap-4 items-center justify-center h-screen">
         <p className="text-lg text-gray-600">가게를 찾을 수 없습니다.</p>
+        <Button onClick={() => navigate("/store")}>목록으로 이동</Button>
       </div>
     );
   }
