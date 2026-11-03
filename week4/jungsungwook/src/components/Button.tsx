@@ -1,3 +1,4 @@
+//실제 브라우저가 button에 제공하는 속성 불러오기
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 const sizeStyles = {

@@ -5,6 +5,9 @@ type CartItemProps = {
   menu: Menu;
   quantity: number;
   canOrder: boolean;
+  timeLeft : number;
+  increaseQuantity : () => void;
+  decreaseQuantity : () => void;
 };
 
 const CartItem = ({
@@ -12,6 +15,9 @@ const CartItem = ({
   menu,
   quantity,
   canOrder,
+  timeLeft,
+  increaseQuantity,
+  decreaseQuantity
 }: CartItemProps) => {
   return (
     <div className="w-[390px]">
@@ -20,7 +26,8 @@ const CartItem = ({
           {store.name}
         </span>
 
-        {!canOrder && (
+        {/* 시간이 0이 될 때 canOrder가 false로 바뀌어 갑자기 최소 금액 미달이 뜨는 것을 방지하기 위해 넣어둠 */}
+        {!canOrder && timeLeft != 0 && (
           <span className="text-base font-medium text-[#F04452]">
             최소금액 미달 ⓘ
           </span>
@@ -47,12 +54,18 @@ const CartItem = ({
 
         {/* 수량 + 화살표 */}
         <div className="absolute right-[24px] top-[54px] flex items-center gap-[16px]">
+          <button 
+          onClick= {increaseQuantity}
+          >+</button>
           <span className="text-[16px] text-[#6B7684]">
             {quantity}개
           </span>
-
-          <img src="../../arrow.svg" alt="화살표" className="src" />
+          <button
+          disabled = {quantity === 0}
+          onClick={decreaseQuantity}
+          >-</button>
         </div>
+        
       </div>
     </div>
   );
