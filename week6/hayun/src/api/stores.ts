@@ -6,3 +6,9 @@ export const getStores = async (): Promise<Store[]> => {
 
     return response.data;
 }
+
+export const getStore = async (storeId: number): Promise<Store> => {
+    const response = await apiClient.get<Store>(`/api/stores/${storeId}`);
+
+    return response.data;
+}
