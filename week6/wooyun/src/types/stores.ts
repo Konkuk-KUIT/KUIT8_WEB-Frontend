@@ -21,3 +21,7 @@ export interface Store {
 	deliveryFee: number;
 	menus?: Menu[];
 }
+
+export interface StoreMenuResponse extends Store {
+	menus: Menu[];
+}
