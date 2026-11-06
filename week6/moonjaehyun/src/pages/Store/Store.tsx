@@ -1,10 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { getStore } from "../../api/stores.ts";
 import BackBar from "../../components/BackBar";
 import Button from "../../components/Button.tsx";
 import InfoStore from "../../components/InfoStore";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreMenu from "../../components/StoreMenu.tsx";
-import stores from "../../models/stores.ts";
 import { useCartStore } from "../../stores/useCartStore.tsx";
 
 export interface StoredMenus {
@@ -19,7 +20,12 @@ const Store = () => {
 
   // 0번부터 시작
   const storeId = Number(id);
-  const store = stores.find((store) => store.id === Number(storeId));
+
+  const { data: store } = useQuery({
+    queryKey: ["store"],
+    queryFn: () => getStore(storeId),
+    retry: false,
+  });
 
   const cartStore = useCartStore();
 
