@@ -2,16 +2,15 @@ import BackBar from "../../components/BackBar";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreInfo from "../../components/StoreInfo";
 import Menu from "../../components/Menu";
-// import stores from "../../models/stores";
 import { useParams, Link } from "react-router-dom";
 import Button from "../../components/Button";
 import { useCartStore } from "../../stores/cartStore";
 import { getStoreById } from "../../api/stores";
 import { useQuery } from "@tanstack/react-query";
-import { isAxiosError } from "axios";
+import { AxiosError } from "axios";
+import type {ApiErrorResponse, Store as StoreType} from "../../type/stores"
 
-const isNotFoundError = (error: unknown) =>
-  isAxiosError(error) && error.response?.status === 404;
+
 
 const Store = () => {
   const { storeId } = useParams();
@@ -21,7 +20,7 @@ const Store = () => {
   const clearMenu = useCartStore((state)=>state.clear);
   const isDifferentStore = currMenu.some((m)=>m.storeId !== Number(storeId));
 
-  const { data: store, isPending, isError, error, refetch } = useQuery({
+  const { data: store, isPending, isError, error, refetch } = useQuery<StoreType, AxiosError<ApiErrorResponse>>({
     queryKey: ["stores", storeId],
     queryFn: () => getStoreById(Number(storeId)),
     retry: false,
@@ -43,7 +42,8 @@ const Store = () => {
     // 2. 에러
     if (isError) {
       // 2-1. 404 → 가게 없음
-      if (isNotFoundError(error)) {
+
+      if (error.response?.status === 404) {
         return (
           <section className="flex h-screen w-[390px] flex-col items-center justify-center gap-[8px] px-[24px]">
             <span className="mb-[8px] text-[56px]">🏪</span>

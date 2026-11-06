@@ -3,9 +3,10 @@ type PaymentBarProps = {
   totalPrice : number;
   minDeliveryPrice : number;
   PayBtnDisable : boolean
+  HandleOrder? : ()=>void;
 }
 
-const PaymentBar = ({ totalPrice, minDeliveryPrice , PayBtnDisable}: PaymentBarProps) => {
+const PaymentBar = ({ totalPrice, minDeliveryPrice , PayBtnDisable, HandleOrder}: PaymentBarProps) => {
   return (
     <section
       aria-label="결제"
@@ -19,6 +20,7 @@ const PaymentBar = ({ totalPrice, minDeliveryPrice , PayBtnDisable}: PaymentBarP
         type="button"
         className="w-full px-0 whitespace-nowrap"
         disabled={PayBtnDisable}
+        onClick={HandleOrder}
       >
         {totalPrice.toLocaleString()}원 결제하기
       </Button>

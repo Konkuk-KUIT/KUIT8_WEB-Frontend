@@ -6,6 +6,10 @@ import PaymentBar from "../../components/PaymentBar";
 import { useNavigate } from "react-router-dom";
 import { useCartStore, getOrderPrice } from "../../stores/cartStore";
 import useCountdown from "../../hooks/useCountdown";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { postOrder } from "../../api/stores";
+import type { ApiErrorResponse, OrderRequest, OrderResponse } from "../../type/stores";
 
 
 const Cart = () => {
@@ -13,8 +17,23 @@ const Cart = () => {
   const menus = useCartStore((state)=>state.menus);
   const changeCnt = useCartStore((state)=>state.changeCnt);
   const { time, isOver } = useCountdown(60); //1분
+  const clear = useCartStore((state)=>state.clear);
+  const {mutate, isPending} = useMutation<OrderResponse, AxiosError<ApiErrorResponse>, OrderRequest>({
+    mutationFn : postOrder,
+    onSuccess : (res) =>{
+      clear();
+      alert(res.totalPrice);
+      nav("/");
+    },
+    onError: (e) =>{
+      alert(e.response?.data.message ?? "주문에 실패했어요.");
+    }
+  })
 
   const store = stores.find((s)=>s.id === menus[0]?.storeId);
+
+  
+
   if(!store){
     return (
       <main className="w-[390px] mt-[41px]">
@@ -24,6 +43,13 @@ const Cart = () => {
       </main>
     );
   }
+
+  const handleOrder = () => {
+  mutate({
+    storeId: store.id,
+    items: menus.map((m) => ({ menuId: m.id, quantity: m.cnt })),
+  });
+};
 
   const { deliveryFee, minDeliveryPrice } = store;
   const orderPrice = getOrderPrice(menus);
@@ -85,7 +111,8 @@ const Cart = () => {
         <PaymentBar
           totalPrice={totalPrice}
           minDeliveryPrice={minDeliveryPrice}
-          PayBtnDisable={!isOverPrice || isOver}
+          PayBtnDisable={isOver || isPending}
+          HandleOrder={handleOrder}
         />
       </div>
     </main>

@@ -16,12 +16,6 @@ export const useCartStore = create<CartState>((set, get)=>({
 
     addMenu : (menu, storeId)=>{
         const { menus } = get();
-        // const isDifferentStore = menus.some((m)=>m.storeId !== storeId);
-        // if(isDifferentStore){
-        //     if(!confirm("다른 가게 메뉴가 있어요. 비우고 담을까요?")) return;
-        //     set({menus : [{...menu, cnt : 1, storeId}]});
-        //     return;
-        // }
         const isAdded = menus.some((m)=>m.id === menu.id);
         set({
             menus : isAdded ?
