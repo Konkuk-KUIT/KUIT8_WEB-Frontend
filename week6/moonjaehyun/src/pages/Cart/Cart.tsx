@@ -1,9 +1,12 @@
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postOrders } from "../../api/cart";
 import BackBar from "../../components/BackBar";
 import CartCheckoutBar from "../../components/CartCheckoutBar";
 import CartStoreSection from "../../components/CartStoreSection";
 import OrderSummary from "../../components/OrderSummary";
+import StoreItems from "../../components/StoreItem";
 import { useCartStore } from "../../stores/useCartStore";
 
 const DEADLINE_STORAGE_KEY = "cart-order-deadline";
@@ -15,6 +18,16 @@ const Cart = () => {
   const cartStore = useCartStore();
   const store = cartStore.store;
   const menus = cartStore.menus;
+
+  const {
+    data: Order,
+    isPending,
+    error,
+  } = useMutation({
+    queryKey: ["order"],
+    queryFn: () => postOrders(storeId, StoreItems),
+    retry: false,
+  });
 
   const [deadline, setDeadline] = useState(() => {
     const saved = sessionStorage.getItem(DEADLINE_STORAGE_KEY);
@@ -126,6 +139,7 @@ const Cart = () => {
       <CartCheckoutBar
         minimumOrderPrice={store.minDeliveryPrice}
         disabled={isCheckoutDisabled}
+        onCheckout={}
       />
     </main>
   );
