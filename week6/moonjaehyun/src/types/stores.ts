@@ -18,5 +18,22 @@ export interface Store {
   menus?: Menu[];
 }
 
-export const CART_STORAGE_KEY = "contain-store-ids";
+export interface OrderMenu {
+  menuId: number;
+  name: string;
+  price: number;
+  quantity: number;
+  subtotal: number;
+}
 
+export interface Order {
+  orderId: number;
+  storeId: number;
+  items: OrderMenu[];
+  menuTotal: number;
+  deliveryFee: number;
+  totalPrice: number;
+  status: string;
+}
+
+export const CART_STORAGE_KEY = "contain-store-ids";

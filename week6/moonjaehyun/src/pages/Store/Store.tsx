@@ -20,7 +20,12 @@ const Store = () => {
   const storeId = Number(useParams().storeId);
   const hasValidStoreId = Number.isSafeInteger(storeId) && storeId > 0;
 
-  const { data: store, isPending, error, refetch } = useQuery({
+  const {
+    data: store,
+    isPending,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["store", storeId],
     queryFn: () => getStore(storeId),
     enabled: hasValidStoreId,
@@ -49,7 +54,8 @@ const Store = () => {
 
   if (!store) {
     const isNotFound =
-      !hasValidStoreId || (isAxiosError(error) && error.response?.status === 404);
+      !hasValidStoreId ||
+      (isAxiosError(error) && error.response?.status === 404);
 
     return (
       <main className="mx-auto mt-[41px] w-[390px]">
