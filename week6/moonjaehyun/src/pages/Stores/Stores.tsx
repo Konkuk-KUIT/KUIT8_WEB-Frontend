@@ -1,13 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { getStores } from "../../api/stores";
 import BackBar from "../../components/BackBar";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreItems from "../../components/StoreItem";
 import StoreSearchBar from "../../components/StoreSearchBar";
-import stores from "../../models/stores";
 
 const LIKE_STORAGE_KEY = "liked-store-ids";
 
 const Stores = () => {
+  const {
+    data: stores = [],
+    isPending,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["stores"],
+    queryFn: getStores,
+    retry: false,
+  });
+
   const [keyword, setKeyword] = useState("");
   const [likedStoreIds, setLikedStoreIds] = useState<number[]>(() => {
     const savedLikedStoredIds = localStorage.getItem(LIKE_STORAGE_KEY);
