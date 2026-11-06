@@ -63,11 +63,34 @@ const Stores = () => {
         <StoreSearchBar keyword={keyword} onKeywordChange={setKeyword} />
       </header>
 
-      <StoreItems
-        items={filteredStores}
-        likedStoreIds={likedStoreIds}
-        onToggleLike={handleToggleLike}
-      />
+      {isPending ? (
+        <p
+          aria-live="polite"
+          className="px-6 py-10 text-center text-[15px] text-[#6b7684]"
+        >
+          가게 목록을 불러오는 중입니다.
+        </p>
+      ) : isError ? (
+        <div
+          role="alert"
+          className="flex flex-col items-center gap-3 px-6 py-10 text-[15px] text-[#6b7684]"
+        >
+          <p>가게 목록을 불러오지 못했습니다.</p>
+          <button
+            type="button"
+            onClick={() => void refetch()}
+            className="cursor-pointer rounded-lg border-0 bg-[#3182f6] px-4 py-2 text-white"
+          >
+            다시 시도
+          </button>
+        </div>
+      ) : (
+        <StoreItems
+          items={filteredStores}
+          likedStoreIds={likedStoreIds}
+          onToggleLike={handleToggleLike}
+        />
+      )}
       <OrderBar />
     </main>
   );
