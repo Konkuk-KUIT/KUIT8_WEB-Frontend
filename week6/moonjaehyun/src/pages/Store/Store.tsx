@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStore } from "../../api/stores.ts";
 import BackBar from "../../components/BackBar";
@@ -16,14 +17,13 @@ export interface StoredMenus {
 const Store = () => {
   const navigate = useNavigate();
 
-  const id = useParams().storeId; // string|undefined
+  const storeId = Number(useParams().storeId);
+  const hasValidStoreId = Number.isSafeInteger(storeId) && storeId > 0;
 
-  // 0번부터 시작
-  const storeId = Number(id);
-
-  const { data: store } = useQuery({
-    queryKey: ["store"],
+  const { data: store, isPending, error, refetch } = useQuery({
+    queryKey: ["store", storeId],
     queryFn: () => getStore(storeId),
+    enabled: hasValidStoreId,
     retry: false,
   });
 
@@ -33,25 +33,52 @@ const Store = () => {
   //   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartStoredMenus));
   // }, [cartStoredMenus]);
 
+  if (hasValidStoreId && isPending) {
+    return (
+      <main className="mx-auto mt-[41px] w-[390px]">
+        <BackBar orderCancel={false} />
+        <p
+          role="status"
+          className="px-6 py-10 text-center text-[15px] text-[#6b7684]"
+        >
+          가게 정보를 불러오는 중입니다.
+        </p>
+      </main>
+    );
+  }
+
   if (!store) {
+    const isNotFound =
+      !hasValidStoreId || (isAxiosError(error) && error.response?.status === 404);
+
     return (
       <main className="mx-auto mt-[41px] w-[390px]">
         <BackBar orderCancel={false} />
         <section className="flex min-h-[60vh] flex-col items-center justify-center px-[20px] text-center">
           <h1 className="text-[20px] font-semibold text-[#333d4b]">
-            가게를 찾을 수 없습니다
+            {isNotFound
+              ? "가게를 찾을 수 없습니다"
+              : "가게 정보를 불러오지 못했습니다"}
           </h1>
           <p className="mt-[12px] text-[15px] leading-[22px] text-[#6b7684]">
-            주소가 잘못되었거나 존재하지 않는 가게입니다.
-            <br />
-            가게 목록에서 다시 선택해 주세요.
+            {isNotFound ? (
+              <>
+                주소가 잘못되었거나 존재하지 않는 가게입니다.
+                <br />
+                가게 목록에서 다시 선택해 주세요.
+              </>
+            ) : (
+              "잠시 후 다시 시도해 주세요."
+            )}
           </p>
           <Button
             size="checkout"
             className="mt-[28px]"
-            onClick={() => navigate("/store")}
+            onClick={
+              isNotFound ? () => navigate("/store") : () => void refetch()
+            }
           >
-            가게 목록으로 이동
+            {isNotFound ? "가게 목록으로 이동" : "다시 시도"}
           </Button>
         </section>
       </main>
