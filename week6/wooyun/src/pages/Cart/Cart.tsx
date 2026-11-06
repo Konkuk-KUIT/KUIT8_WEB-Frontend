@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createOrder, OrderApiError } from "../../api/orders";
 import BackBar from "../../components/BackBar";
 import Button from "../../components/Button";
 import CartBar from "../../components/Cart/CartBar";
@@ -53,6 +54,7 @@ const Cart = () => {
 	const [remainingSeconds, setRemainingSeconds] = useState(() =>
 		calculateRemainingSeconds(orderDeadline),
 	);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	useEffect(() => {
 		const timerId = window.setInterval(() => {
@@ -91,6 +93,48 @@ const Cart = () => {
 		2,
 		"0",
 	)}:${String(remainingSeconds % 60).padStart(2, "0")}`;
+
+	const handleOrder = async () => {
+		if (
+			storeId === null ||
+			cartItems.length === 0 ||
+			isExpired ||
+			isSubmitting
+		) {
+			return;
+		}
+
+		setIsSubmitting(true);
+
+		try {
+			const orderResponse = await createOrder({
+				storeId,
+				items: cartItems.map(({ id, count }) => ({
+					menuId: id,
+					quantity: count,
+				})),
+			});
+			const acceptanceMessage = orderResponse.accepted
+				? "주문이 접수되었어요."
+				: "주문이 접수되지 않았어요.";
+
+			window.alert(
+				`${acceptanceMessage}\n결제금액 ${orderResponse.totalPrice.toLocaleString()}원`,
+			);
+		} catch (requestError) {
+			if (
+				requestError instanceof OrderApiError &&
+				requestError.status === 400 &&
+				requestError.code === "MINIMUM_ORDER_NOT_MET"
+			) {
+				window.alert(requestError.message);
+			} else {
+				window.alert("주문 요청에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+			}
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
 
 	return (
 		<main className="min-h-screen w-[390px] pt-[41px] pb-[132px]">
@@ -132,10 +176,15 @@ const Cart = () => {
 					<Button
 						type="button"
 						size="xl"
-						disabled={!isMinimumMet || isExpired}
+						disabled={
+							cartItems.length === 0 || isExpired || isSubmitting
+						}
+						onClick={() => void handleOrder()}
 					>
 						<span className="whitespace-nowrap">
-							{totalPrice.toLocaleString()}원 결제하기
+							{isSubmitting
+								? "주문 요청 중..."
+								: `${totalPrice.toLocaleString()}원 결제하기`}
 						</span>
 					</Button>
 				</div>
