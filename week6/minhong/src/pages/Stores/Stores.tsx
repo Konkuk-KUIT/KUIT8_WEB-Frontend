@@ -72,8 +72,6 @@ const Stores = () => {
         onToggleLike={handleToggleLike}
       />)
       }
-
-      
       <OrderBar />
     </main>
   );

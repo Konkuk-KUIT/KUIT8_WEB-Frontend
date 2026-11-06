@@ -18,8 +18,9 @@ export const StoreItem = ({ store, isLiked, onToggleLike }: StoreItemProps) => {
   } = store;
 
   return (
-    <Link to={"/store/"+id}>
     <li className="flex w-[390px] gap-[17px] p-[16px_24px_17px_24px]">
+    <Link to={"/store/"+id} className="flex min-w-0 flex-1 gap-[17px]">
+
       <div className="h-[54px] w-[54px] shrink-0 rounded-[8px] bg-[#ececec]" />
 
       <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
@@ -40,6 +41,7 @@ export const StoreItem = ({ store, isLiked, onToggleLike }: StoreItemProps) => {
           {deliveryFee.toLocaleString()}원
         </span>
       </div>
+    </Link>
 
       <button
         type="button"
@@ -51,7 +53,6 @@ export const StoreItem = ({ store, isLiked, onToggleLike }: StoreItemProps) => {
         {isLiked ? "♥" : "♡"}
       </button>
     </li>
-    </Link>
     
   );
 };
