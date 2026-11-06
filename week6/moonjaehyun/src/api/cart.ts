@@ -1,14 +1,13 @@
-import type { Menu, Order } from "../types/stores";
+import type { Order, OrderMenu } from "../types/stores";
 import apiClient from "./client";
 
-export const postOrders = async (
-  storeId: number,
-  items: Menu[],
-): Promise<Order> => {
-  const response = await apiClient.post<Order>("/api/orders", {
-    storeId,
-    items,
-  });
+interface OrderRequest {
+  storeId: number;
+  items: Pick<OrderMenu, "menuId" | "quantity">[];
+}
+
+export const postOrders = async (order: OrderRequest): Promise<Order> => {
+  const response = await apiClient.post<Order>("/api/orders", order);
 
   return response.data;
 };

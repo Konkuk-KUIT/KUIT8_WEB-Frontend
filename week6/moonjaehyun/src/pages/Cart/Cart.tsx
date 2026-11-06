@@ -1,4 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
+import { useIsMutating, useMutation, useQueryClient } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postOrders } from "../../api/cart";
@@ -6,27 +7,46 @@ import BackBar from "../../components/BackBar";
 import CartCheckoutBar from "../../components/CartCheckoutBar";
 import CartStoreSection from "../../components/CartStoreSection";
 import OrderSummary from "../../components/OrderSummary";
-import StoreItems from "../../components/StoreItem";
 import { useCartStore } from "../../stores/useCartStore";
 
 const DEADLINE_STORAGE_KEY = "cart-order-deadline";
 const ORDER_DURATION_MS = 60_000;
+const ORDER_MUTATION_KEY = ["order"];
 
 const Cart = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const orderMutationFilter = { mutationKey: ORDER_MUTATION_KEY, exact: true };
+  const isSubmitting = useIsMutating(orderMutationFilter) > 0;
 
   const cartStore = useCartStore();
   const store = cartStore.store;
   const menus = cartStore.menus;
 
-  const {
-    data: Order,
-    isPending,
-    error,
-  } = useMutation({
-    queryKey: ["order"],
-    queryFn: () => postOrders(storeId, StoreItems),
+  const { mutate: submitOrder } = useMutation({
+    mutationKey: ORDER_MUTATION_KEY,
+    mutationFn: postOrders,
     retry: false,
+    onSuccess: (order) => {
+      window.alert(
+        `주문 접수 상태: ${order.status}\n결제 금액: ${order.totalPrice.toLocaleString("ko-KR")}원`,
+      );
+    },
+    onError: (error) => {
+      if (isAxiosError<{ code?: string; message?: string }>(error)) {
+        const response = error.response;
+        if (
+          response?.status === 400 &&
+          response.data?.code === "MINIMUM_ORDER_NOT_MET" &&
+          response.data.message
+        ) {
+          window.alert(response.data.message);
+          return;
+        }
+      }
+
+      window.alert("주문을 접수하지 못했습니다. 다시 시도해 주세요.");
+    },
   });
 
   const [deadline, setDeadline] = useState(() => {
@@ -94,7 +114,22 @@ const Cart = () => {
 
   // 최소 금액 이하인 거 판정
   const isBelowMinimum = orderPrice < store.minDeliveryPrice;
-  const isCheckoutDisabled = isBelowMinimum || isExpired || menus.length === 0;
+  const isCheckoutDisabled = isSubmitting || isExpired || menus.length === 0;
+
+  const handleCheckout = () => {
+    if (
+      menus.length === 0 ||
+      Date.now() >= deadline ||
+      queryClient.isMutating(orderMutationFilter) > 0
+    ) {
+      return;
+    }
+
+    submitOrder({
+      storeId: store.id,
+      items: menus.map(({ id, quantity }) => ({ menuId: id, quantity })),
+    });
+  };
 
   return (
     <main className="mx-auto min-h-screen w-[390px] bg-white pt-[41px] pb-[95px]">
@@ -139,7 +174,7 @@ const Cart = () => {
       <CartCheckoutBar
         minimumOrderPrice={store.minDeliveryPrice}
         disabled={isCheckoutDisabled}
-        onCheckout={}
+        onCheckout={handleCheckout}
       />
     </main>
   );
