@@ -17,3 +17,7 @@ export interface Store {
     deliveryFee: number;
     menus?: Menu[];
 }
+
+export interface StoreDetail extends Store {
+    menus: Menu[];
+}

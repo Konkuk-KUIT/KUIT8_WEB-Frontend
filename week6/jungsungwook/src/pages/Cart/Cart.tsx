@@ -7,12 +7,12 @@ import Timer from "../../components/Timer";
 import { useCartStore } from "../../useCartStore";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { isAxiosError } from "axios";
+import { createOrder, type OrderErrorResponse } from "../../api/orders";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 
 const Cart = () => {
-
-
-
   const cartStore = useCartStore((state) => state.store);
   const menus = useCartStore((state) => state.menus);
   const increaseQuantity = useCartStore(
@@ -23,11 +23,35 @@ const Cart = () => {
   );
   const navigate = useNavigate();
   const clearCart = useCartStore((state) => state.clearCart);
+  const queryClient = useQueryClient();
 
   const store = stores.find(
     (item) => item.id === cartStore?.id
   );
   const [timeLeft, setTimeLeft] = useState<number>(60);
+  const { mutate: submitOrder, isPending: isSubmitting } = useMutation({
+    mutationKey: ["createOrder"],
+    mutationFn: createOrder,
+    retry: false,
+    onSuccess: async (result, variables) => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["stores"] }),
+        queryClient.invalidateQueries({ queryKey: ["store", variables.storeId] }),
+      ]);
+      alert(`주문 상태: ${result.status}\n결제금액: ${result.totalPrice.toLocaleString()}원`);
+    },
+    onError: (error) => {
+      if (
+        isAxiosError<OrderErrorResponse>(error) &&
+        error.response?.status === 400 &&
+        error.response.data.code === "MINIMUM_ORDER_NOT_MET"
+      ) {
+        alert(error.response.data.message);
+      } else {
+        alert("주문에 실패했습니다. 다시 시도해 주세요.");
+      }
+    },
+  });
 
 
   useEffect(() => {
@@ -47,23 +71,28 @@ const Cart = () => {
     return null;
   }
 
-  const menu = store.menus[0];
-
-  if (!menu) {
-    return null;
-  }
-
   const orderPrice = menus.reduce((sum, menu) => sum + menu.price * menu.quantity, 0);
 
   const totalPrice = orderPrice + store.deliveryFee;
   const canOrder =
-    orderPrice >= store.minDeliveryPrice &&
     menus.length > 0 &&
     timeLeft > 0;
 
   const handleOrderCancel = () => {
     clearCart();
     navigate("/store");
+  };
+
+  const handleOrder = () => {
+    if (!canOrder || isSubmitting) return;
+
+    submitOrder({
+        storeId: store.id,
+        items: menus.map((menu) => ({
+          menuId: menu.id,
+          quantity: menu.quantity,
+        })),
+    });
   };
 
 
@@ -119,6 +148,8 @@ const Cart = () => {
         totalPrice={totalPrice}
         minDeliveryPrice={store.minDeliveryPrice}
         canOrder={canOrder}
+        isSubmitting={isSubmitting}
+        onOrder={handleOrder}
       />
     </div>
   );
