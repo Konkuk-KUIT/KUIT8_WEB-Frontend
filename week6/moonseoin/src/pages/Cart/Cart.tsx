@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import BackBar from "../../components/BackBar";
 import CartItem from "../../components/CartItem/CartItem";
 import CartSummary from "../../components/CartSummary/CartSummary";
@@ -9,6 +10,8 @@ import useCartStore from "../../stores/useCartStore";
 const Cart = () => {
   const { storeId, menus, changeQuantity } = useCartStore();
   const store = stores.find((store) => store.id === storeId);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitting = useRef(false);
   const [endTime] = useState(() => {
     const savedTime = sessionStorage.getItem("requirement3");
     const time = Number(savedTime);
@@ -37,6 +40,31 @@ const Cart = () => {
   const minDeliveryPrice = store?.minDeliveryPrice ?? 0;
   const finalPrice = totalOrder + deliveryFee;
   const isBelowMin = totalOrder < minDeliveryPrice;
+
+  const handleOrder = async () => {
+    if (submitting.current || storeId === null || menus.length === 0 || Date.now() >= endTime) return;
+
+    submitting.current = true;
+    setIsSubmitting(true);
+    try {
+      const { data } = await axios.post<{ status: string; totalPrice: number }>(
+        `${import.meta.env.VITE_API_BASE_URL}/api/orders`,
+        {
+          storeId,
+          items: menus.map((menu) => ({ menuId: menu.id, quantity: menu.quantity })),
+        }
+      );
+      alert(`${data.status === "RECEIVED" ? "주문이 접수되었습니다." : "주문이 접수되지 않았습니다."}\n결제 금액: ${data.totalPrice.toLocaleString()}원`);
+    } catch (error) {
+      const message = axios.isAxiosError<{ code: string; message: string }>(error)
+        ? error.response?.data.message
+        : undefined;
+      alert(message ?? "주문 요청에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      submitting.current = false;
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <main className="mt-[41px] w-[390px] pb-[180px]">
@@ -73,7 +101,7 @@ const Cart = () => {
 
       <div className="px-5 py-4 text-[17px] text-[#3182F6] text-center font-semibold border-b-16 border-[#F2F4F6]">더 담기 +</div>
 
-      <CartSummary totalOrder={totalOrder} deliveryFee={deliveryFee} finalPrice={finalPrice} minDeliveryPrice={minDeliveryPrice} isExpired={isExpired} isEmpty={menus.length === 0} />
+      <CartSummary totalOrder={totalOrder} deliveryFee={deliveryFee} finalPrice={finalPrice} minDeliveryPrice={minDeliveryPrice} isExpired={isExpired} isEmpty={menus.length === 0} isSubmitting={isSubmitting} onOrder={handleOrder} />
     </main>
   );
 };
