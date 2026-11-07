@@ -4,7 +4,9 @@ import Button from "../../components/Button";
 import OrderBar from "../../components/OrderBar/OrderBar";
 import StoreHeader from "../../components/StoreHeader/StoreHeader";
 import MenuItem from "../../components/MenuItem/MenuItem";
-import stores from "../../models/stores";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import type { Store as StoreData } from "../../models/stores";
 
 import useCartStore from "../../stores/useCartStore";
 
@@ -12,12 +14,30 @@ const Store = () => {
   const { storeId } = useParams();
   const navigate = useNavigate();
   const addMenu = useCartStore((state) => state.addMenu);
-  const store = stores.find((s) => String(s.id) === storeId);
+  const { data: store, isPending, error } = useQuery({
+    queryKey: ["store", storeId],
+    queryFn: async () => {
+      const response = await axios.get<StoreData>(
+        `${import.meta.env.VITE_API_BASE_URL}/api/stores/${storeId}`
+      );
+      return response.data;
+    },
+    retry: false,
+  });
 
-  if (!store) {
+  if (isPending) {
+    return <p className="flex items-center justify-center h-screen">가게 정보를 불러오는 중입니다.</p>;
+  }
+
+  if (error) {
+    const isNotFound = axios.isAxiosError(error)
+      && error.response?.status === 404
+      && error.response.data?.code === "STORE_NOT_FOUND";
     return (
       <div className="flex flex-col gap-4 items-center justify-center h-screen">
-        <p className="text-lg text-gray-600">가게를 찾을 수 없습니다.</p>
+        <p className="text-lg text-gray-600">
+          {isNotFound ? "가게를 찾을 수 없습니다." : "가게 정보를 불러오지 못했습니다."}
+        </p>
         <Button onClick={() => navigate("/store")}>목록으로 이동</Button>
       </div>
     );
