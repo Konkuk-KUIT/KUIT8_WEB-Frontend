@@ -6,6 +6,7 @@ interface CartBarProps {
 	isMinimumMet: boolean;
 	onIncrease: (menuId: number) => void;
 	onDecrease: (menuId: number) => void;
+	onAddMore: () => void;
 }
 
 const CartBar = ({
@@ -14,6 +15,7 @@ const CartBar = ({
 	isMinimumMet,
 	onIncrease,
 	onDecrease,
+	onAddMore,
 }: CartBarProps) => {
 	return (
 		<section className="border-b-[16px] border-[#F2F4F6] bg-white pt-5">
@@ -58,9 +60,8 @@ const CartBar = ({
 							<button
 								type="button"
 								aria-label={`${item.name} 수량 감소`}
-								disabled={item.count <= 1}
 								onClick={() => onDecrease(item.id)}
-								className="grid h-7 w-7 cursor-pointer place-items-center rounded-full border border-[#d1d6db] bg-white text-[18px] disabled:cursor-not-allowed disabled:text-[#b0b8c1]"
+								className="grid h-7 w-7 cursor-pointer place-items-center rounded-full border border-[#d1d6db] bg-white text-[18px]"
 							>
 								−
 							</button>
@@ -82,6 +83,7 @@ const CartBar = ({
 
 			<button
 				type="button"
+				onClick={onAddMore}
 				className="mt-[1px] flex h-[54px] w-full items-center justify-center bg-white text-[17px] font-semibold text-[#3182f6]"
 			>
 				더 담기 +

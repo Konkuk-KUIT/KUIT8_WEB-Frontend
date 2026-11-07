@@ -41,6 +41,14 @@ const loadOrderDeadline = () => {
 const calculateRemainingSeconds = (deadline: number) =>
 	Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
 
+const clearOrderDeadline = () => {
+	try {
+		localStorage.removeItem(ORDER_DEADLINE_STORAGE_KEY);
+	} catch {
+		// Storage를 사용할 수 없어도 주문 완료와 화면 이동은 계속 진행한다.
+	}
+};
+
 const Cart = () => {
 	const navigate = useNavigate();
 	const storeId = useCartStore((state) => state.storeId);
@@ -71,14 +79,12 @@ const Cart = () => {
 
 	const handleCancelOrder = () => {
 		clearCart();
-
-		try {
-			localStorage.removeItem(ORDER_DEADLINE_STORAGE_KEY);
-		} catch {
-			// Storage를 사용할 수 없어도 주문취소와 화면 이동은 계속 진행한다.
-		}
-
+		clearOrderDeadline();
 		navigate("/store");
+	};
+
+	const handleAddMore = () => {
+		navigate(storeId === null ? "/store" : `/store/${storeId}`);
 	};
 
 	const deliveryFee = store?.deliveryFee ?? 0;
@@ -114,13 +120,12 @@ const Cart = () => {
 					quantity: count,
 				})),
 			});
-			const acceptanceMessage = orderResponse.accepted
-				? "주문이 접수되었어요."
-				: "주문이 접수되지 않았어요.";
-
 			window.alert(
-				`${acceptanceMessage}\n결제금액 ${orderResponse.totalPrice.toLocaleString()}원`,
+				`주문이 완료되었습니다.\n결제금액 ${orderResponse.totalPrice.toLocaleString()}원`,
 			);
+			clearCart();
+			clearOrderDeadline();
+			navigate("/");
 		} catch (requestError) {
 			if (
 				requestError instanceof OrderApiError &&
@@ -160,6 +165,7 @@ const Cart = () => {
 				isMinimumMet={isMinimumMet}
 				onIncrease={increaseMenu}
 				onDecrease={decreaseMenu}
+				onAddMore={handleAddMore}
 			/>
 
 			<CartPrice

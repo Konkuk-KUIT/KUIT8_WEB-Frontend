@@ -53,13 +53,27 @@ export const useCartStore = create<CartStoreState>()(
 				}));
 			},
 			decreaseMenu: (menuId) => {
-				set((state) => ({
-					items: state.items.map((item) =>
-						item.id === menuId
-							? { ...item, count: Math.max(1, item.count - 1) }
-							: item,
-					),
-				}));
+				set((state) => {
+					const menu = state.items.find((item) => item.id === menuId);
+
+					if (!menu) {
+						return state;
+					}
+
+					if (menu.count === 1) {
+						return {
+							items: state.items.filter((item) => item.id !== menuId),
+						};
+					}
+
+					return {
+						items: state.items.map((item) =>
+							item.id === menuId
+								? { ...item, count: item.count - 1 }
+								: item,
+						),
+					};
+				});
 			},
 			clearCart: () => {
 				set({ storeId: null, items: [] });
