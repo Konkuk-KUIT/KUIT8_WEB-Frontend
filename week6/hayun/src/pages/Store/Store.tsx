@@ -10,23 +10,23 @@ const Store = () => {
     const { storeId } = useParams();
 
     const {
-		data: store,
-		isPending,
-		isError,
-	} = useQuery({
-		queryKey: ["store", storeId],
-		queryFn: () => getStore(Number(storeId)),
-		retry: false,
-	});
+        data: store,
+        isPending,
+        isError,
+    } = useQuery({
+        queryKey: ["store", storeId],
+        queryFn: () => getStore(Number(storeId)),
+        retry: false,
+    });
 
 
     if (isPending) {
         return (
             <p
-            aria-live="polite"
-            className="px-6 py-10 text-center text-[15px] text-[#6b7684]"
+                aria-live="polite"
+                className="px-6 py-10 text-center text-[15px] text-[#6b7684]"
             >
-            가게 목록을 불러오는 중입니다.
+                가게 목록을 불러오는 중입니다.
             </p>
         )
     }
@@ -44,20 +44,20 @@ const Store = () => {
         );
     }
 
-	return (
+    return (
         <main className="mx-auto mt-[41px] mb-[77px] w-[390px]">
             <BackBar orderCancel={false} />
-            <InfoStore store={store}/>
+            <InfoStore store={store} />
             <div className="h-[56px] p-[26px_0_11px_24px] text-[17px] text-[#6B7684] font-semibold border-t border-[#E5E8EB]">
                 샐러드
             </div>
             <MenuItem
-                storeId = {store.id}
+                storeId={store.id}
                 menus={store.menus ?? []}
             />
-            <OrderBar/>
+            <OrderBar />
         </main>
-	);
+    );
 };
 
 export default Store;

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import type { Menu } from "../types/stores.ts";
 import stores from "../models/stores";
 
-type orderMenu = Menu & {
+export type orderMenu = Menu & {
     quantity: number;
 };
 
@@ -31,16 +31,16 @@ export const useCartStore = create<CartStore>()((set, get) => ({
             };
 
             const exists = state.orderList.some((item) => item.id === menu.id);
-            
+
             return {
                 storeId,
                 orderList: exists
-                ? state.orderList.map((item) =>
-                    item.id === menu.id
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item,
-                )
-                : [...state.orderList, { ...menu, quantity: 1 }],
+                    ? state.orderList.map((item) =>
+                        item.id === menu.id
+                            ? { ...item, quantity: item.quantity + 1 }
+                            : item,
+                    )
+                    : [...state.orderList, { ...menu, quantity: 1 }],
             };
         });
     },
@@ -52,9 +52,9 @@ export const useCartStore = create<CartStore>()((set, get) => ({
                 .filter((menu) => !(menu.id === menuId && menu.quantity === 1))
                 .map((menu) =>
                     menu.id === menuId
-                ? { ...menu, quantity: menu.quantity - 1 }
-                : menu,
-            ),
+                        ? { ...menu, quantity: menu.quantity - 1 }
+                        : menu,
+                ),
         }));
     },
 
@@ -67,11 +67,11 @@ export const useCartStore = create<CartStore>()((set, get) => ({
     },
 
 
-    calcOrderPrice: () => 
+    calcOrderPrice: () =>
         get().orderList.reduce(
-		    (sum, menu) => sum + menu.price * menu.quantity,
-		0,
-	),
+            (sum, menu) => sum + menu.price * menu.quantity,
+            0,
+        ),
 
 
     calcTotalPrice: () => {

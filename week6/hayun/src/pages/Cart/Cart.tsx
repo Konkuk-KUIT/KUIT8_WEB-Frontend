@@ -1,8 +1,10 @@
 import BackBar from "../../components/BackBar";
 import OrderMenu from "../../components/OrderMenu";
-import stores from "../../models/stores";
 import { useEffect, useState } from "react";
 import { useCartStore } from "../../stores/useCartStore";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { getStore, postCart } from "../../api/stores";
+import axios from "axios";
 
 const Cart = () => {
 	const [remainingSeconds, setRemainingSeconds] = useState(60);
@@ -19,20 +21,71 @@ const Cart = () => {
 	}, [isExpired]);
 
 	const storeId = useCartStore((state) => state.storeId);
-	const store = stores.find((store) => store.id === storeId)
+	const orderList = useCartStore((state) => state.orderList);
 	const orderPrice = useCartStore((state) => state.calcOrderPrice());
 	const totalPrice = useCartStore((state) => state.calcTotalPrice());
 
-	if (!store) {
+	const {
+		data: store,
+		isPending,
+		isError,
+	} = useQuery({
+		queryKey: ["store", storeId],
+		queryFn: () => {
+			if (storeId === null) {
+				throw new Error("가게 ID가 없습니다.");
+			}
+
+			return getStore(Number(storeId));
+		},
+		retry: false,
+	});
+
+	const payment = useMutation({
+		mutationFn: postCart,
+		retry: false,
+		onSuccess: (data) => {
+			alert(`주문 상태: ${data.status}\n결제 금액: ${data.totalPrice.toLocaleString()}원`);
+		},
+		onError: (error) => {
+			if (
+				axios.isAxiosError<{ code: string; message: string }>(error) &&
+				error.response?.status === 400
+			) {
+				alert(error.response.data?.message);
+				return;
+			}
+
+			alert("주문 중 오류가 발생했습니다.");
+		},
+	});
+
+	if (storeId === null || orderList.length === 0) {
 		return <div>장바구니에 담긴 가게가 없습니다.</div>;
 	}
 
-	const isPaymentDisabled = isExpired || orderPrice < store.minDeliveryPrice;
+	if (isPending) {
+		return <div>가게 정보를 불러오는 중입니다.</div>;
+	}
+
+	if (isError) {
+		return <div>가게 정보를 불러오지 못했습니다.</div>
+	}
+
+	// const isPaymentDisabled = isExpired || orderPrice < store.minDeliveryPrice;
+
+	const order = {
+		storeId,
+		items: orderList.map((menu) => ({
+			menuId: menu.id,
+			quantity: menu.quantity,
+		})),
+	};
 
 	return (
-        <main className="flex flex-col mx-auto mt-[41px] mb-[77px] w-[390px]">
+		<main className="flex flex-col mx-auto mt-[41px] mb-[77px] w-[390px]">
 
-            <BackBar
+			<BackBar
 				orderCancel={true}
 				remainingSeconds={remainingSeconds}
 			/>
@@ -48,7 +101,7 @@ const Cart = () => {
 					</span>
 				)}
 			</div>
-			<OrderMenu/>
+			<OrderMenu />
 
 			<div className="flex h-[59px] gap-[3px] border-t border-[#E5E8EB] items-center justify-center">
 				<button className="text-[17px] text-[#3182F6] font-semibold">더 담기</button>
@@ -77,23 +130,24 @@ const Cart = () => {
 					<span className="text-[17px] text-[#6B7684] font-medium">
 						최소 주문금액 {store.minDeliveryPrice.toLocaleString()}원
 					</span>
-					
+
 					<button
 						type="button"
-						disabled={isPaymentDisabled}
-						className={`flex h-[56px] w-[350px] rounded-[16px] justify-center items-center ${
-							isPaymentDisabled
-								? "bg-[#D0DFFB]"
-								: "bg-[#3182F6]"
-						}`}
+						// disabled={isPaymentDisabled}
+						disabled={isExpired || payment.isPending}
+						onClick={() => payment.mutate(order)}
+						className={`flex h-[56px] w-[350px] rounded-[16px] justify-center items-center ${isExpired || payment.isPending
+							? "bg-[#D0DFFB]"
+							: "bg-[#3182F6] cursor-pointer"
+							}`}
 					>
 						<span className="text-[#FFFFFF] text-[16px] font-semibold">
-							{totalPrice.toLocaleString()}원 결제하기
+							{payment.isPending ? "주문 처리 중..." : `${totalPrice.toLocaleString()}원 결제하기`}
 						</span>
 					</button>
 				</div>
 			</div>
-        </main>
+		</main>
 	);
 };
 
